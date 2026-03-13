@@ -1,0 +1,79 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "aws": "https://aws.amazon.com/rekognition/schemas/",
+    "rekognition": "https://docs.aws.amazon.com/rekognition/latest/APIReference/",
+    "Label": {
+      "@id": "aws:Label",
+      "@context": {
+        "Name": "schema:name",
+        "Confidence": "aws:confidence",
+        "Instances": "aws:instances",
+        "Parents": "schema:isPartOf",
+        "Categories": "schema:category"
+      }
+    },
+    "BoundingBox": {
+      "@id": "aws:BoundingBox",
+      "@context": {
+        "Width": "schema:width",
+        "Height": "schema:height",
+        "Left": "aws:left",
+        "Top": "aws:top"
+      }
+    },
+    "Face": {
+      "@id": "aws:Face",
+      "@context": {
+        "FaceId": "schema:identifier",
+        "BoundingBox": "aws:BoundingBox",
+        "Confidence": "aws:confidence",
+        "Landmarks": "aws:landmarks",
+        "Emotions": "aws:emotions",
+        "AgeRange": "aws:ageRange"
+      }
+    },
+    "Celebrity": {
+      "@id": "aws:Celebrity",
+      "@context": {
+        "Name": "schema:name",
+        "Id": "schema:identifier",
+        "Urls": "schema:url",
+        "Face": "aws:Face"
+      }
+    },
+    "TextDetection": {
+      "@id": "aws:TextDetection",
+      "@context": {
+        "DetectedText": "schema:text",
+        "Type": "schema:additionalType",
+        "Confidence": "aws:confidence",
+        "Geometry": "aws:geometry"
+      }
+    },
+    "Collection": {
+      "@id": "aws:Collection",
+      "@context": {
+        "CollectionId": "schema:identifier",
+        "CollectionArn": "aws:arn",
+        "FaceCount": "schema:size",
+        "CreationTimestamp": "schema:dateCreated"
+      }
+    },
+    "DetectLabelsResponse": {
+      "@id": "aws:DetectLabelsResponse",
+      "@context": {
+        "Labels": "aws:Label",
+        "LabelModelVersion": "schema:softwareVersion",
+        "ImageProperties": "aws:imageProperties"
+      }
+    },
+    "Image": {
+      "@id": "schema:ImageObject",
+      "@context": {
+        "Bytes": "schema:contentUrl",
+        "S3Object": "aws:s3Object"
+      }
+    }
+  }
+}

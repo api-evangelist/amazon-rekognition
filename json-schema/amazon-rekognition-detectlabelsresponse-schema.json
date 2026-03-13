@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aws.amazon.com/rekognition/schemas/detectlabelsresponse",
+  "title": "DetectLabelsResponse",
+  "description": "Response object from the Amazon Rekognition DetectLabels operation containing detected labels with confidence scores and bounding box information.",
+  "type": "object",
+  "properties": {
+    "Labels": {
+      "type": "array",
+      "description": "An array of labels for the real-world objects detected in the image.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "The name of the detected label."
+          },
+          "Confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Level of confidence in the label detection."
+          },
+          "Instances": {
+            "type": "array",
+            "description": "A list of instances of the label detected in the image, each with a bounding box.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "BoundingBox": {
+                  "type": "object",
+                  "description": "The position of the detected instance in the image.",
+                  "properties": {
+                    "Width": {
+                      "type": "number",
+                      "description": "Width of the bounding box as a ratio of the overall image width."
+                    },
+                    "Height": {
+                      "type": "number",
+                      "description": "Height of the bounding box as a ratio of the overall image height."
+                    },
+                    "Left": {
+                      "type": "number",
+                      "description": "Left coordinate of the bounding box as a ratio of overall image width."
+                    },
+                    "Top": {
+                      "type": "number",
+                      "description": "Top coordinate of the bounding box as a ratio of overall image height."
+                    }
+                  },
+                  "required": ["Width", "Height", "Left", "Top"]
+                },
+                "Confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100,
+                  "description": "The confidence that Amazon Rekognition has in the accuracy of the bounding box."
+                }
+              }
+            }
+          },
+          "Parents": {
+            "type": "array",
+            "description": "The parent labels for a label.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string",
+                  "description": "The name of the parent label."
+                }
+              }
+            }
+          },
+          "Aliases": {
+            "type": "array",
+            "description": "A list of potential aliases for a given label.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string",
+                  "description": "The name of an alias."
+                }
+              }
+            }
+          },
+          "Categories": {
+            "type": "array",
+            "description": "A list of the categories associated with a given label.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string",
+                  "description": "The name of a category that applies to a given label."
+                }
+              }
+            }
+          }
+        },
+        "required": ["Name", "Confidence"]
+      }
+    },
+    "LabelModelVersion": {
+      "type": "string",
+      "description": "Version number of the label detection model that was used to detect labels."
+    },
+    "ImageProperties": {
+      "type": "object",
+      "description": "Information about the properties of the input image.",
+      "properties": {
+        "Quality": {
+          "type": "object",
+          "properties": {
+            "Brightness": {
+              "type": "number",
+              "description": "The brightness of the image."
+            },
+            "Sharpness": {
+              "type": "number",
+              "description": "The sharpness of the image."
+            },
+            "Contrast": {
+              "type": "number",
+              "description": "The contrast of the image."
+            }
+          }
+        },
+        "DominantColors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Red": {
+                "type": "integer"
+              },
+              "Green": {
+                "type": "integer"
+              },
+              "Blue": {
+                "type": "integer"
+              },
+              "HexCode": {
+                "type": "string"
+              },
+              "SimplifiedColor": {
+                "type": "string"
+              },
+              "CSSColor": {
+                "type": "string"
+              },
+              "PixelPercent": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["Labels"]
+}

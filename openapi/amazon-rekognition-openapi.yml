@@ -1,0 +1,488 @@
+openapi: 3.0.0
+info:
+  title: Amazon Rekognition
+  description: Amazon Rekognition is a cloud-based computer vision service that provides image and video analysis capabilities including label detection, facial analysis, face comparison, celebrity recognition, and text detection.
+  version: '2016-06-27'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://aws.amazon.com/rekognition/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: https://rekognition.amazonaws.com
+    description: Amazon Rekognition API endpoint
+paths:
+  /:
+    post:
+      operationId: DetectLabels
+      summary: Detect Labels
+      description: Detects instances of real-world entities within an image provided as input, returning labels with confidence levels for each detected object, scene, or concept.
+      headers:
+        X-Amz-Target:
+          description: The target API operation.
+          schema:
+            type: string
+            enum:
+              - RekognitionService.DetectLabels
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                Image:
+                  type: object
+                  description: The input image as base64-encoded bytes or an S3 object.
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+                      properties:
+                        Bucket:
+                          type: string
+                        Name:
+                          type: string
+                        Version:
+                          type: string
+                MaxLabels:
+                  type: integer
+                  description: Maximum number of labels to return.
+                MinConfidence:
+                  type: number
+                  format: float
+                  description: Minimum confidence level for returned labels.
+              required:
+                - Image
+      responses:
+        '200':
+          description: Successful label detection response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectLabelsResponse'
+      tags:
+        - Label Detection
+
+  /#DetectFaces:
+    post:
+      operationId: DetectFaces
+      summary: Detect Faces
+      description: Detects faces within an image and returns facial attributes such as age range, emotions, gender, and pose.
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                Image:
+                  type: object
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+                      properties:
+                        Bucket:
+                          type: string
+                        Name:
+                          type: string
+                Attributes:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - DEFAULT
+                      - ALL
+              required:
+                - Image
+      responses:
+        '200':
+          description: Successful face detection response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FaceDetails:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BoundingBox:
+                          type: object
+                        Confidence:
+                          type: number
+                        Landmarks:
+                          type: array
+                          items:
+                            type: object
+                        Emotions:
+                          type: array
+                          items:
+                            type: object
+      tags:
+        - Face Detection
+
+  /#DetectText:
+    post:
+      operationId: DetectText
+      summary: Detect Text
+      description: Detects text in the input image and converts it into machine-readable text.
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                Image:
+                  type: object
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+                      properties:
+                        Bucket:
+                          type: string
+                        Name:
+                          type: string
+              required:
+                - Image
+      responses:
+        '200':
+          description: Successful text detection response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  TextDetections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        DetectedText:
+                          type: string
+                        Type:
+                          type: string
+                        Confidence:
+                          type: number
+                        Geometry:
+                          type: object
+      tags:
+        - Text Detection
+
+  /#CompareFaces:
+    post:
+      operationId: CompareFaces
+      summary: Compare Faces
+      description: Compares a face in the source input image with each of the 100 largest faces detected in the target input image.
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                SourceImage:
+                  type: object
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+                TargetImage:
+                  type: object
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+                SimilarityThreshold:
+                  type: number
+                  format: float
+              required:
+                - SourceImage
+                - TargetImage
+      responses:
+        '200':
+          description: Successful face comparison response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FaceMatches:
+                    type: array
+                    items:
+                      type: object
+                  UnmatchedFaces:
+                    type: array
+                    items:
+                      type: object
+      tags:
+        - Face Comparison
+
+  /#RecognizeCelebrities:
+    post:
+      operationId: RecognizeCelebrities
+      summary: Recognize Celebrities
+      description: Returns an array of celebrities recognized in the input image along with confidence levels and additional information.
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                Image:
+                  type: object
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+              required:
+                - Image
+      responses:
+        '200':
+          description: Successful celebrity recognition response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  CelebrityFaces:
+                    type: array
+                    items:
+                      type: object
+                  UnrecognizedFaces:
+                    type: array
+                    items:
+                      type: object
+      tags:
+        - Celebrity Recognition
+
+  /#SearchFacesByImage:
+    post:
+      operationId: SearchFacesByImage
+      summary: Search Faces By Image
+      description: Searches for faces in a collection that match the largest face in the supplied image.
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                CollectionId:
+                  type: string
+                Image:
+                  type: object
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+                MaxFaces:
+                  type: integer
+                FaceMatchThreshold:
+                  type: number
+                  format: float
+              required:
+                - CollectionId
+                - Image
+      responses:
+        '200':
+          description: Successful face search response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  SearchedFaceBoundingBox:
+                    type: object
+                  SearchedFaceConfidence:
+                    type: number
+                  FaceMatches:
+                    type: array
+                    items:
+                      type: object
+      tags:
+        - Face Search
+
+  /#CreateCollection:
+    post:
+      operationId: CreateCollection
+      summary: Create Collection
+      description: Creates a collection in an AWS Region. You can add faces to the collection using the IndexFaces operation.
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                CollectionId:
+                  type: string
+                  description: ID for the collection that you are creating.
+              required:
+                - CollectionId
+      responses:
+        '200':
+          description: Successful collection creation response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  StatusCode:
+                    type: integer
+                  CollectionArn:
+                    type: string
+                  FaceModelVersion:
+                    type: string
+      tags:
+        - Collections
+
+  /#IndexFaces:
+    post:
+      operationId: IndexFaces
+      summary: Index Faces
+      description: Detects faces in the input image and adds them to the specified collection.
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                CollectionId:
+                  type: string
+                Image:
+                  type: object
+                  properties:
+                    Bytes:
+                      type: string
+                      format: byte
+                    S3Object:
+                      type: object
+                MaxFaces:
+                  type: integer
+                QualityFilter:
+                  type: string
+                  enum:
+                    - NONE
+                    - AUTO
+                    - LOW
+                    - MEDIUM
+                    - HIGH
+              required:
+                - CollectionId
+                - Image
+      responses:
+        '200':
+          description: Successful face indexing response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FaceRecords:
+                    type: array
+                    items:
+                      type: object
+                  UnindexedFaces:
+                    type: array
+                    items:
+                      type: object
+                  FaceModelVersion:
+                    type: string
+      tags:
+        - Collections
+
+components:
+  schemas:
+    DetectLabelsResponse:
+      type: object
+      properties:
+        Labels:
+          type: array
+          description: An array of labels for the real-world objects detected.
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+                description: The name of the label.
+              Confidence:
+                type: number
+                format: float
+                description: Level of confidence.
+              Instances:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    BoundingBox:
+                      type: object
+                      properties:
+                        Width:
+                          type: number
+                        Height:
+                          type: number
+                        Left:
+                          type: number
+                        Top:
+                          type: number
+                    Confidence:
+                      type: number
+              Parents:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Name:
+                      type: string
+              Categories:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Name:
+                      type: string
+        LabelModelVersion:
+          type: string
+          description: Version number of the label detection model.
+        ImageProperties:
+          type: object
+          description: Information about the properties of the input image.
+
+tags:
+  - name: Label Detection
+    description: Operations for detecting labels in images.
+  - name: Face Detection
+    description: Operations for detecting faces in images.
+  - name: Text Detection
+    description: Operations for detecting text in images.
+  - name: Face Comparison
+    description: Operations for comparing faces between images.
+  - name: Celebrity Recognition
+    description: Operations for recognizing celebrities in images.
+  - name: Face Search
+    description: Operations for searching faces in collections.
+  - name: Collections
+    description: Operations for managing face collections.

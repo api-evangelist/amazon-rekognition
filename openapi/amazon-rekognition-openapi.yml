@@ -472,17 +472,17 @@ components:
           description: Information about the properties of the input image.
 
 tags:
-  - name: Label Detection
-    description: Operations for detecting labels in images.
-  - name: Face Detection
-    description: Operations for detecting faces in images.
-  - name: Text Detection
-    description: Operations for detecting text in images.
-  - name: Face Comparison
-    description: Operations for comparing faces between images.
   - name: Celebrity Recognition
     description: Operations for recognizing celebrities in images.
-  - name: Face Search
-    description: Operations for searching faces in collections.
   - name: Collections
     description: Operations for managing face collections.
+  - name: Face Comparison
+    description: Operations for comparing faces between images.
+  - name: Face Detection
+    description: Operations for detecting faces in images.
+  - name: Face Search
+    description: Operations for searching faces in collections.
+  - name: Label Detection
+    description: Operations for detecting labels in images.
+  - name: Text Detection
+    description: Operations for detecting text in images.

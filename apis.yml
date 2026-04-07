@@ -128,13 +128,13 @@ maintainer:
   email: kin@apievangelist.com
 
 tags:
+  - AWS
+  - Celebrity Recognition
   - Computer Vision
-  - Image Analysis
+  - Deep Learning
   - Facial Recognition
+  - Image Analysis
+  - Machine Learning
   - Object Detection
   - Text Detection
-  - Celebrity Recognition
   - Video Analysis
-  - Deep Learning
-  - Machine Learning
-  - AWS

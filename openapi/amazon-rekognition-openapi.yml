@@ -17,7 +17,7 @@ paths:
   /:
     post:
       operationId: DetectLabels
-      summary: Detect Labels
+      summary: Amazon Rekognition Detect Labels
       description: Detects instances of real-world entities within an image provided as input, returning labels with confidence levels for each detected object, scene, or concept.
       headers:
         X-Amz-Target:
@@ -71,7 +71,7 @@ paths:
   /#DetectFaces:
     post:
       operationId: DetectFaces
-      summary: Detect Faces
+      summary: Amazon Rekognition Detect Faces
       description: Detects faces within an image and returns facial attributes such as age range, emotions, gender, and pose.
       requestBody:
         required: true
@@ -133,7 +133,7 @@ paths:
   /#DetectText:
     post:
       operationId: DetectText
-      summary: Detect Text
+      summary: Amazon Rekognition Detect Text
       description: Detects text in the input image and converts it into machine-readable text.
       requestBody:
         required: true
@@ -184,7 +184,7 @@ paths:
   /#CompareFaces:
     post:
       operationId: CompareFaces
-      summary: Compare Faces
+      summary: Amazon Rekognition Compare Faces
       description: Compares a face in the source input image with each of the 100 largest faces detected in the target input image.
       requestBody:
         required: true
@@ -237,7 +237,7 @@ paths:
   /#RecognizeCelebrities:
     post:
       operationId: RecognizeCelebrities
-      summary: Recognize Celebrities
+      summary: Amazon Rekognition Recognize Celebrities
       description: Returns an array of celebrities recognized in the input image along with confidence levels and additional information.
       requestBody:
         required: true
@@ -278,7 +278,7 @@ paths:
   /#SearchFacesByImage:
     post:
       operationId: SearchFacesByImage
-      summary: Search Faces By Image
+      summary: Amazon Rekognition Search Faces By Image
       description: Searches for faces in a collection that match the largest face in the supplied image.
       requestBody:
         required: true
@@ -327,7 +327,7 @@ paths:
   /#CreateCollection:
     post:
       operationId: CreateCollection
-      summary: Create Collection
+      summary: Amazon Rekognition Create Collection
       description: Creates a collection in an AWS Region. You can add faces to the collection using the IndexFaces operation.
       requestBody:
         required: true
@@ -361,7 +361,7 @@ paths:
   /#IndexFaces:
     post:
       operationId: IndexFaces
-      summary: Index Faces
+      summary: Amazon Rekognition Index Faces
       description: Detects faces in the input image and adds them to the specified collection.
       requestBody:
         required: true

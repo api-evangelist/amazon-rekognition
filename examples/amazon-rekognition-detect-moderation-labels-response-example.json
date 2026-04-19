@@ -1,0 +1,12 @@
+{
+  "ModerationLabels": [
+    {
+      "Confidence": 80.43,
+      "Name": "Explicit Nudity",
+      "ParentName": "images/sample.jpg"
+    }
+  ],
+  "ModerationModelVersion": "7.0",
+  "HumanLoopActivationOutput": {},
+  "ProjectVersion": "6.0"
+}

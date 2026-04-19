@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-search-faces-by-image-response-structure.json",
+  "name": "SearchFacesByImageResponse",
+  "description": "SearchFacesByImageResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "SearchedFaceBoundingBox": {
+      "$ref": "#/components/schemas/BoundingBox"
+    },
+    "SearchedFaceConfidence": {
+      "type": "float"
+    },
+    "FaceMatches": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "FaceModelVersion": {
+      "type": "string"
+    }
+  }
+}

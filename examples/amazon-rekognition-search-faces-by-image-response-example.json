@@ -1,0 +1,8 @@
+{
+  "SearchedFaceBoundingBox": "sample-value",
+  "SearchedFaceConfidence": 72.34,
+  "FaceMatches": [
+    {}
+  ],
+  "FaceModelVersion": "6.0"
+}

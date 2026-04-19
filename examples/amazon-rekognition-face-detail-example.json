@@ -1,0 +1,22 @@
+{
+  "BoundingBox": "sample-value",
+  "AgeRange": {
+    "Low": 25,
+    "High": 35
+  },
+  "Smile": {
+    "Value": true,
+    "Confidence": 36.57
+  },
+  "Gender": {
+    "Value": "Female",
+    "Confidence": 56.64
+  },
+  "Emotions": [
+    {
+      "Type": "UNKNOWN",
+      "Confidence": 5.1
+    }
+  ],
+  "Confidence": 99.7
+}

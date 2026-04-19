@@ -1,0 +1,162 @@
+rules:
+  info-title-prefix:
+    description: Info title must start with Amazon Rekognition
+    message: Info title should start with "Amazon Rekognition"
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: ^Amazon Rekognition
+  info-description-required:
+    description: Info must have a description
+    message: Info object must have a description
+    severity: error
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  info-version-required:
+    description: Info must have a version
+    message: API version is required
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+  servers-required:
+    description: At least one server must be defined
+    message: Servers array must be defined and non-empty
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+  servers-https:
+    description: Server URLs must use HTTPS
+    message: Server URL must use HTTPS
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  operation-summary-required:
+    description: All operations must have a summary
+    message: Operation must have a summary
+    severity: error
+    given: $.paths[*][*]
+    then:
+      field: summary
+      function: truthy
+  operation-summary-prefix:
+    description: Operation summaries must start with Amazon Rekognition
+    message: Operation summary should start with "Amazon Rekognition"
+    severity: warn
+    given: $.paths[*][*].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: ^Amazon Rekognition
+  operation-description-required:
+    description: All operations must have a description
+    message: Operation must have a description
+    severity: error
+    given: $.paths[*][*]
+    then:
+      field: description
+      function: truthy
+  operation-operationid-required:
+    description: All operations must have an operationId
+    message: Operation must have an operationId
+    severity: error
+    given: $.paths[*][*]
+    then:
+      field: operationId
+      function: truthy
+  operation-operationid-camelcase:
+    description: OperationIds must use camelCase
+    message: OperationId must use camelCase
+    severity: warn
+    given: $.paths[*][*].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: ^[a-z][a-zA-Z0-9]*$
+  operation-tags-required:
+    description: All operations must have at least one tag
+    message: Operation must have at least one tag
+    severity: warn
+    given: $.paths[*][*]
+    then:
+      field: tags
+      function: truthy
+  operation-security-required:
+    description: All operations should specify security
+    message: Operation should define security requirements
+    severity: warn
+    given: $.paths[*][*]
+    then:
+      field: security
+      function: truthy
+  response-success-required:
+    description: Operations must have a 2xx success response
+    message: Operation must define at least one 2xx success response
+    severity: error
+    given: $.paths[*][*].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '202'
+          - required:
+            - '204'
+  response-400-recommended:
+    description: Operations should have a 400 error response
+    message: Operation should define a 400 Bad Request response
+    severity: warn
+    given: $.paths[*][*].responses
+    then:
+      field: '400'
+      function: truthy
+  schema-description-required:
+    description: Top-level schemas should have descriptions
+    message: Schema must have a description
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+  security-schemes-defined:
+    description: Security schemes must be defined in components
+    message: Security schemes should be defined in components/securitySchemes
+    severity: warn
+    given: $
+    then:
+      field: components.securitySchemes
+      function: truthy
+  post-must-use-amz-json:
+    description: POST operations should use AWS JSON content type
+    message: POST operations should use application/x-amz-json-1.1 content type
+    severity: info
+    given: $.paths[*].post.requestBody.content
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required:
+          - application/x-amz-json-1.1
+  tag-descriptions-required:
+    description: Global tags should have descriptions
+    message: Tag must have a description
+    severity: info
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy

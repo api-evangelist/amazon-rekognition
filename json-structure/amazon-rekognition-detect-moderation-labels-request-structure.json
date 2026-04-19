@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-detect-moderation-labels-request-structure.json",
+  "name": "DetectModerationLabelsRequest",
+  "description": "DetectModerationLabelsRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "MinConfidence": {
+      "type": "float",
+      "description": "Minimum confidence level for labels to return.",
+      "example": 50.0
+    },
+    "HumanLoopConfig": {
+      "type": "object",
+      "description": "Sets up the flow for A2I human review of moderation labels."
+    },
+    "ProjectVersion": {
+      "type": "string",
+      "description": "Identifier for a custom label detection project version."
+    }
+  },
+  "required": [
+    "Image"
+  ]
+}

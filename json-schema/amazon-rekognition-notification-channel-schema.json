@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-notification-channel-schema.json",
+  "title": "NotificationChannel",
+  "description": "Amazon SNS topic for completion status notifications.",
+  "type": "object",
+  "properties": {
+    "SNSTopicArn": {
+      "type": "string",
+      "description": "The Amazon SNS topic ARN to post completion status.",
+      "example": "arn:aws:sns:us-east-1:123456789012:AmazonRekognitionTopic"
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "The ARN of an IAM role that gives Rekognition publishing permissions.",
+      "example": "arn:aws:iam::123456789012:role/RekognitionRole"
+    }
+  }
+}

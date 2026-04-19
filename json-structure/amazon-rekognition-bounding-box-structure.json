@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-bounding-box-structure.json",
+  "name": "BoundingBox",
+  "description": "Identifies the bounding box around the label, face, text or object.",
+  "type": "object",
+  "properties": {
+    "Width": {
+      "type": "float",
+      "description": "Width of the bounding box as a ratio of the overall image width.",
+      "example": 0.35
+    },
+    "Height": {
+      "type": "float",
+      "description": "Height of the bounding box as a ratio of the overall image height.",
+      "example": 0.45
+    },
+    "Left": {
+      "type": "float",
+      "description": "Left coordinate of the bounding box as a ratio of overall image width.",
+      "example": 0.1
+    },
+    "Top": {
+      "type": "float",
+      "description": "Top coordinate of the bounding box as a ratio of overall image height.",
+      "example": 0.05
+    }
+  }
+}

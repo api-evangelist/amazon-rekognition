@@ -1,0 +1,11 @@
+{
+  "Video": "500123",
+  "ClientRequestToken": "abc123token",
+  "MinConfidence": 75.0,
+  "NotificationChannel": "sample-value",
+  "JobTag": "sample-value",
+  "Features": [
+    "sample-value"
+  ],
+  "Settings": {}
+}

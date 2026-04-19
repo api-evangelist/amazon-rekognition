@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-start-video-job-response-structure.json",
+  "name": "StartVideoJobResponse",
+  "description": "StartVideoJobResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "JobId": {
+      "type": "string",
+      "description": "The identifier for the video analysis job.",
+      "example": "1234567890abcdef"
+    }
+  }
+}

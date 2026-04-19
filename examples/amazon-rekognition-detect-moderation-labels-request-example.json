@@ -1,0 +1,6 @@
+{
+  "Image": "sample-value",
+  "MinConfidence": 50.0,
+  "HumanLoopConfig": {},
+  "ProjectVersion": "6.0"
+}

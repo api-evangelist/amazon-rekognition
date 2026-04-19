@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-compare-faces-response-structure.json",
+  "name": "CompareFacesResponse",
+  "description": "CompareFacesResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "SourceImageFace": {
+      "type": "object",
+      "properties": {
+        "BoundingBox": {
+          "$ref": "#/components/schemas/BoundingBox"
+        },
+        "Confidence": {
+          "type": "float"
+        }
+      }
+    },
+    "FaceMatches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Similarity": {
+            "type": "float",
+            "example": 95.3
+          },
+          "Face": {
+            "type": "object",
+            "properties": {
+              "BoundingBox": {
+                "$ref": "#/components/schemas/BoundingBox"
+              },
+              "Confidence": {
+                "type": "float"
+              }
+            }
+          }
+        }
+      }
+    },
+    "UnmatchedFaces": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

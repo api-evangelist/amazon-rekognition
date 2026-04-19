@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-create-collection-request-structure.json",
+  "name": "CreateCollectionRequest",
+  "description": "CreateCollectionRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "CollectionId": {
+      "type": "string",
+      "description": "ID for the collection to create.",
+      "example": "my-face-collection"
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "CollectionId"
+  ]
+}

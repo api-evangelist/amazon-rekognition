@@ -1,0 +1,7 @@
+{
+  "JobId": "1234567890abcdef",
+  "MaxResults": 100,
+  "NextToken": "abc123token",
+  "SortBy": "NAME",
+  "AggregateBy": "SEGMENTS"
+}

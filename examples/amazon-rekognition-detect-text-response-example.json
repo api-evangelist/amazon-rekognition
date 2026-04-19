@@ -1,0 +1,15 @@
+{
+  "TextDetections": [
+    {
+      "DetectedText": "Hello World",
+      "Type": "LINE",
+      "Id": 71,
+      "ParentId": 100,
+      "Confidence": 54.03,
+      "Geometry": {
+        "BoundingBox": "sample-value"
+      }
+    }
+  ],
+  "TextModelVersion": "3.1"
+}

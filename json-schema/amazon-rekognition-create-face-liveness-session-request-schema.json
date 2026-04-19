@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-create-face-liveness-session-request-schema.json",
+  "title": "CreateFaceLivenessSessionRequest",
+  "description": "CreateFaceLivenessSessionRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "KmsKeyId": {
+      "type": "string"
+    },
+    "Settings": {
+      "type": "object"
+    },
+    "ClientRequestToken": {
+      "type": "string"
+    }
+  }
+}

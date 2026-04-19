@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-detect-custom-labels-response-structure.json",
+  "name": "DetectCustomLabelsResponse",
+  "description": "DetectCustomLabelsResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "CustomLabels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "example": "MyProduct"
+          },
+          "Confidence": {
+            "type": "float",
+            "example": 92.3
+          },
+          "Geometry": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

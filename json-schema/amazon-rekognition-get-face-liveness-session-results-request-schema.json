@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-get-face-liveness-session-results-request-schema.json",
+  "title": "GetFaceLivenessSessionResultsRequest",
+  "description": "GetFaceLivenessSessionResultsRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "SessionId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The sessionId for the Face Liveness session."
+    }
+  },
+  "required": [
+    "SessionId"
+  ]
+}

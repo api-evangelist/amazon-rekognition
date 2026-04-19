@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-face-detail-schema.json",
+  "title": "FaceDetail",
+  "description": "Structure containing attributes of the face that the algorithm detected.",
+  "type": "object",
+  "properties": {
+    "BoundingBox": {
+      "$ref": "#/components/schemas/BoundingBox"
+    },
+    "AgeRange": {
+      "type": "object",
+      "description": "The estimated age range in years for the face.",
+      "properties": {
+        "Low": {
+          "type": "integer",
+          "example": 25
+        },
+        "High": {
+          "type": "integer",
+          "example": 35
+        }
+      }
+    },
+    "Smile": {
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "boolean"
+        },
+        "Confidence": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "Gender": {
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string",
+          "enum": [
+            "Male",
+            "Female"
+          ]
+        },
+        "Confidence": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "Emotions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "enum": [
+              "HAPPY",
+              "SAD",
+              "ANGRY",
+              "CONFUSED",
+              "DISGUSTED",
+              "SURPRISED",
+              "CALM",
+              "UNKNOWN",
+              "FEAR"
+            ]
+          },
+          "Confidence": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "Confidence": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence level that the bounding box contains a face.",
+      "example": 99.7
+    }
+  }
+}

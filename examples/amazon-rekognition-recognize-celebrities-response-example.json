@@ -1,0 +1,16 @@
+{
+  "CelebrityFaces": [
+    {
+      "Urls": [
+        "sample-value"
+      ],
+      "Name": "Jeff Bezos",
+      "Id": "500123",
+      "MatchConfidence": 27.24,
+      "KnownGender": {}
+    }
+  ],
+  "UnrecognizedFaces": [
+    {}
+  ]
+}

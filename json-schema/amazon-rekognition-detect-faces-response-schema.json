@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-detect-faces-response-schema.json",
+  "title": "DetectFacesResponse",
+  "description": "DetectFacesResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "FaceDetails": {
+      "type": "array",
+      "description": "Details of each face found in the image.",
+      "items": {
+        "$ref": "#/components/schemas/FaceDetail"
+      }
+    },
+    "OrientationCorrection": {
+      "type": "string",
+      "description": "Orientation correction value."
+    }
+  }
+}

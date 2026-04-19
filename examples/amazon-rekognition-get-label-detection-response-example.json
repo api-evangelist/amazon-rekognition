@@ -1,0 +1,14 @@
+{
+  "JobStatus": "SUCCEEDED",
+  "StatusMessage": "SUCCEEDED",
+  "VideoMetadata": {},
+  "NextToken": "abc123token",
+  "Labels": [
+    {
+      "Timestamp": 13,
+      "Label": "sample-value"
+    }
+  ],
+  "LabelModelVersion": "6.0",
+  "JobId": "500123"
+}

@@ -1,0 +1,6 @@
+{
+  "ProjectVersionArn": "arn:aws:rekognition:us-east-1:123456789012:collection/my-collection",
+  "Image": "sample-value",
+  "MaxResults": 59,
+  "MinConfidence": 69.24
+}

@@ -1,0 +1,15 @@
+{
+  "Name": "Person",
+  "Confidence": 98.5,
+  "Instances": [
+    {
+      "BoundingBox": "sample-value",
+      "Confidence": 79.7
+    }
+  ],
+  "Parents": [
+    {
+      "Name": "images/sample.jpg"
+    }
+  ]
+}

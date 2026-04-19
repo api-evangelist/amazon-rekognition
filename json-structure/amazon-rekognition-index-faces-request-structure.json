@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-index-faces-request-structure.json",
+  "name": "IndexFacesRequest",
+  "description": "IndexFacesRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "CollectionId": {
+      "type": "string",
+      "example": "my-face-collection"
+    },
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "ExternalImageId": {
+      "type": "string",
+      "description": "ID you want to assign to all faces detected in the image.",
+      "example": "user-123"
+    },
+    "DetectionAttributes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "DEFAULT",
+          "ALL"
+        ]
+      }
+    },
+    "MaxFaces": {
+      "type": "int32",
+      "description": "Maximum number of faces to index."
+    },
+    "QualityFilter": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "AUTO",
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    }
+  },
+  "required": [
+    "CollectionId",
+    "Image"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-create-face-liveness-session-response-schema.json",
+  "title": "CreateFaceLivenessSessionResponse",
+  "description": "CreateFaceLivenessSessionResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "SessionId": {
+      "type": "string",
+      "description": "A unique 128-bit UUID identifying a Face Liveness session.",
+      "format": "uuid",
+      "example": "550e8400-e29b-41d4-a716-446655440000"
+    }
+  }
+}

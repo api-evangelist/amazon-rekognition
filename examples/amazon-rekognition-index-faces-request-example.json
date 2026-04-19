@@ -1,0 +1,10 @@
+{
+  "CollectionId": "my-face-collection",
+  "Image": "sample-value",
+  "ExternalImageId": "user-123",
+  "DetectionAttributes": [
+    "DEFAULT"
+  ],
+  "MaxFaces": 39,
+  "QualityFilter": "NONE"
+}

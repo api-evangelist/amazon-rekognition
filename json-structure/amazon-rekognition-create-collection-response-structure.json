@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-create-collection-response-structure.json",
+  "name": "CreateCollectionResponse",
+  "description": "CreateCollectionResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "StatusCode": {
+      "type": "int32",
+      "example": 200
+    },
+    "CollectionArn": {
+      "type": "string",
+      "example": "aws:rekognition:us-east-1:123456789012:collection/my-face-collection"
+    },
+    "FaceModelVersion": {
+      "type": "string",
+      "example": "6.0"
+    }
+  }
+}

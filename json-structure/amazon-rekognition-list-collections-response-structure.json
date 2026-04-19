@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-list-collections-response-structure.json",
+  "name": "ListCollectionsResponse",
+  "description": "ListCollectionsResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "CollectionIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "NextToken": {
+      "type": "string"
+    },
+    "FaceModelVersions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

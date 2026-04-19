@@ -1,0 +1,4 @@
+{
+  "SNSTopicArn": "arn:aws:sns:us-east-1:123456789012:AmazonRekognitionTopic",
+  "RoleArn": "arn:aws:iam::123456789012:role/RekognitionRole"
+}

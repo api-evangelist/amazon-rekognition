@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-start-label-detection-request-schema.json",
+  "title": "StartLabelDetectionRequest",
+  "description": "StartLabelDetectionRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "Video": {
+      "$ref": "#/components/schemas/Video"
+    },
+    "ClientRequestToken": {
+      "type": "string"
+    },
+    "MinConfidence": {
+      "type": "number",
+      "format": "float",
+      "example": 75.0
+    },
+    "NotificationChannel": {
+      "$ref": "#/components/schemas/NotificationChannel"
+    },
+    "JobTag": {
+      "type": "string"
+    },
+    "Features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Settings": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "Video"
+  ]
+}

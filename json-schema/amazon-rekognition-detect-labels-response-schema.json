@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-detect-labels-response-schema.json",
+  "title": "DetectLabelsResponse",
+  "description": "Response from the DetectLabels operation.",
+  "type": "object",
+  "properties": {
+    "Labels": {
+      "type": "array",
+      "description": "An array of labels for the real-world objects detected.",
+      "items": {
+        "$ref": "#/components/schemas/Label"
+      }
+    },
+    "OrientationCorrection": {
+      "type": "string",
+      "description": "The value of OrientationCorrection is always null.",
+      "example": "ROTATE_0"
+    },
+    "LabelModelVersion": {
+      "type": "string",
+      "description": "Version number of the label detection model used.",
+      "example": "3.0"
+    },
+    "ImageProperties": {
+      "type": "object",
+      "description": "Information about the quality and dominant colors of an input image."
+    }
+  }
+}

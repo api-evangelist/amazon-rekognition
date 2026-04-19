@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-get-video-job-result-request-structure.json",
+  "name": "GetVideoJobResultRequest",
+  "description": "GetVideoJobResultRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "JobId": {
+      "type": "string",
+      "description": "Job identifier from the start job call.",
+      "example": "1234567890abcdef"
+    },
+    "MaxResults": {
+      "type": "int32",
+      "example": 100
+    },
+    "NextToken": {
+      "type": "string"
+    },
+    "SortBy": {
+      "type": "string",
+      "enum": [
+        "NAME",
+        "TIMESTAMP"
+      ]
+    },
+    "AggregateBy": {
+      "type": "string",
+      "enum": [
+        "TIMESTAMPS",
+        "SEGMENTS"
+      ]
+    }
+  },
+  "required": [
+    "JobId"
+  ]
+}

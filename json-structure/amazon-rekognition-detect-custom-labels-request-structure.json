@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-detect-custom-labels-request-structure.json",
+  "name": "DetectCustomLabelsRequest",
+  "description": "DetectCustomLabelsRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "ProjectVersionArn": {
+      "type": "string",
+      "description": "The ARN of the model version to use."
+    },
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "MaxResults": {
+      "type": "int32"
+    },
+    "MinConfidence": {
+      "type": "float"
+    }
+  },
+  "required": [
+    "ProjectVersionArn",
+    "Image"
+  ]
+}

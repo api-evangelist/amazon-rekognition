@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-detect-custom-labels-request-schema.json",
+  "title": "DetectCustomLabelsRequest",
+  "description": "DetectCustomLabelsRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "ProjectVersionArn": {
+      "type": "string",
+      "description": "The ARN of the model version to use."
+    },
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "MaxResults": {
+      "type": "integer"
+    },
+    "MinConfidence": {
+      "type": "number",
+      "format": "float"
+    }
+  },
+  "required": [
+    "ProjectVersionArn",
+    "Image"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "Image": "sample-value",
+  "MaxLabels": 10,
+  "MinConfidence": 75.0,
+  "Features": [
+    "GENERAL_LABELS"
+  ],
+  "Settings": {}
+}

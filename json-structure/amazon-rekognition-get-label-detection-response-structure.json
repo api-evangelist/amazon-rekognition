@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-get-label-detection-response-structure.json",
+  "name": "GetLabelDetectionResponse",
+  "description": "GetLabelDetectionResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "JobStatus": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "FAILED"
+      ],
+      "example": "SUCCEEDED"
+    },
+    "StatusMessage": {
+      "type": "string"
+    },
+    "VideoMetadata": {
+      "type": "object"
+    },
+    "NextToken": {
+      "type": "string"
+    },
+    "Labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Timestamp": {
+            "type": "int32"
+          },
+          "Label": {
+            "$ref": "#/components/schemas/Label"
+          }
+        }
+      }
+    },
+    "LabelModelVersion": {
+      "type": "string"
+    },
+    "JobId": {
+      "type": "string"
+    }
+  }
+}

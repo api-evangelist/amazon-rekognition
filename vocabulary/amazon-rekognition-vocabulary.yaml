@@ -1,0 +1,405 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: Amazon Rekognition
+  description: Unified vocabulary mapping operational API dimensions and capability workflows for Amazon Rekognition computer vision service.
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: rekognition
+      version: "2016-06-27"
+      baseUrl: https://rekognition.amazonaws.com
+      status: active
+      description: Amazon Rekognition image and video analysis API
+
+  resources:
+    - name: labels
+      api: rekognition
+      description: Object, scene, and concept labels detected in images and videos
+      actions:
+        - detect
+        - start-detection
+        - get-detection
+    - name: faces
+      api: rekognition
+      description: Faces detected and analyzed in images and video
+      actions:
+        - detect
+        - compare
+        - index
+        - search
+        - search-by-image
+        - associate
+        - disassociate
+        - delete
+        - list
+    - name: collections
+      api: rekognition
+      description: Searchable face collections for identity management
+      actions:
+        - create
+        - list
+        - describe
+        - delete
+    - name: users
+      api: rekognition
+      description: User profiles within face collections
+      actions:
+        - create
+        - delete
+        - list
+        - search
+        - search-by-image
+    - name: text
+      api: rekognition
+      description: Text detected in images and videos
+      actions:
+        - detect
+        - start-detection
+        - get-detection
+    - name: moderation-labels
+      api: rekognition
+      description: Inappropriate or unsafe content labels
+      actions:
+        - detect
+        - start-detection
+        - get-detection
+    - name: celebrities
+      api: rekognition
+      description: Celebrities recognized in images and videos
+      actions:
+        - recognize
+        - get-info
+        - start-recognition
+        - get-recognition
+    - name: liveness-sessions
+      api: rekognition
+      description: Face liveness verification sessions
+      actions:
+        - create
+        - get-results
+    - name: stream-processors
+      api: rekognition
+      description: Streaming video analysis processors
+      actions:
+        - create
+        - start
+        - stop
+        - describe
+        - list
+        - delete
+        - update
+    - name: projects
+      api: rekognition
+      description: Custom Labels machine learning projects
+      actions:
+        - create
+        - delete
+        - describe
+    - name: media-analysis-jobs
+      api: rekognition
+      description: Batch media analysis jobs
+      actions:
+        - start
+        - get
+        - list
+    - name: custom-labels
+      api: rekognition
+      description: Custom trained labels detected in images
+      actions:
+        - detect
+
+  actions:
+    - name: detect
+      httpMethods:
+        - POST
+      pattern: read
+      description: Synchronously analyze an image and return detected entities
+    - name: start
+      httpMethods:
+        - POST
+      pattern: write
+      description: Start an asynchronous video analysis job
+    - name: get
+      httpMethods:
+        - POST
+      pattern: read
+      description: Retrieve results of an asynchronous job
+    - name: create
+      httpMethods:
+        - POST
+      pattern: write
+      description: Create a new resource
+    - name: delete
+      httpMethods:
+        - POST
+      pattern: destructive
+      description: Delete an existing resource
+    - name: list
+      httpMethods:
+        - POST
+      pattern: read
+      description: List resources with optional pagination
+    - name: describe
+      httpMethods:
+        - POST
+      pattern: read
+      description: Get detailed information about a specific resource
+    - name: search
+      httpMethods:
+        - POST
+      pattern: read
+      description: Search for matching entities in a collection
+    - name: index
+      httpMethods:
+        - POST
+      pattern: write
+      description: Add entities to a searchable collection
+    - name: compare
+      httpMethods:
+        - POST
+      pattern: read
+      description: Compare two entities for similarity
+    - name: recognize
+      httpMethods:
+        - POST
+      pattern: read
+      description: Identify known entities in media
+
+  schemas:
+    core:
+      - name: Image
+        description: Input image as S3 object or base64 bytes
+        keyProperties:
+          - Bytes
+          - S3Object
+      - name: S3Object
+        description: S3 bucket and key reference for stored media
+        keyProperties:
+          - Bucket
+          - Name
+          - Version
+      - name: BoundingBox
+        description: Bounding box coordinates for detected entities
+        keyProperties:
+          - Width
+          - Height
+          - Left
+          - Top
+      - name: Label
+        description: Detected label with name and confidence
+        keyProperties:
+          - Name
+          - Confidence
+          - Instances
+          - Parents
+      - name: FaceDetail
+        description: Facial attributes detected on a face
+        keyProperties:
+          - BoundingBox
+          - AgeRange
+          - Emotions
+          - Gender
+          - Confidence
+    video:
+      - name: Video
+        description: Video stored in S3 for analysis
+        keyProperties:
+          - S3Object
+      - name: NotificationChannel
+        description: SNS notification for async job completion
+        keyProperties:
+          - SNSTopicArn
+          - RoleArn
+
+  parameters:
+    pagination:
+      - name: NextToken
+        description: Token for the next page of results
+      - name: MaxResults
+        description: Maximum number of results to return
+    identifiers:
+      - name: CollectionId
+        description: Face collection identifier
+      - name: FaceId
+        description: UUID of an indexed face
+      - name: UserId
+        description: User profile identifier
+      - name: JobId
+        description: Async video analysis job identifier
+      - name: SessionId
+        description: Face liveness session identifier
+      - name: ProjectVersionArn
+        description: ARN of a Custom Labels model version
+    filters:
+      - name: MinConfidence
+        description: Minimum confidence threshold for results
+      - name: FaceMatchThreshold
+        description: Minimum similarity threshold for face matches
+      - name: SimilarityThreshold
+        description: Minimum similarity score for face comparison
+
+  enums:
+    jobStatus:
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+    orientationCorrection:
+      - ROTATE_0
+      - ROTATE_90
+      - ROTATE_180
+      - ROTATE_270
+    emotionTypes:
+      - HAPPY
+      - SAD
+      - ANGRY
+      - CONFUSED
+      - DISGUSTED
+      - SURPRISED
+      - CALM
+      - UNKNOWN
+      - FEAR
+    textTypes:
+      - LINE
+      - WORD
+    qualityFilter:
+      - NONE
+      - AUTO
+      - LOW
+      - MEDIUM
+      - HIGH
+    livenessStatus:
+      - CREATED
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+      - EXPIRED
+
+  authentication:
+    schemes:
+      - name: AWS Signature Version 4
+        type: apiKey
+        header: Authorization
+        description: AWS SigV4 authentication using access key and secret
+
+capability:
+  workflows:
+    - name: Computer Vision Workflows
+      file: capabilities/computer-vision-workflows.yaml
+      description: Unified computer vision, identity verification, and content moderation workflows
+      apisCombined:
+        - rekognition
+      toolCount: 15
+      personas:
+        - Application Developer
+        - Security Engineer
+        - Content Moderator
+
+  personas:
+    - id: application-developer
+      name: Application Developer
+      description: Developers building apps with computer vision features such as image search, face login, and text extraction.
+      workflows:
+        - Computer Vision Workflows
+    - id: security-engineer
+      name: Security Engineer
+      description: Security teams using facial recognition and liveness detection for identity verification and fraud prevention.
+      workflows:
+        - Computer Vision Workflows
+    - id: content-moderator
+      name: Content Moderator
+      description: Trust and safety teams moderating user-generated content for inappropriate or explicit imagery.
+      workflows:
+        - Computer Vision Workflows
+
+  domains:
+    - name: Image Analysis
+      description: Synchronous analysis of images for labels, faces, text, and moderation
+      resources:
+        - labels
+        - faces
+        - text
+        - moderation-labels
+        - celebrities
+        - custom-labels
+    - name: Identity Verification
+      description: Face comparison, collection search, and liveness detection for user identity
+      resources:
+        - faces
+        - collections
+        - liveness-sessions
+        - users
+    - name: Video Analysis
+      description: Asynchronous analysis of stored and streaming video
+      resources:
+        - labels
+        - faces
+        - text
+        - moderation-labels
+        - celebrities
+        - stream-processors
+        - media-analysis-jobs
+
+  namespaces:
+    - name: rekognition
+      type: consumed
+      baseUri: https://rekognition.amazonaws.com
+    - name: computer-vision-api
+      type: rest-exposed
+      port: 8080
+    - name: computer-vision-mcp
+      type: mcp-exposed
+      port: 9080
+
+  binds:
+    - name: AWS_ACCESS_KEY_ID
+      description: AWS access key for authenticating Rekognition API calls
+      workflows:
+        - Computer Vision Workflows
+    - name: AWS_SECRET_ACCESS_KEY
+      description: AWS secret key for authenticating Rekognition API calls
+      workflows:
+        - Computer Vision Workflows
+    - name: AWS_REGION
+      description: AWS region for Rekognition API endpoint
+      workflows:
+        - Computer Vision Workflows
+
+crossReference:
+  - resource: labels
+    operations:
+      - detectLabels
+      - startLabelDetection
+      - getLabelDetection
+    workflows:
+      - Computer Vision Workflows
+    personas:
+      - Application Developer
+  - resource: faces
+    operations:
+      - detectFaces
+      - compareFaces
+      - indexFaces
+      - searchFacesByImage
+    workflows:
+      - Computer Vision Workflows
+    personas:
+      - Application Developer
+      - Security Engineer
+  - resource: liveness-sessions
+    operations:
+      - createFaceLivenessSession
+      - getFaceLivenessSessionResults
+    workflows:
+      - Computer Vision Workflows
+    personas:
+      - Security Engineer
+  - resource: moderation-labels
+    operations:
+      - detectModerationLabels
+    workflows:
+      - Computer Vision Workflows
+    personas:
+      - Content Moderator

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-get-face-liveness-session-results-request-structure.json",
+  "name": "GetFaceLivenessSessionResultsRequest",
+  "description": "GetFaceLivenessSessionResultsRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "SessionId": {
+      "type": "uuid",
+      "description": "The sessionId for the Face Liveness session."
+    }
+  },
+  "required": [
+    "SessionId"
+  ]
+}

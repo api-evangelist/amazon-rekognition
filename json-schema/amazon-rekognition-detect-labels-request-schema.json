@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-detect-labels-request-schema.json",
+  "title": "DetectLabelsRequest",
+  "description": "Request for the DetectLabels operation.",
+  "type": "object",
+  "properties": {
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "MaxLabels": {
+      "type": "integer",
+      "description": "Maximum number of labels to return.",
+      "example": 10
+    },
+    "MinConfidence": {
+      "type": "number",
+      "format": "float",
+      "description": "Minimum confidence level for labels to return.",
+      "example": 75.0
+    },
+    "Features": {
+      "type": "array",
+      "description": "A list of the types of analysis to perform.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "GENERAL_LABELS",
+          "IMAGE_PROPERTIES"
+        ]
+      }
+    },
+    "Settings": {
+      "type": "object",
+      "description": "Optional settings for label detection."
+    }
+  },
+  "required": [
+    "Image"
+  ]
+}

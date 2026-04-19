@@ -1,0 +1,18 @@
+{
+  "SourceImageFace": {
+    "BoundingBox": "sample-value",
+    "Confidence": 34.33
+  },
+  "FaceMatches": [
+    {
+      "Similarity": 95.3,
+      "Face": {
+        "BoundingBox": "sample-value",
+        "Confidence": 95.0
+      }
+    }
+  ],
+  "UnmatchedFaces": [
+    {}
+  ]
+}

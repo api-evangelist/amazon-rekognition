@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-detect-moderation-labels-response-schema.json",
+  "title": "DetectModerationLabelsResponse",
+  "description": "DetectModerationLabelsResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "ModerationLabels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Confidence": {
+            "type": "number",
+            "format": "float"
+          },
+          "Name": {
+            "type": "string",
+            "example": "Explicit Nudity"
+          },
+          "ParentName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ModerationModelVersion": {
+      "type": "string",
+      "example": "7.0"
+    },
+    "HumanLoopActivationOutput": {
+      "type": "object"
+    },
+    "ProjectVersion": {
+      "type": "string"
+    }
+  }
+}

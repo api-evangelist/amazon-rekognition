@@ -1,0 +1,5 @@
+{
+  "StatusCode": 200,
+  "CollectionArn": "aws:rekognition:us-east-1:123456789012:collection/my-face-collection",
+  "FaceModelVersion": "6.0"
+}

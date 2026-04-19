@@ -1,0 +1,7 @@
+{
+  "CollectionId": "my-face-collection",
+  "Image": "sample-value",
+  "MaxFaces": 5,
+  "FaceMatchThreshold": 80.0,
+  "QualityFilter": "NONE"
+}

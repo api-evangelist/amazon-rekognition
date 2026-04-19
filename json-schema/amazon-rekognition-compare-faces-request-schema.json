@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-compare-faces-request-schema.json",
+  "title": "CompareFacesRequest",
+  "description": "CompareFacesRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "SourceImage": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "TargetImage": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "SimilarityThreshold": {
+      "type": "number",
+      "format": "float",
+      "description": "Minimum confidence for a match to be included in FaceMatches.",
+      "example": 80.0
+    },
+    "QualityFilter": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "AUTO",
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    }
+  },
+  "required": [
+    "SourceImage",
+    "TargetImage"
+  ]
+}

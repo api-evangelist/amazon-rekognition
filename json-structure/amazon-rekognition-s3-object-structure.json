@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-s3-object-structure.json",
+  "name": "S3Object",
+  "description": "Provides the S3 bucket name and object name.",
+  "type": "object",
+  "properties": {
+    "Bucket": {
+      "type": "string",
+      "description": "Name of the S3 bucket.",
+      "example": "my-images-bucket"
+    },
+    "Name": {
+      "type": "string",
+      "description": "S3 object key name.",
+      "example": "images/photo.jpg"
+    },
+    "Version": {
+      "type": "string",
+      "description": "S3 object version ID if versioning is enabled.",
+      "example": "v1"
+    }
+  }
+}

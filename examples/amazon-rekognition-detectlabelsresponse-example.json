@@ -1,0 +1,48 @@
+{
+  "Labels": [
+    {
+      "Name": "images/sample.jpg",
+      "Confidence": 24.66,
+      "Instances": [
+        {
+          "BoundingBox": {},
+          "Confidence": 94.94
+        }
+      ],
+      "Parents": [
+        {
+          "Name": "images/sample.jpg"
+        }
+      ],
+      "Aliases": [
+        {
+          "Name": "images/sample.jpg"
+        }
+      ],
+      "Categories": [
+        {
+          "Name": "images/sample.jpg"
+        }
+      ]
+    }
+  ],
+  "LabelModelVersion": "6.0",
+  "ImageProperties": {
+    "Quality": {
+      "Brightness": 32.11,
+      "Sharpness": 94.76,
+      "Contrast": 10.99
+    },
+    "DominantColors": [
+      {
+        "Red": 6,
+        "Green": 80,
+        "Blue": 85,
+        "HexCode": "sample-value",
+        "SimplifiedColor": "sample-value",
+        "CSSColor": "sample-value",
+        "PixelPercent": 67.3
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "Bucket": "my-images-bucket",
+  "Name": "images/photo.jpg",
+  "Version": "v1"
+}

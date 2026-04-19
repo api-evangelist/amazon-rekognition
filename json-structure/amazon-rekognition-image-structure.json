@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-image-structure.json",
+  "name": "Image",
+  "description": "Provides the input image either as bytes or an S3 object.",
+  "type": "object",
+  "properties": {
+    "Bytes": {
+      "type": "string",
+      "description": "Blob of image bytes up to 5 MBs."
+    },
+    "S3Object": {
+      "$ref": "#/components/schemas/S3Object"
+    }
+  }
+}

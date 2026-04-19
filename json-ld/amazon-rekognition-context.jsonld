@@ -1,79 +1,495 @@
 {
   "@context": {
-    "@vocab": "https://schema.org/",
-    "aws": "https://aws.amazon.com/rekognition/schemas/",
-    "rekognition": "https://docs.aws.amazon.com/rekognition/latest/APIReference/",
-    "Label": {
-      "@id": "aws:Label",
-      "@context": {
-        "Name": "schema:name",
-        "Confidence": "aws:confidence",
-        "Instances": "aws:instances",
-        "Parents": "schema:isPartOf",
-        "Categories": "schema:category"
-      }
+    "@version": 1.1,
+    "rekognition": "https://rekognition.amazonaws.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CompareFacesResponse": "rekognition:CompareFacesResponse",
+    "DetectLabelsResponse": "rekognition:DetectLabelsResponse",
+    "Video": {
+      "@id": "rekognition:Video",
+      "@type": "xsd:string"
     },
+    "DetectModerationLabelsRequest": "rekognition:DetectModerationLabelsRequest",
+    "ListCollectionsResponse": "rekognition:ListCollectionsResponse",
+    "CreateFaceLivenessSessionRequest": "rekognition:CreateFaceLivenessSessionRequest",
     "BoundingBox": {
-      "@id": "aws:BoundingBox",
-      "@context": {
-        "Width": "schema:width",
-        "Height": "schema:height",
-        "Left": "aws:left",
-        "Top": "aws:top"
-      }
+      "@id": "rekognition:BoundingBox",
+      "@type": "xsd:string"
+    },
+    "DetectModerationLabelsResponse": "rekognition:DetectModerationLabelsResponse",
+    "DetectTextResponse": "rekognition:DetectTextResponse",
+    "IndexFacesResponse": "rekognition:IndexFacesResponse",
+    "GetFaceLivenessSessionResultsRequest": "rekognition:GetFaceLivenessSessionResultsRequest",
+    "StartLabelDetectionRequest": "rekognition:StartLabelDetectionRequest",
+    "DetectFacesRequest": "rekognition:DetectFacesRequest",
+    "SearchFacesByImageResponse": "rekognition:SearchFacesByImageResponse",
+    "StartVideoJobResponse": "rekognition:StartVideoJobResponse",
+    "DetectLabelsRequest": "rekognition:DetectLabelsRequest",
+    "DetectCustomLabelsRequest": "rekognition:DetectCustomLabelsRequest",
+    "CreateFaceLivenessSessionResponse": "rekognition:CreateFaceLivenessSessionResponse",
+    "CreateCollectionResponse": "rekognition:CreateCollectionResponse",
+    "CompareFacesRequest": "rekognition:CompareFacesRequest",
+    "FaceDetail": "rekognition:FaceDetail",
+    "SearchFacesByImageRequest": "rekognition:SearchFacesByImageRequest",
+    "Label": "rekognition:Label",
+    "CreateCollectionRequest": "rekognition:CreateCollectionRequest",
+    "S3Object": {
+      "@id": "rekognition:S3Object",
+      "@type": "xsd:string"
+    },
+    "GetVideoJobResultRequest": "rekognition:GetVideoJobResultRequest",
+    "Image": {
+      "@id": "rekognition:Image",
+      "@type": "xsd:string"
+    },
+    "DetectCustomLabelsResponse": "rekognition:DetectCustomLabelsResponse",
+    "NotificationChannel": {
+      "@id": "rekognition:NotificationChannel",
+      "@type": "xsd:string"
+    },
+    "IndexFacesRequest": "rekognition:IndexFacesRequest",
+    "RecognizeCelebritiesResponse": "rekognition:RecognizeCelebritiesResponse",
+    "GetLabelDetectionResponse": "rekognition:GetLabelDetectionResponse",
+    "GetFaceLivenessSessionResultsResponse": "rekognition:GetFaceLivenessSessionResultsResponse",
+    "DetectFacesResponse": "rekognition:DetectFacesResponse",
+    "ImageOnlyRequest": "rekognition:ImageOnlyRequest",
+    "SourceImageFace": {
+      "@id": "rekognition:SourceImageFace",
+      "@type": "@id"
+    },
+    "Confidence": {
+      "@id": "rekognition:Confidence",
+      "@type": "xsd:float"
+    },
+    "FaceMatches": {
+      "@id": "rekognition:FaceMatches",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "Similarity": {
+      "@id": "rekognition:Similarity",
+      "@type": "xsd:float"
     },
     "Face": {
-      "@id": "aws:Face",
-      "@context": {
-        "FaceId": "schema:identifier",
-        "BoundingBox": "aws:BoundingBox",
-        "Confidence": "aws:confidence",
-        "Landmarks": "aws:landmarks",
-        "Emotions": "aws:emotions",
-        "AgeRange": "aws:ageRange"
-      }
+      "@id": "rekognition:Face",
+      "@type": "@id"
     },
-    "Celebrity": {
-      "@id": "aws:Celebrity",
-      "@context": {
-        "Name": "schema:name",
-        "Id": "schema:identifier",
-        "Urls": "schema:url",
-        "Face": "aws:Face"
-      }
+    "UnmatchedFaces": {
+      "@id": "rekognition:UnmatchedFaces",
+      "@container": "@set",
+      "@type": "@id"
     },
-    "TextDetection": {
-      "@id": "aws:TextDetection",
-      "@context": {
-        "DetectedText": "schema:text",
-        "Type": "schema:additionalType",
-        "Confidence": "aws:confidence",
-        "Geometry": "aws:geometry"
-      }
+    "Labels": {
+      "@id": "rekognition:Labels",
+      "@container": "@set",
+      "@type": "@id"
     },
-    "Collection": {
-      "@id": "aws:Collection",
-      "@context": {
-        "CollectionId": "schema:identifier",
-        "CollectionArn": "aws:arn",
-        "FaceCount": "schema:size",
-        "CreationTimestamp": "schema:dateCreated"
-      }
+    "Name": {
+      "@id": "rekognition:Name",
+      "@type": "xsd:string"
     },
-    "DetectLabelsResponse": {
-      "@id": "aws:DetectLabelsResponse",
-      "@context": {
-        "Labels": "aws:Label",
-        "LabelModelVersion": "schema:softwareVersion",
-        "ImageProperties": "aws:imageProperties"
-      }
+    "Instances": {
+      "@id": "rekognition:Instances",
+      "@container": "@set",
+      "@type": "@id"
     },
-    "Image": {
-      "@id": "schema:ImageObject",
-      "@context": {
-        "Bytes": "schema:contentUrl",
-        "S3Object": "aws:s3Object"
-      }
+    "Parents": {
+      "@id": "rekognition:Parents",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "Aliases": {
+      "@id": "rekognition:Aliases",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "Categories": {
+      "@id": "rekognition:Categories",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "LabelModelVersion": {
+      "@id": "rekognition:LabelModelVersion",
+      "@type": "xsd:string"
+    },
+    "ImageProperties": {
+      "@id": "rekognition:ImageProperties",
+      "@type": "@id"
+    },
+    "Quality": {
+      "@id": "rekognition:Quality",
+      "@type": "@id"
+    },
+    "Brightness": {
+      "@id": "rekognition:Brightness",
+      "@type": "xsd:decimal"
+    },
+    "Sharpness": {
+      "@id": "rekognition:Sharpness",
+      "@type": "xsd:decimal"
+    },
+    "Contrast": {
+      "@id": "rekognition:Contrast",
+      "@type": "xsd:decimal"
+    },
+    "DominantColors": {
+      "@id": "rekognition:DominantColors",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "Red": {
+      "@id": "rekognition:Red",
+      "@type": "xsd:integer"
+    },
+    "Green": {
+      "@id": "rekognition:Green",
+      "@type": "xsd:integer"
+    },
+    "Blue": {
+      "@id": "rekognition:Blue",
+      "@type": "xsd:integer"
+    },
+    "HexCode": {
+      "@id": "rekognition:HexCode",
+      "@type": "xsd:string"
+    },
+    "SimplifiedColor": {
+      "@id": "rekognition:SimplifiedColor",
+      "@type": "xsd:string"
+    },
+    "CSSColor": {
+      "@id": "rekognition:CSSColor",
+      "@type": "xsd:string"
+    },
+    "PixelPercent": {
+      "@id": "rekognition:PixelPercent",
+      "@type": "xsd:decimal"
+    },
+    "MinConfidence": {
+      "@id": "rekognition:MinConfidence",
+      "@type": "xsd:float"
+    },
+    "HumanLoopConfig": {
+      "@id": "rekognition:HumanLoopConfig",
+      "@type": "@id"
+    },
+    "ProjectVersion": {
+      "@id": "rekognition:ProjectVersion",
+      "@type": "xsd:string"
+    },
+    "CollectionIds": {
+      "@id": "rekognition:CollectionIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "NextToken": {
+      "@id": "rekognition:NextToken",
+      "@type": "xsd:string"
+    },
+    "FaceModelVersions": {
+      "@id": "rekognition:FaceModelVersions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "KmsKeyId": {
+      "@id": "rekognition:KmsKeyId",
+      "@type": "xsd:string"
+    },
+    "Settings": {
+      "@id": "rekognition:Settings",
+      "@type": "@id"
+    },
+    "ClientRequestToken": {
+      "@id": "rekognition:ClientRequestToken",
+      "@type": "xsd:string"
+    },
+    "Width": {
+      "@id": "rekognition:Width",
+      "@type": "xsd:float"
+    },
+    "Height": {
+      "@id": "rekognition:Height",
+      "@type": "xsd:float"
+    },
+    "Left": {
+      "@id": "rekognition:Left",
+      "@type": "xsd:float"
+    },
+    "Top": {
+      "@id": "rekognition:Top",
+      "@type": "xsd:float"
+    },
+    "ModerationLabels": {
+      "@id": "rekognition:ModerationLabels",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "ParentName": {
+      "@id": "rekognition:ParentName",
+      "@type": "xsd:string"
+    },
+    "ModerationModelVersion": {
+      "@id": "rekognition:ModerationModelVersion",
+      "@type": "xsd:string"
+    },
+    "HumanLoopActivationOutput": {
+      "@id": "rekognition:HumanLoopActivationOutput",
+      "@type": "@id"
+    },
+    "TextDetections": {
+      "@id": "rekognition:TextDetections",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "DetectedText": {
+      "@id": "rekognition:DetectedText",
+      "@type": "xsd:string"
+    },
+    "Type": {
+      "@id": "rekognition:Type",
+      "@type": "xsd:string"
+    },
+    "Id": {
+      "@id": "rekognition:Id",
+      "@type": "xsd:integer"
+    },
+    "ParentId": {
+      "@id": "rekognition:ParentId",
+      "@type": "xsd:integer"
+    },
+    "Geometry": {
+      "@id": "rekognition:Geometry",
+      "@type": "@id"
+    },
+    "TextModelVersion": {
+      "@id": "rekognition:TextModelVersion",
+      "@type": "xsd:string"
+    },
+    "FaceRecords": {
+      "@id": "rekognition:FaceRecords",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "OrientationCorrection": {
+      "@id": "rekognition:OrientationCorrection",
+      "@type": "xsd:string"
+    },
+    "FaceModelVersion": {
+      "@id": "rekognition:FaceModelVersion",
+      "@type": "xsd:string"
+    },
+    "UnindexedFaces": {
+      "@id": "rekognition:UnindexedFaces",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "SessionId": {
+      "@id": "rekognition:SessionId",
+      "@type": "xsd:string"
+    },
+    "JobTag": {
+      "@id": "rekognition:JobTag",
+      "@type": "xsd:string"
+    },
+    "Features": {
+      "@id": "rekognition:Features",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "Attributes": {
+      "@id": "rekognition:Attributes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "SearchedFaceBoundingBox": {
+      "@id": "rekognition:SearchedFaceBoundingBox",
+      "@type": "xsd:string"
+    },
+    "SearchedFaceConfidence": {
+      "@id": "rekognition:SearchedFaceConfidence",
+      "@type": "xsd:float"
+    },
+    "JobId": {
+      "@id": "rekognition:JobId",
+      "@type": "xsd:string"
+    },
+    "MaxLabels": {
+      "@id": "rekognition:MaxLabels",
+      "@type": "xsd:integer"
+    },
+    "ProjectVersionArn": {
+      "@id": "rekognition:ProjectVersionArn",
+      "@type": "xsd:string"
+    },
+    "MaxResults": {
+      "@id": "rekognition:MaxResults",
+      "@type": "xsd:integer"
+    },
+    "StatusCode": {
+      "@id": "rekognition:StatusCode",
+      "@type": "xsd:integer"
+    },
+    "CollectionArn": {
+      "@id": "rekognition:CollectionArn",
+      "@type": "xsd:string"
+    },
+    "SourceImage": {
+      "@id": "rekognition:SourceImage",
+      "@type": "xsd:string"
+    },
+    "TargetImage": {
+      "@id": "rekognition:TargetImage",
+      "@type": "xsd:string"
+    },
+    "SimilarityThreshold": {
+      "@id": "rekognition:SimilarityThreshold",
+      "@type": "xsd:float"
+    },
+    "QualityFilter": {
+      "@id": "rekognition:QualityFilter",
+      "@type": "xsd:string"
+    },
+    "AgeRange": {
+      "@id": "rekognition:AgeRange",
+      "@type": "@id"
+    },
+    "Low": {
+      "@id": "rekognition:Low",
+      "@type": "xsd:integer"
+    },
+    "High": {
+      "@id": "rekognition:High",
+      "@type": "xsd:integer"
+    },
+    "Smile": {
+      "@id": "rekognition:Smile",
+      "@type": "@id"
+    },
+    "Value": {
+      "@id": "rekognition:Value",
+      "@type": "xsd:boolean"
+    },
+    "Gender": {
+      "@id": "rekognition:Gender",
+      "@type": "@id"
+    },
+    "Emotions": {
+      "@id": "rekognition:Emotions",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "CollectionId": {
+      "@id": "rekognition:CollectionId",
+      "@type": "xsd:string"
+    },
+    "MaxFaces": {
+      "@id": "rekognition:MaxFaces",
+      "@type": "xsd:integer"
+    },
+    "FaceMatchThreshold": {
+      "@id": "rekognition:FaceMatchThreshold",
+      "@type": "xsd:float"
+    },
+    "Tags": {
+      "@id": "rekognition:Tags",
+      "@type": "@id"
+    },
+    "Bucket": {
+      "@id": "rekognition:Bucket",
+      "@type": "xsd:string"
+    },
+    "Version": {
+      "@id": "rekognition:Version",
+      "@type": "xsd:string"
+    },
+    "SortBy": {
+      "@id": "rekognition:SortBy",
+      "@type": "xsd:string"
+    },
+    "AggregateBy": {
+      "@id": "rekognition:AggregateBy",
+      "@type": "xsd:string"
+    },
+    "Bytes": {
+      "@id": "rekognition:Bytes",
+      "@type": "xsd:string"
+    },
+    "CustomLabels": {
+      "@id": "rekognition:CustomLabels",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "SNSTopicArn": {
+      "@id": "rekognition:SNSTopicArn",
+      "@type": "xsd:string"
+    },
+    "RoleArn": {
+      "@id": "rekognition:RoleArn",
+      "@type": "xsd:string"
+    },
+    "ExternalImageId": {
+      "@id": "rekognition:ExternalImageId",
+      "@type": "xsd:string"
+    },
+    "DetectionAttributes": {
+      "@id": "rekognition:DetectionAttributes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "CelebrityFaces": {
+      "@id": "rekognition:CelebrityFaces",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "Urls": {
+      "@id": "rekognition:Urls",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "MatchConfidence": {
+      "@id": "rekognition:MatchConfidence",
+      "@type": "xsd:float"
+    },
+    "KnownGender": {
+      "@id": "rekognition:KnownGender",
+      "@type": "@id"
+    },
+    "UnrecognizedFaces": {
+      "@id": "rekognition:UnrecognizedFaces",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "JobStatus": {
+      "@id": "rekognition:JobStatus",
+      "@type": "xsd:string"
+    },
+    "StatusMessage": {
+      "@id": "rekognition:StatusMessage",
+      "@type": "xsd:string"
+    },
+    "VideoMetadata": {
+      "@id": "rekognition:VideoMetadata",
+      "@type": "@id"
+    },
+    "Status": {
+      "@id": "rekognition:Status",
+      "@type": "xsd:string"
+    },
+    "ReferenceImage": {
+      "@id": "rekognition:ReferenceImage",
+      "@type": "@id"
+    },
+    "AuditImages": {
+      "@id": "rekognition:AuditImages",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "FaceDetails": {
+      "@id": "rekognition:FaceDetails",
+      "@container": "@set",
+      "@type": "xsd:string"
     }
   }
 }

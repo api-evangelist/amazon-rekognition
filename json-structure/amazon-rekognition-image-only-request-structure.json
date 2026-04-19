@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-image-only-request-structure.json",
+  "name": "ImageOnlyRequest",
+  "description": "Request containing only an image.",
+  "type": "object",
+  "properties": {
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    }
+  },
+  "required": [
+    "Image"
+  ]
+}

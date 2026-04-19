@@ -1,488 +1,1494 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: Amazon Rekognition
-  description: Amazon Rekognition is a cloud-based computer vision service that provides image and video analysis capabilities including label detection, facial analysis, face comparison, celebrity recognition, and text detection.
+  description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
   version: '2016-06-27'
   contact:
-    name: Kin Lane
-    email: kin@apievangelist.com
-    url: https://aws.amazon.com/rekognition/
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
 servers:
   - url: https://rekognition.amazonaws.com
-    description: Amazon Rekognition API endpoint
+    description: Amazon Rekognition global endpoint
 paths:
-  /:
+  /#DetectLabels:
     post:
-      operationId: DetectLabels
+      operationId: detectLabels
       summary: Amazon Rekognition Detect Labels
-      description: Detects instances of real-world entities within an image provided as input, returning labels with confidence levels for each detected object, scene, or concept.
-      headers:
-        X-Amz-Target:
-          description: The target API operation.
-          schema:
-            type: string
-            enum:
-              - RekognitionService.DetectLabels
+      description: Detects instances of real-world entities within an image and returns labels with confidence scores.
+      tags:
+        - Image Analysis
       requestBody:
         required: true
         content:
           application/x-amz-json-1.1:
             schema:
-              type: object
-              properties:
-                Image:
-                  type: object
-                  description: The input image as base64-encoded bytes or an S3 object.
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
+              $ref: '#/components/schemas/DetectLabelsRequest'
+            examples:
+              detectLabels200Example:
+                summary: Default detectLabels request
+                x-microcks-default: true
+                value:
+                  Image:
                     S3Object:
-                      type: object
-                      properties:
-                        Bucket:
-                          type: string
-                        Name:
-                          type: string
-                        Version:
-                          type: string
-                MaxLabels:
-                  type: integer
-                  description: Maximum number of labels to return.
-                MinConfidence:
-                  type: number
-                  format: float
-                  description: Minimum confidence level for returned labels.
-              required:
-                - Image
+                      Bucket: my-images-bucket
+                      Name: images/photo.jpg
+                  MaxLabels: 10
+                  MinConfidence: 75.0
       responses:
         '200':
-          description: Successful label detection response.
+          description: Labels detected successfully.
           content:
-            application/json:
+            application/x-amz-json-1.1:
               schema:
                 $ref: '#/components/schemas/DetectLabelsResponse'
-      tags:
-        - Label Detection
-
+              examples:
+                detectLabels200Example:
+                  summary: Default detectLabels 200 response
+                  x-microcks-default: true
+                  value:
+                    Labels:
+                      - Name: Person
+                        Confidence: 98.5
+                        Instances: []
+                        Parents: []
+                    LabelModelVersion: '3.0'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /#DetectFaces:
     post:
-      operationId: DetectFaces
+      operationId: detectFaces
       summary: Amazon Rekognition Detect Faces
-      description: Detects faces within an image and returns facial attributes such as age range, emotions, gender, and pose.
+      description: Detects faces within an image and returns detailed facial attributes for each detected face.
+      tags:
+        - Facial Analysis
       requestBody:
         required: true
         content:
           application/x-amz-json-1.1:
             schema:
-              type: object
-              properties:
-                Image:
-                  type: object
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
+              $ref: '#/components/schemas/DetectFacesRequest'
+            examples:
+              detectFacesRequestExample:
+                summary: Default detectFaces request
+                x-microcks-default: true
+                value:
+                  Image:
                     S3Object:
-                      type: object
-                      properties:
-                        Bucket:
-                          type: string
-                        Name:
-                          type: string
-                Attributes:
-                  type: array
-                  items:
-                    type: string
-                    enum:
-                      - DEFAULT
-                      - ALL
-              required:
-                - Image
+                      Bucket: my-images-bucket
+                      Name: images/face.jpg
+                  Attributes:
+                    - ALL
       responses:
         '200':
-          description: Successful face detection response.
+          description: Faces detected successfully.
           content:
-            application/json:
+            application/x-amz-json-1.1:
               schema:
-                type: object
-                properties:
-                  FaceDetails:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        BoundingBox:
-                          type: object
-                        Confidence:
-                          type: number
-                        Landmarks:
-                          type: array
-                          items:
-                            type: object
-                        Emotions:
-                          type: array
-                          items:
-                            type: object
-      tags:
-        - Face Detection
-
-  /#DetectText:
-    post:
-      operationId: DetectText
-      summary: Amazon Rekognition Detect Text
-      description: Detects text in the input image and converts it into machine-readable text.
-      requestBody:
-        required: true
-        content:
-          application/x-amz-json-1.1:
-            schema:
-              type: object
-              properties:
-                Image:
-                  type: object
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
-                    S3Object:
-                      type: object
-                      properties:
-                        Bucket:
-                          type: string
-                        Name:
-                          type: string
-              required:
-                - Image
-      responses:
-        '200':
-          description: Successful text detection response.
+                $ref: '#/components/schemas/DetectFacesResponse'
+              examples:
+                detectFaces200Example:
+                  summary: Default detectFaces 200 response
+                  x-microcks-default: true
+                  value:
+                    FaceDetails:
+                      - BoundingBox:
+                          Width: 0.35
+                          Height: 0.45
+                          Left: 0.1
+                          Top: 0.05
+                        Confidence: 99.7
+                        AgeRange:
+                          Low: 25
+                          High: 35
+        '400':
+          description: Invalid request parameters.
           content:
-            application/json:
+            application/x-amz-json-1.1:
               schema:
-                type: object
-                properties:
-                  TextDetections:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        DetectedText:
-                          type: string
-                        Type:
-                          type: string
-                        Confidence:
-                          type: number
-                        Geometry:
-                          type: object
-      tags:
-        - Text Detection
-
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /#CompareFaces:
     post:
-      operationId: CompareFaces
+      operationId: compareFaces
       summary: Amazon Rekognition Compare Faces
-      description: Compares a face in the source input image with each of the 100 largest faces detected in the target input image.
+      description: Compares a face in the source input image with each face detected in the target input image.
+      tags:
+        - Facial Analysis
       requestBody:
         required: true
         content:
           application/x-amz-json-1.1:
             schema:
-              type: object
-              properties:
-                SourceImage:
-                  type: object
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
+              $ref: '#/components/schemas/CompareFacesRequest'
+            examples:
+              compareFacesRequestExample:
+                summary: Default compareFaces request
+                x-microcks-default: true
+                value:
+                  SourceImage:
                     S3Object:
-                      type: object
-                TargetImage:
-                  type: object
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
+                      Bucket: my-bucket
+                      Name: source.jpg
+                  TargetImage:
                     S3Object:
-                      type: object
-                SimilarityThreshold:
-                  type: number
-                  format: float
-              required:
-                - SourceImage
-                - TargetImage
+                      Bucket: my-bucket
+                      Name: target.jpg
+                  SimilarityThreshold: 80.0
       responses:
         '200':
-          description: Successful face comparison response.
+          description: Face comparison completed successfully.
           content:
-            application/json:
+            application/x-amz-json-1.1:
               schema:
-                type: object
-                properties:
-                  FaceMatches:
-                    type: array
-                    items:
-                      type: object
-                  UnmatchedFaces:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/CompareFacesResponse'
+              examples:
+                compareFaces200Example:
+                  summary: Default compareFaces 200 response
+                  x-microcks-default: true
+                  value:
+                    FaceMatches:
+                      - Similarity: 95.3
+                        Face:
+                          BoundingBox:
+                            Width: 0.3
+                            Height: 0.4
+                            Left: 0.1
+                            Top: 0.1
+                          Confidence: 99.5
+                    UnmatchedFaces: []
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#DetectText:
+    post:
+      operationId: detectText
+      summary: Amazon Rekognition Detect Text
+      description: Detects text in the input image and converts it into machine-readable text.
       tags:
-        - Face Comparison
-
+        - Text Detection
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/ImageOnlyRequest'
+            examples:
+              detectTextRequestExample:
+                summary: Default detectText request
+                x-microcks-default: true
+                value:
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: signage.jpg
+      responses:
+        '200':
+          description: Text detected successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/DetectTextResponse'
+              examples:
+                detectText200Example:
+                  summary: Default detectText 200 response
+                  x-microcks-default: true
+                  value:
+                    TextDetections:
+                      - DetectedText: Hello World
+                        Type: LINE
+                        Id: 0
+                        Confidence: 99.1
+                    TextModelVersion: '3.1'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#DetectModerationLabels:
+    post:
+      operationId: detectModerationLabels
+      summary: Amazon Rekognition Detect Moderation Labels
+      description: Detects unsafe content such as explicit adult content or violent content in an image.
+      tags:
+        - Content Moderation
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/DetectModerationLabelsRequest'
+            examples:
+              detectModerationLabelsRequestExample:
+                summary: Default detectModerationLabels request
+                x-microcks-default: true
+                value:
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: ugc-content.jpg
+                  MinConfidence: 50.0
+      responses:
+        '200':
+          description: Moderation labels detected successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/DetectModerationLabelsResponse'
+              examples:
+                detectModerationLabels200Example:
+                  summary: Default detectModerationLabels 200 response
+                  x-microcks-default: true
+                  value:
+                    ModerationLabels: []
+                    ModerationModelVersion: '7.0'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /#RecognizeCelebrities:
     post:
-      operationId: RecognizeCelebrities
+      operationId: recognizeCelebrities
       summary: Amazon Rekognition Recognize Celebrities
-      description: Returns an array of celebrities recognized in the input image along with confidence levels and additional information.
-      requestBody:
-        required: true
-        content:
-          application/x-amz-json-1.1:
-            schema:
-              type: object
-              properties:
-                Image:
-                  type: object
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
-                    S3Object:
-                      type: object
-              required:
-                - Image
-      responses:
-        '200':
-          description: Successful celebrity recognition response.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  CelebrityFaces:
-                    type: array
-                    items:
-                      type: object
-                  UnrecognizedFaces:
-                    type: array
-                    items:
-                      type: object
+      description: Returns an array of celebrities recognized in the input image.
       tags:
         - Celebrity Recognition
-
-  /#SearchFacesByImage:
-    post:
-      operationId: SearchFacesByImage
-      summary: Amazon Rekognition Search Faces By Image
-      description: Searches for faces in a collection that match the largest face in the supplied image.
       requestBody:
         required: true
         content:
           application/x-amz-json-1.1:
             schema:
-              type: object
-              properties:
-                CollectionId:
-                  type: string
-                Image:
-                  type: object
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
+              $ref: '#/components/schemas/ImageOnlyRequest'
+            examples:
+              recognizeCelebritiesRequestExample:
+                summary: Default recognizeCelebrities request
+                x-microcks-default: true
+                value:
+                  Image:
                     S3Object:
-                      type: object
-                MaxFaces:
-                  type: integer
-                FaceMatchThreshold:
-                  type: number
-                  format: float
-              required:
-                - CollectionId
-                - Image
+                      Bucket: my-bucket
+                      Name: event-photo.jpg
       responses:
         '200':
-          description: Successful face search response.
+          description: Celebrities recognized successfully.
           content:
-            application/json:
+            application/x-amz-json-1.1:
               schema:
-                type: object
-                properties:
-                  SearchedFaceBoundingBox:
-                    type: object
-                  SearchedFaceConfidence:
-                    type: number
-                  FaceMatches:
-                    type: array
-                    items:
-                      type: object
-      tags:
-        - Face Search
-
+                $ref: '#/components/schemas/RecognizeCelebritiesResponse'
+              examples:
+                recognizeCelebrities200Example:
+                  summary: Default recognizeCelebrities 200 response
+                  x-microcks-default: true
+                  value:
+                    CelebrityFaces: []
+                    UnrecognizedFaces: []
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /#CreateCollection:
     post:
-      operationId: CreateCollection
+      operationId: createCollection
       summary: Amazon Rekognition Create Collection
-      description: Creates a collection in an AWS Region. You can add faces to the collection using the IndexFaces operation.
+      description: Creates a collection in an AWS Region for storing and searching face data.
+      tags:
+        - Face Collections
       requestBody:
         required: true
         content:
           application/x-amz-json-1.1:
             schema:
-              type: object
-              properties:
-                CollectionId:
-                  type: string
-                  description: ID for the collection that you are creating.
-              required:
-                - CollectionId
+              $ref: '#/components/schemas/CreateCollectionRequest'
+            examples:
+              createCollectionRequestExample:
+                summary: Default createCollection request
+                x-microcks-default: true
+                value:
+                  CollectionId: my-face-collection
       responses:
         '200':
-          description: Successful collection creation response.
+          description: Collection created successfully.
           content:
-            application/json:
+            application/x-amz-json-1.1:
               schema:
-                type: object
-                properties:
-                  StatusCode:
-                    type: integer
-                  CollectionArn:
-                    type: string
-                  FaceModelVersion:
-                    type: string
+                $ref: '#/components/schemas/CreateCollectionResponse'
+              examples:
+                createCollection200Example:
+                  summary: Default createCollection 200 response
+                  x-microcks-default: true
+                  value:
+                    StatusCode: 200
+                    CollectionArn: aws:rekognition:us-east-1:123456789012:collection/my-face-collection
+                    FaceModelVersion: '6.0'
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#ListCollections:
+    post:
+      operationId: listCollections
+      summary: Amazon Rekognition List Collections
+      description: Returns list of collection IDs in your AWS account.
       tags:
-        - Collections
-
+        - Face Collections
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/PaginationRequest'
+            examples:
+              listCollectionsRequestExample:
+                summary: Default listCollections request
+                x-microcks-default: true
+                value:
+                  MaxResults: 20
+      responses:
+        '200':
+          description: Collections listed successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ListCollectionsResponse'
+              examples:
+                listCollections200Example:
+                  summary: Default listCollections 200 response
+                  x-microcks-default: true
+                  value:
+                    CollectionIds:
+                      - my-face-collection
+                    FaceModelVersions:
+                      - '6.0'
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /#IndexFaces:
     post:
-      operationId: IndexFaces
+      operationId: indexFaces
       summary: Amazon Rekognition Index Faces
       description: Detects faces in the input image and adds them to the specified collection.
+      tags:
+        - Face Collections
       requestBody:
         required: true
         content:
           application/x-amz-json-1.1:
             schema:
-              type: object
-              properties:
-                CollectionId:
-                  type: string
-                Image:
-                  type: object
-                  properties:
-                    Bytes:
-                      type: string
-                      format: byte
+              $ref: '#/components/schemas/IndexFacesRequest'
+            examples:
+              indexFacesRequestExample:
+                summary: Default indexFaces request
+                x-microcks-default: true
+                value:
+                  CollectionId: my-face-collection
+                  Image:
                     S3Object:
-                      type: object
-                MaxFaces:
-                  type: integer
-                QualityFilter:
-                  type: string
-                  enum:
-                    - NONE
-                    - AUTO
-                    - LOW
-                    - MEDIUM
-                    - HIGH
-              required:
-                - CollectionId
-                - Image
+                      Bucket: my-bucket
+                      Name: employee.jpg
+                  ExternalImageId: user-123
       responses:
         '200':
-          description: Successful face indexing response.
+          description: Faces indexed successfully.
           content:
-            application/json:
+            application/x-amz-json-1.1:
               schema:
-                type: object
-                properties:
-                  FaceRecords:
-                    type: array
-                    items:
-                      type: object
-                  UnindexedFaces:
-                    type: array
-                    items:
-                      type: object
-                  FaceModelVersion:
-                    type: string
+                $ref: '#/components/schemas/IndexFacesResponse'
+              examples:
+                indexFaces200Example:
+                  summary: Default indexFaces 200 response
+                  x-microcks-default: true
+                  value:
+                    FaceRecords: []
+                    FaceModelVersion: '6.0'
+                    UnindexedFaces: []
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#SearchFacesByImage:
+    post:
+      operationId: searchFacesByImage
+      summary: Amazon Rekognition Search Faces by Image
+      description: For a given input image, searches the specified collection for matching faces.
       tags:
-        - Collections
+        - Face Search
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/SearchFacesByImageRequest'
+            examples:
+              searchFacesByImageRequestExample:
+                summary: Default searchFacesByImage request
+                x-microcks-default: true
+                value:
+                  CollectionId: my-face-collection
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: query.jpg
+                  MaxFaces: 5
+                  FaceMatchThreshold: 80.0
+      responses:
+        '200':
+          description: Face search completed successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/SearchFacesByImageResponse'
+              examples:
+                searchFacesByImage200Example:
+                  summary: Default searchFacesByImage 200 response
+                  x-microcks-default: true
+                  value:
+                    FaceMatches: []
+                    FaceModelVersion: '6.0'
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#StartLabelDetection:
+    post:
+      operationId: startLabelDetection
+      summary: Amazon Rekognition Start Label Detection
+      description: Starts asynchronous detection of labels in a stored video.
+      tags:
+        - Stored Video Analysis
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/StartLabelDetectionRequest'
+            examples:
+              startLabelDetectionRequestExample:
+                summary: Default startLabelDetection request
+                x-microcks-default: true
+                value:
+                  Video:
+                    S3Object:
+                      Bucket: my-videos-bucket
+                      Name: clip.mp4
+                  MinConfidence: 75.0
+      responses:
+        '200':
+          description: Label detection job started successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/StartVideoJobResponse'
+              examples:
+                startLabelDetection200Example:
+                  summary: Default startLabelDetection 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: 1234567890abcdef
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#GetLabelDetection:
+    post:
+      operationId: getLabelDetection
+      summary: Amazon Rekognition Get Label Detection
+      description: Gets the label detection results of a Rekognition Video analysis started by StartLabelDetection.
+      tags:
+        - Stored Video Analysis
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/GetVideoJobResultRequest'
+            examples:
+              getLabelDetectionRequestExample:
+                summary: Default getLabelDetection request
+                x-microcks-default: true
+                value:
+                  JobId: 1234567890abcdef
+                  MaxResults: 100
+      responses:
+        '200':
+          description: Label detection results retrieved successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/GetLabelDetectionResponse'
+              examples:
+                getLabelDetection200Example:
+                  summary: Default getLabelDetection 200 response
+                  x-microcks-default: true
+                  value:
+                    JobStatus: SUCCEEDED
+                    Labels: []
+                    LabelModelVersion: '3.0'
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#CreateFaceLivenessSession:
+    post:
+      operationId: createFaceLivenessSession
+      summary: Amazon Rekognition Create Face Liveness Session
+      description: Initiates a Face Liveness session and returns a SessionId for streaming.
+      tags:
+        - Face Liveness
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/CreateFaceLivenessSessionRequest'
+            examples:
+              createFaceLivenessSessionRequestExample:
+                summary: Default createFaceLivenessSession request
+                x-microcks-default: true
+                value:
+                  ClientRequestToken: token-abc123
+      responses:
+        '200':
+          description: Face liveness session created.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/CreateFaceLivenessSessionResponse'
+              examples:
+                createFaceLivenessSession200Example:
+                  summary: Default createFaceLivenessSession 200 response
+                  x-microcks-default: true
+                  value:
+                    SessionId: 550e8400-e29b-41d4-a716-446655440000
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#GetFaceLivenessSessionResults:
+    post:
+      operationId: getFaceLivenessSessionResults
+      summary: Amazon Rekognition Get Face Liveness Session Results
+      description: Retrieves the results of a specific Face Liveness session.
+      tags:
+        - Face Liveness
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/GetFaceLivenessSessionResultsRequest'
+            examples:
+              getFaceLivenessSessionResultsRequestExample:
+                summary: Default getFaceLivenessSessionResults request
+                x-microcks-default: true
+                value:
+                  SessionId: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: Face liveness session results retrieved.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/GetFaceLivenessSessionResultsResponse'
+              examples:
+                getFaceLivenessSessionResults200Example:
+                  summary: Default getFaceLivenessSessionResults 200 response
+                  x-microcks-default: true
+                  value:
+                    SessionId: 550e8400-e29b-41d4-a716-446655440000
+                    Status: SUCCEEDED
+                    Confidence: 98.5
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#DetectCustomLabels:
+    post:
+      operationId: detectCustomLabels
+      summary: Amazon Rekognition Detect Custom Labels
+      description: Detects custom labels in a supplied image using an Amazon Rekognition Custom Labels model.
+      tags:
+        - Custom Labels
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/DetectCustomLabelsRequest'
+            examples:
+              detectCustomLabelsRequestExample:
+                summary: Default detectCustomLabels request
+                x-microcks-default: true
+                value:
+                  ProjectVersionArn: arn:aws:rekognition:us-east-1:123456789012:project/my-project/version/v1/1234567890
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: product.jpg
+                  MinConfidence: 70.0
+      responses:
+        '200':
+          description: Custom labels detected.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/DetectCustomLabelsResponse'
+              examples:
+                detectCustomLabels200Example:
+                  summary: Default detectCustomLabels 200 response
+                  x-microcks-default: true
+                  value:
+                    CustomLabels:
+                      - Name: MyProduct
+                        Confidence: 92.3
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 
 components:
   schemas:
-    DetectLabelsResponse:
+    S3Object:
       type: object
+      description: Provides the S3 bucket name and object name.
       properties:
-        Labels:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+    BoundingBox:
+      type: object
+      description: Identifies the bounding box around the label, face, text or object.
+      properties:
+        Width:
+          type: number
+          format: float
+          description: Width of the bounding box as a ratio of the overall image width.
+          example: 0.35
+        Height:
+          type: number
+          format: float
+          description: Height of the bounding box as a ratio of the overall image height.
+          example: 0.45
+        Left:
+          type: number
+          format: float
+          description: Left coordinate of the bounding box as a ratio of overall image width.
+          example: 0.1
+        Top:
+          type: number
+          format: float
+          description: Top coordinate of the bounding box as a ratio of overall image height.
+          example: 0.05
+    Label:
+      type: object
+      description: Structure containing details about the detected label.
+      properties:
+        Name:
+          type: string
+          description: The name of the label detected in the image or video.
+          example: Person
+        Confidence:
+          type: number
+          format: float
+          description: Level of confidence for the label.
+          example: 98.5
+        Instances:
           type: array
-          description: An array of labels for the real-world objects detected.
+          description: Bounding boxes for each instance of the detected object.
+          items:
+            type: object
+            properties:
+              BoundingBox:
+                $ref: '#/components/schemas/BoundingBox'
+              Confidence:
+                type: number
+                format: float
+        Parents:
+          type: array
+          description: The parent labels for a label in the taxonomy hierarchy.
           items:
             type: object
             properties:
               Name:
                 type: string
-                description: The name of the label.
+    ImageOnlyRequest:
+      type: object
+      required:
+        - Image
+      description: Request containing only an image.
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+    DetectLabelsRequest:
+      type: object
+      required:
+        - Image
+      description: Request for the DetectLabels operation.
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxLabels:
+          type: integer
+          description: Maximum number of labels to return.
+          example: 10
+        MinConfidence:
+          type: number
+          format: float
+          description: Minimum confidence level for labels to return.
+          example: 75.0
+        Features:
+          type: array
+          description: A list of the types of analysis to perform.
+          items:
+            type: string
+            enum:
+              - GENERAL_LABELS
+              - IMAGE_PROPERTIES
+        Settings:
+          type: object
+          description: Optional settings for label detection.
+    DetectLabelsResponse:
+      type: object
+      description: Response from the DetectLabels operation.
+      properties:
+        Labels:
+          type: array
+          description: An array of labels for the real-world objects detected.
+          items:
+            $ref: '#/components/schemas/Label'
+        OrientationCorrection:
+          type: string
+          description: The value of OrientationCorrection is always null.
+          example: ROTATE_0
+        LabelModelVersion:
+          type: string
+          description: Version number of the label detection model used.
+          example: '3.0'
+        ImageProperties:
+          type: object
+          description: Information about the quality and dominant colors of an input image.
+    FaceDetail:
+      type: object
+      description: Structure containing attributes of the face that the algorithm detected.
+      properties:
+        BoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        AgeRange:
+          type: object
+          description: The estimated age range in years for the face.
+          properties:
+            Low:
+              type: integer
+              example: 25
+            High:
+              type: integer
+              example: 35
+        Smile:
+          type: object
+          properties:
+            Value:
+              type: boolean
+            Confidence:
+              type: number
+              format: float
+        Gender:
+          type: object
+          properties:
+            Value:
+              type: string
+              enum:
+                - Male
+                - Female
+            Confidence:
+              type: number
+              format: float
+        Emotions:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+                enum:
+                  - HAPPY
+                  - SAD
+                  - ANGRY
+                  - CONFUSED
+                  - DISGUSTED
+                  - SURPRISED
+                  - CALM
+                  - UNKNOWN
+                  - FEAR
               Confidence:
                 type: number
                 format: float
-                description: Level of confidence.
-              Instances:
+        Confidence:
+          type: number
+          format: float
+          description: Confidence level that the bounding box contains a face.
+          example: 99.7
+    DetectFacesRequest:
+      type: object
+      required:
+        - Image
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        Attributes:
+          type: array
+          description: An array of facial attributes to return. ALL returns all attributes.
+          items:
+            type: string
+            enum:
+              - DEFAULT
+              - ALL
+    DetectFacesResponse:
+      type: object
+      properties:
+        FaceDetails:
+          type: array
+          description: Details of each face found in the image.
+          items:
+            $ref: '#/components/schemas/FaceDetail'
+        OrientationCorrection:
+          type: string
+          description: Orientation correction value.
+    CompareFacesRequest:
+      type: object
+      required:
+        - SourceImage
+        - TargetImage
+      properties:
+        SourceImage:
+          $ref: '#/components/schemas/Image'
+        TargetImage:
+          $ref: '#/components/schemas/Image'
+        SimilarityThreshold:
+          type: number
+          format: float
+          description: Minimum confidence for a match to be included in FaceMatches.
+          example: 80.0
+        QualityFilter:
+          type: string
+          enum:
+            - NONE
+            - AUTO
+            - LOW
+            - MEDIUM
+            - HIGH
+    CompareFacesResponse:
+      type: object
+      properties:
+        SourceImageFace:
+          type: object
+          properties:
+            BoundingBox:
+              $ref: '#/components/schemas/BoundingBox'
+            Confidence:
+              type: number
+              format: float
+        FaceMatches:
+          type: array
+          items:
+            type: object
+            properties:
+              Similarity:
+                type: number
+                format: float
+                example: 95.3
+              Face:
+                type: object
+                properties:
+                  BoundingBox:
+                    $ref: '#/components/schemas/BoundingBox'
+                  Confidence:
+                    type: number
+                    format: float
+        UnmatchedFaces:
+          type: array
+          items:
+            type: object
+    DetectTextResponse:
+      type: object
+      properties:
+        TextDetections:
+          type: array
+          description: An array of text detected in the input image.
+          items:
+            type: object
+            properties:
+              DetectedText:
+                type: string
+                example: Hello World
+              Type:
+                type: string
+                enum:
+                  - LINE
+                  - WORD
+              Id:
+                type: integer
+              ParentId:
+                type: integer
+              Confidence:
+                type: number
+                format: float
+              Geometry:
+                type: object
+                properties:
+                  BoundingBox:
+                    $ref: '#/components/schemas/BoundingBox'
+        TextModelVersion:
+          type: string
+          example: '3.1'
+    DetectModerationLabelsRequest:
+      type: object
+      required:
+        - Image
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        MinConfidence:
+          type: number
+          format: float
+          description: Minimum confidence level for labels to return.
+          example: 50.0
+        HumanLoopConfig:
+          type: object
+          description: Sets up the flow for A2I human review of moderation labels.
+        ProjectVersion:
+          type: string
+          description: Identifier for a custom label detection project version.
+    DetectModerationLabelsResponse:
+      type: object
+      properties:
+        ModerationLabels:
+          type: array
+          items:
+            type: object
+            properties:
+              Confidence:
+                type: number
+                format: float
+              Name:
+                type: string
+                example: Explicit Nudity
+              ParentName:
+                type: string
+        ModerationModelVersion:
+          type: string
+          example: '7.0'
+        HumanLoopActivationOutput:
+          type: object
+        ProjectVersion:
+          type: string
+    RecognizeCelebritiesResponse:
+      type: object
+      properties:
+        CelebrityFaces:
+          type: array
+          items:
+            type: object
+            properties:
+              Urls:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    BoundingBox:
-                      type: object
-                      properties:
-                        Width:
-                          type: number
-                        Height:
-                          type: number
-                        Left:
-                          type: number
-                        Top:
-                          type: number
-                    Confidence:
-                      type: number
-              Parents:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    Name:
-                      type: string
-              Categories:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    Name:
-                      type: string
+                  type: string
+              Name:
+                type: string
+                example: Jeff Bezos
+              Id:
+                type: string
+              MatchConfidence:
+                type: number
+                format: float
+              KnownGender:
+                type: object
+        UnrecognizedFaces:
+          type: array
+          items:
+            type: object
+    CreateCollectionRequest:
+      type: object
+      required:
+        - CollectionId
+      properties:
+        CollectionId:
+          type: string
+          description: ID for the collection to create.
+          example: my-face-collection
+        Tags:
+          type: object
+          additionalProperties:
+            type: string
+    CreateCollectionResponse:
+      type: object
+      properties:
+        StatusCode:
+          type: integer
+          example: 200
+        CollectionArn:
+          type: string
+          example: aws:rekognition:us-east-1:123456789012:collection/my-face-collection
+        FaceModelVersion:
+          type: string
+          example: '6.0'
+    ListCollectionsResponse:
+      type: object
+      properties:
+        CollectionIds:
+          type: array
+          items:
+            type: string
+        NextToken:
+          type: string
+        FaceModelVersions:
+          type: array
+          items:
+            type: string
+    IndexFacesRequest:
+      type: object
+      required:
+        - CollectionId
+        - Image
+      properties:
+        CollectionId:
+          type: string
+          example: my-face-collection
+        Image:
+          $ref: '#/components/schemas/Image'
+        ExternalImageId:
+          type: string
+          description: ID you want to assign to all faces detected in the image.
+          example: user-123
+        DetectionAttributes:
+          type: array
+          items:
+            type: string
+            enum:
+              - DEFAULT
+              - ALL
+        MaxFaces:
+          type: integer
+          description: Maximum number of faces to index.
+        QualityFilter:
+          type: string
+          enum:
+            - NONE
+            - AUTO
+            - LOW
+            - MEDIUM
+            - HIGH
+    IndexFacesResponse:
+      type: object
+      properties:
+        FaceRecords:
+          type: array
+          items:
+            type: object
+        OrientationCorrection:
+          type: string
+        FaceModelVersion:
+          type: string
+        UnindexedFaces:
+          type: array
+          items:
+            type: object
+    SearchFacesByImageRequest:
+      type: object
+      required:
+        - CollectionId
+        - Image
+      properties:
+        CollectionId:
+          type: string
+          example: my-face-collection
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxFaces:
+          type: integer
+          example: 5
+        FaceMatchThreshold:
+          type: number
+          format: float
+          example: 80.0
+        QualityFilter:
+          type: string
+          enum:
+            - NONE
+            - AUTO
+            - LOW
+            - MEDIUM
+            - HIGH
+    SearchFacesByImageResponse:
+      type: object
+      properties:
+        SearchedFaceBoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        SearchedFaceConfidence:
+          type: number
+          format: float
+        FaceMatches:
+          type: array
+          items:
+            type: object
+        FaceModelVersion:
+          type: string
+    Video:
+      type: object
+      description: Video file stored in an Amazon S3 bucket.
+      properties:
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+    NotificationChannel:
+      type: object
+      description: Amazon SNS topic for completion status notifications.
+      properties:
+        SNSTopicArn:
+          type: string
+          description: The Amazon SNS topic ARN to post completion status.
+          example: arn:aws:sns:us-east-1:123456789012:AmazonRekognitionTopic
+        RoleArn:
+          type: string
+          description: The ARN of an IAM role that gives Rekognition publishing permissions.
+          example: arn:aws:iam::123456789012:role/RekognitionRole
+    StartLabelDetectionRequest:
+      type: object
+      required:
+        - Video
+      properties:
+        Video:
+          $ref: '#/components/schemas/Video'
+        ClientRequestToken:
+          type: string
+        MinConfidence:
+          type: number
+          format: float
+          example: 75.0
+        NotificationChannel:
+          $ref: '#/components/schemas/NotificationChannel'
+        JobTag:
+          type: string
+        Features:
+          type: array
+          items:
+            type: string
+        Settings:
+          type: object
+    StartVideoJobResponse:
+      type: object
+      properties:
+        JobId:
+          type: string
+          description: The identifier for the video analysis job.
+          example: 1234567890abcdef
+    GetVideoJobResultRequest:
+      type: object
+      required:
+        - JobId
+      properties:
+        JobId:
+          type: string
+          description: Job identifier from the start job call.
+          example: 1234567890abcdef
+        MaxResults:
+          type: integer
+          example: 100
+        NextToken:
+          type: string
+        SortBy:
+          type: string
+          enum:
+            - NAME
+            - TIMESTAMP
+        AggregateBy:
+          type: string
+          enum:
+            - TIMESTAMPS
+            - SEGMENTS
+    GetLabelDetectionResponse:
+      type: object
+      properties:
+        JobStatus:
+          type: string
+          enum:
+            - IN_PROGRESS
+            - SUCCEEDED
+            - FAILED
+          example: SUCCEEDED
+        StatusMessage:
+          type: string
+        VideoMetadata:
+          type: object
+        NextToken:
+          type: string
+        Labels:
+          type: array
+          items:
+            type: object
+            properties:
+              Timestamp:
+                type: integer
+              Label:
+                $ref: '#/components/schemas/Label'
         LabelModelVersion:
           type: string
-          description: Version number of the label detection model.
-        ImageProperties:
+        JobId:
+          type: string
+    CreateFaceLivenessSessionRequest:
+      type: object
+      properties:
+        KmsKeyId:
+          type: string
+        Settings:
           type: object
-          description: Information about the properties of the input image.
+        ClientRequestToken:
+          type: string
+    CreateFaceLivenessSessionResponse:
+      type: object
+      properties:
+        SessionId:
+          type: string
+          description: A unique 128-bit UUID identifying a Face Liveness session.
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+    GetFaceLivenessSessionResultsRequest:
+      type: object
+      required:
+        - SessionId
+      properties:
+        SessionId:
+          type: string
+          format: uuid
+          description: The sessionId for the Face Liveness session.
+    GetFaceLivenessSessionResultsResponse:
+      type: object
+      properties:
+        SessionId:
+          type: string
+          format: uuid
+        Status:
+          type: string
+          enum:
+            - CREATED
+            - IN_PROGRESS
+            - SUCCEEDED
+            - FAILED
+            - EXPIRED
+        Confidence:
+          type: number
+          format: float
+          description: Confidence value between 0 and 100 of live presence.
+          example: 98.5
+        ReferenceImage:
+          type: object
+        AuditImages:
+          type: array
+          items:
+            type: object
+    DetectCustomLabelsRequest:
+      type: object
+      required:
+        - ProjectVersionArn
+        - Image
+      properties:
+        ProjectVersionArn:
+          type: string
+          description: The ARN of the model version to use.
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxResults:
+          type: integer
+        MinConfidence:
+          type: number
+          format: float
+    DetectCustomLabelsResponse:
+      type: object
+      properties:
+        CustomLabels:
+          type: array
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+                example: MyProduct
+              Confidence:
+                type: number
+                format: float
+                example: 92.3
+              Geometry:
+                type: object
+    PaginationRequest:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+          example: 20
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256 signature.
 
 tags:
-  - name: Celebrity Recognition
-    description: Operations for recognizing celebrities in images.
-  - name: Collections
-    description: Operations for managing face collections.
-  - name: Face Comparison
-    description: Operations for comparing faces between images.
-  - name: Face Detection
-    description: Operations for detecting faces in images.
+  - name: Image Analysis
+    description: Detect labels, objects, scenes, and concepts in images.
+  - name: Facial Analysis
+    description: Detect and analyze faces with detailed attributes.
+  - name: Face Collections
+    description: Create and manage searchable face collections.
   - name: Face Search
-    description: Operations for searching faces in collections.
-  - name: Label Detection
-    description: Operations for detecting labels in images.
+    description: Search for matching faces within collections.
   - name: Text Detection
-    description: Operations for detecting text in images.
+    description: Detect and extract text from images and videos.
+  - name: Content Moderation
+    description: Detect inappropriate or explicit content.
+  - name: Celebrity Recognition
+    description: Identify celebrities in images and videos.
+  - name: Stored Video Analysis
+    description: Asynchronous analysis of videos stored in Amazon S3.
+  - name: Face Liveness
+    description: Verify that a user is physically present during identity verification.
+  - name: Custom Labels
+    description: Train and use custom image classifiers.

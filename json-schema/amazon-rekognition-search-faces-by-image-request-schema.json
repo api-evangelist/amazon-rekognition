@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-search-faces-by-image-request-schema.json",
+  "title": "SearchFacesByImageRequest",
+  "description": "SearchFacesByImageRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "CollectionId": {
+      "type": "string",
+      "example": "my-face-collection"
+    },
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "MaxFaces": {
+      "type": "integer",
+      "example": 5
+    },
+    "FaceMatchThreshold": {
+      "type": "number",
+      "format": "float",
+      "example": 80.0
+    },
+    "QualityFilter": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "AUTO",
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    }
+  },
+  "required": [
+    "CollectionId",
+    "Image"
+  ]
+}

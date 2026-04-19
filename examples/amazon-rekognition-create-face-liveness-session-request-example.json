@@ -1,0 +1,5 @@
+{
+  "KmsKeyId": "images/sample.jpg",
+  "Settings": {},
+  "ClientRequestToken": "abc123token"
+}

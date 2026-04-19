@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-detect-faces-request-structure.json",
+  "name": "DetectFacesRequest",
+  "description": "DetectFacesRequest schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "Image": {
+      "$ref": "#/components/schemas/Image"
+    },
+    "Attributes": {
+      "type": "array",
+      "description": "An array of facial attributes to return. ALL returns all attributes.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "DEFAULT",
+          "ALL"
+        ]
+      }
+    }
+  },
+  "required": [
+    "Image"
+  ]
+}

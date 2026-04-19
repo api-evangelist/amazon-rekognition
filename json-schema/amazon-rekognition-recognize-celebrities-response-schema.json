@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-recognize-celebrities-response-schema.json",
+  "title": "RecognizeCelebritiesResponse",
+  "description": "RecognizeCelebritiesResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "CelebrityFaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "Name": {
+            "type": "string",
+            "example": "Jeff Bezos"
+          },
+          "Id": {
+            "type": "string"
+          },
+          "MatchConfidence": {
+            "type": "number",
+            "format": "float"
+          },
+          "KnownGender": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "UnrecognizedFaces": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

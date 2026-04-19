@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-get-face-liveness-session-results-response-schema.json",
+  "title": "GetFaceLivenessSessionResultsResponse",
+  "description": "GetFaceLivenessSessionResultsResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "SessionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "FAILED",
+        "EXPIRED"
+      ]
+    },
+    "Confidence": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence value between 0 and 100 of live presence.",
+      "example": 98.5
+    },
+    "ReferenceImage": {
+      "type": "object"
+    },
+    "AuditImages": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

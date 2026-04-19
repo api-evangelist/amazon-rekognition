@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-video-structure.json",
+  "name": "Video",
+  "description": "Video file stored in an Amazon S3 bucket.",
+  "type": "object",
+  "properties": {
+    "S3Object": {
+      "$ref": "#/components/schemas/S3Object"
+    }
+  }
+}

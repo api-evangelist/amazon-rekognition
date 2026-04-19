@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-detect-text-response-schema.json",
+  "title": "DetectTextResponse",
+  "description": "DetectTextResponse schema from Amazon Rekognition",
+  "type": "object",
+  "properties": {
+    "TextDetections": {
+      "type": "array",
+      "description": "An array of text detected in the input image.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "DetectedText": {
+            "type": "string",
+            "example": "Hello World"
+          },
+          "Type": {
+            "type": "string",
+            "enum": [
+              "LINE",
+              "WORD"
+            ]
+          },
+          "Id": {
+            "type": "integer"
+          },
+          "ParentId": {
+            "type": "integer"
+          },
+          "Confidence": {
+            "type": "number",
+            "format": "float"
+          },
+          "Geometry": {
+            "type": "object",
+            "properties": {
+              "BoundingBox": {
+                "$ref": "#/components/schemas/BoundingBox"
+              }
+            }
+          }
+        }
+      }
+    },
+    "TextModelVersion": {
+      "type": "string",
+      "example": "3.1"
+    }
+  }
+}

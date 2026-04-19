@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-face-detail-structure.json",
+  "name": "FaceDetail",
+  "description": "Structure containing attributes of the face that the algorithm detected.",
+  "type": "object",
+  "properties": {
+    "BoundingBox": {
+      "$ref": "#/components/schemas/BoundingBox"
+    },
+    "AgeRange": {
+      "type": "object",
+      "description": "The estimated age range in years for the face.",
+      "properties": {
+        "Low": {
+          "type": "int32",
+          "example": 25
+        },
+        "High": {
+          "type": "int32",
+          "example": 35
+        }
+      }
+    },
+    "Smile": {
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "boolean"
+        },
+        "Confidence": {
+          "type": "float"
+        }
+      }
+    },
+    "Gender": {
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string",
+          "enum": [
+            "Male",
+            "Female"
+          ]
+        },
+        "Confidence": {
+          "type": "float"
+        }
+      }
+    },
+    "Emotions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "enum": [
+              "HAPPY",
+              "SAD",
+              "ANGRY",
+              "CONFUSED",
+              "DISGUSTED",
+              "SURPRISED",
+              "CALM",
+              "UNKNOWN",
+              "FEAR"
+            ]
+          },
+          "Confidence": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    "Confidence": {
+      "type": "float",
+      "description": "Confidence level that the bounding box contains a face.",
+      "example": 99.7
+    }
+  }
+}

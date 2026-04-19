@@ -1,0 +1,389 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Amazon Rekognition
+  description: Amazon Rekognition computer vision API for image and video analysis including label detection, facial analysis, celebrity recognition, text detection, content moderation, custom labels, and face liveness.
+  tags:
+    - Amazon Rekognition
+    - Computer Vision
+    - Image Analysis
+    - Machine Learning
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+      AWS_REGION: AWS_REGION
+
+capability:
+  consumes:
+    - type: http
+      namespace: rekognition
+      baseUri: https://rekognition.amazonaws.com
+      description: Amazon Rekognition image and video analysis API
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "{{AWS_ACCESS_KEY_ID}}"
+        placement: header
+      resources:
+        - name: image-analysis
+          path: /
+          description: Image analysis operations
+          operations:
+            - name: detect-labels
+              method: POST
+              description: Detect labels in an image
+              inputParameters:
+                - name: X-Amz-Target
+                  in: header
+                  type: string
+                  required: true
+                  description: AWS target operation
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: detect-faces
+              method: POST
+              description: Detect faces in an image
+              inputParameters:
+                - name: X-Amz-Target
+                  in: header
+                  type: string
+                  required: true
+                  description: AWS target operation
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: compare-faces
+              method: POST
+              description: Compare faces across images
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: detect-text
+              method: POST
+              description: Detect text in an image
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: detect-moderation-labels
+              method: POST
+              description: Detect inappropriate content in an image
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: recognize-celebrities
+              method: POST
+              description: Recognize celebrities in an image
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: detect-custom-labels
+              method: POST
+              description: Detect custom labels using a trained model
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: face-collections
+          path: /
+          description: Face collection management
+          operations:
+            - name: create-collection
+              method: POST
+              description: Create a face collection
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-collections
+              method: POST
+              description: List face collections
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: index-faces
+              method: POST
+              description: Index faces into a collection
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: search-faces-by-image
+              method: POST
+              description: Search for matching faces using an image
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: video-analysis
+          path: /
+          description: Stored video analysis operations
+          operations:
+            - name: start-label-detection
+              method: POST
+              description: Start asynchronous label detection in video
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-label-detection
+              method: POST
+              description: Get label detection results
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: face-liveness
+          path: /
+          description: Face liveness detection operations
+          operations:
+            - name: create-face-liveness-session
+              method: POST
+              description: Create a face liveness verification session
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-face-liveness-session-results
+              method: POST
+              description: Get face liveness session results
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: rekognition-api
+      resources:
+        - path: /v1/images/labels
+          name: image-label-detection
+          description: Detect labels in images
+          operations:
+            - method: POST
+              name: detect-labels
+              description: Detect objects and scenes in an image
+              call: "rekognition.detect-labels"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/images/faces
+          name: image-face-detection
+          description: Detect and analyze faces in images
+          operations:
+            - method: POST
+              name: detect-faces
+              description: Detect and analyze faces in an image
+              call: "rekognition.detect-faces"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/images/text
+          name: image-text-detection
+          description: Detect text in images
+          operations:
+            - method: POST
+              name: detect-text
+              description: Detect text in an image
+              call: "rekognition.detect-text"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/collections
+          name: face-collections
+          description: Manage face collections
+          operations:
+            - method: GET
+              name: list-collections
+              description: List face collections
+              call: "rekognition.list-collections"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-collection
+              description: Create a new face collection
+              call: "rekognition.create-collection"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/liveness/sessions
+          name: liveness-sessions
+          description: Face liveness verification sessions
+          operations:
+            - method: POST
+              name: create-session
+              description: Create a face liveness session
+              call: "rekognition.create-face-liveness-session"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: rekognition-mcp
+      transport: http
+      tools:
+        - name: detect-image-labels
+          description: Detect objects, scenes, and concepts in an image stored in S3 or provided as bytes
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "rekognition.detect-labels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: detect-faces
+          description: Detect faces in an image and return facial attributes including age, emotions, and landmarks
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "rekognition.detect-faces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: compare-faces
+          description: Compare a face in a source image with faces in a target image to find matches
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "rekognition.compare-faces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: detect-text
+          description: Detect and extract text from an image
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "rekognition.detect-text"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: detect-moderation-labels
+          description: Detect inappropriate or explicit content in an image for content moderation
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "rekognition.detect-moderation-labels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: recognize-celebrities
+          description: Identify celebrities in an image and return their names and information
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "rekognition.recognize-celebrities"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: detect-custom-labels
+          description: Detect custom labels in an image using a trained Amazon Rekognition Custom Labels model
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "rekognition.detect-custom-labels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-face-collection
+          description: Create a new face collection for storing and searching face data
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "rekognition.create-collection"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-face-collections
+          description: List all face collections in your AWS account
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "rekognition.list-collections"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: index-faces
+          description: Detect faces in an image and add them to a face collection for future searching
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "rekognition.index-faces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-faces-by-image
+          description: Search a face collection for faces that match a face in the provided image
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "rekognition.search-faces-by-image"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: start-video-label-detection
+          description: Start asynchronous detection of labels in a video stored in Amazon S3
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "rekognition.start-label-detection"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-video-label-detection
+          description: Get results of a video label detection job started by start-video-label-detection
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "rekognition.get-label-detection"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-liveness-session
+          description: Create a face liveness verification session to confirm a user is physically present
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "rekognition.create-face-liveness-session"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-liveness-session-results
+          description: Get results of a face liveness verification session
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "rekognition.get-face-liveness-session-results"
+          outputParameters:
+            - type: object
+              mapping: "$."

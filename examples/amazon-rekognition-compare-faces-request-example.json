@@ -1,0 +1,6 @@
+{
+  "SourceImage": "sample-value",
+  "TargetImage": "sample-value",
+  "SimilarityThreshold": 80.0,
+  "QualityFilter": "HIGH"
+}

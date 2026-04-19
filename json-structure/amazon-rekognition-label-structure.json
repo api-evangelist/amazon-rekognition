@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-structure/amazon-rekognition-label-structure.json",
+  "name": "Label",
+  "description": "Structure containing details about the detected label.",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The name of the label detected in the image or video.",
+      "example": "Person"
+    },
+    "Confidence": {
+      "type": "float",
+      "description": "Level of confidence for the label.",
+      "example": 98.5
+    },
+    "Instances": {
+      "type": "array",
+      "description": "Bounding boxes for each instance of the detected object.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "BoundingBox": {
+            "$ref": "#/components/schemas/BoundingBox"
+          },
+          "Confidence": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    "Parents": {
+      "type": "array",
+      "description": "The parent labels for a label in the taxonomy hierarchy.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

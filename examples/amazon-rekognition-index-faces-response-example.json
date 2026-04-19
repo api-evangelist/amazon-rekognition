@@ -1,0 +1,10 @@
+{
+  "FaceRecords": [
+    {}
+  ],
+  "OrientationCorrection": "sample-value",
+  "FaceModelVersion": "6.0",
+  "UnindexedFaces": [
+    {}
+  ]
+}

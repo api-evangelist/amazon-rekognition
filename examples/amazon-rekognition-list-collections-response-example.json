@@ -1,0 +1,9 @@
+{
+  "CollectionIds": [
+    "500123"
+  ],
+  "NextToken": "abc123token",
+  "FaceModelVersions": [
+    "6.0"
+  ]
+}

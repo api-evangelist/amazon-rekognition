@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/json-schema/amazon-rekognition-bounding-box-schema.json",
+  "title": "BoundingBox",
+  "description": "Identifies the bounding box around the label, face, text or object.",
+  "type": "object",
+  "properties": {
+    "Width": {
+      "type": "number",
+      "format": "float",
+      "description": "Width of the bounding box as a ratio of the overall image width.",
+      "example": 0.35
+    },
+    "Height": {
+      "type": "number",
+      "format": "float",
+      "description": "Height of the bounding box as a ratio of the overall image height.",
+      "example": 0.45
+    },
+    "Left": {
+      "type": "number",
+      "format": "float",
+      "description": "Left coordinate of the bounding box as a ratio of overall image width.",
+      "example": 0.1
+    },
+    "Top": {
+      "type": "number",
+      "format": "float",
+      "description": "Top coordinate of the bounding box as a ratio of overall image height.",
+      "example": 0.05
+    }
+  }
+}

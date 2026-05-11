@@ -398,6 +398,8 @@ common:
   url: examples/amazon-rekognition-start-video-job-response-example.json
 - type: Example
   url: examples/amazon-rekognition-video-example.json
+- type: Integrations
+  url: https://aws.amazon.com/partners/
 maintainer:
   name: Kin Lane
   email: kin@apievangelist.com
@@ -416,3 +418,12 @@ tags:
 - Object Detection
 - Text Detection
 - Video Analysis
+integrations:
+  - name: Partner Programs
+  - name: Resources
+  - name: Success Stories
+  - name: Work with an AWS Partner
+  - name: AWS Marketplace
+  - name: AWS Partner Central
+  - name: Partner Paths
+  - name: co-sell with AWS

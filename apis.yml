@@ -7,7 +7,7 @@ url: https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/he
 created: '2024-01-15'
 modified: '2026-04-19'
 specificationVersion: '0.18'
-x-type: company
+kind: company
 
 apis:
 
@@ -180,7 +180,7 @@ common:
   - name: Amazon Augmented AI (A2I)
     description: Route low-confidence Rekognition predictions to human reviewers using Amazon Augmented AI for quality control.
 
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/amazon-rekognition-context.jsonld
 - type: JSONSchema
   url: json-schema/amazon-rekognition-bounding-box-schema.json

@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Rekognition — Custom Labels
+  description: 'Amazon Rekognition — Custom Labels. 1 operations. Lead operation: Amazon Rekognition Detect Custom Labels.
+    Self-contained Naftiko capability covering one Amazon Rekognition business surface.'
+  tags:
+  - Amazon Rekognition
+  - Custom Labels
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_REKOGNITION_API_KEY: AMAZON_REKOGNITION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-rekognition-custom-labels
+    baseUri: https://rekognition.amazonaws.com
+    description: Amazon Rekognition — Custom Labels business capability. Self-contained, no shared references.
+    resources:
+    - name: '#DetectCustomLabels'
+      path: /#DetectCustomLabels
+      operations:
+      - name: detectcustomlabels
+        method: POST
+        description: Amazon Rekognition Detect Custom Labels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_REKOGNITION_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-rekognition-custom-labels-rest
+    port: 8080
+    description: REST adapter for Amazon Rekognition — Custom Labels. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/detectcustomlabels
+      name: detectcustomlabels
+      description: 'REST surface for #DetectCustomLabels.'
+      operations:
+      - method: POST
+        name: detectcustomlabels
+        description: Amazon Rekognition Detect Custom Labels
+        call: amazon-rekognition-custom-labels.detectcustomlabels
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-rekognition-custom-labels-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Rekognition — Custom Labels. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-rekognition-detect-custom-labels
+      description: Amazon Rekognition Detect Custom Labels
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-rekognition-custom-labels.detectcustomlabels
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

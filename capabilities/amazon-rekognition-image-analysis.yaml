@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Rekognition — Image Analysis
+  description: 'Amazon Rekognition — Image Analysis. 1 operations. Lead operation: Amazon Rekognition Detect Labels. Self-contained
+    Naftiko capability covering one Amazon Rekognition business surface.'
+  tags:
+  - Amazon Rekognition
+  - Image Analysis
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_REKOGNITION_API_KEY: AMAZON_REKOGNITION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-rekognition-image-analysis
+    baseUri: https://rekognition.amazonaws.com
+    description: Amazon Rekognition — Image Analysis business capability. Self-contained, no shared references.
+    resources:
+    - name: '#DetectLabels'
+      path: /#DetectLabels
+      operations:
+      - name: detectlabels
+        method: POST
+        description: Amazon Rekognition Detect Labels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_REKOGNITION_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-rekognition-image-analysis-rest
+    port: 8080
+    description: REST adapter for Amazon Rekognition — Image Analysis. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/detectlabels
+      name: detectlabels
+      description: 'REST surface for #DetectLabels.'
+      operations:
+      - method: POST
+        name: detectlabels
+        description: Amazon Rekognition Detect Labels
+        call: amazon-rekognition-image-analysis.detectlabels
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-rekognition-image-analysis-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Rekognition — Image Analysis. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-rekognition-detect-labels
+      description: Amazon Rekognition Detect Labels
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-rekognition-image-analysis.detectlabels
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

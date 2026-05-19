@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Rekognition — Content Moderation
+  description: 'Amazon Rekognition — Content Moderation. 1 operations. Lead operation: Amazon Rekognition Detect Moderation
+    Labels. Self-contained Naftiko capability covering one Amazon Rekognition business surface.'
+  tags:
+  - Amazon Rekognition
+  - Content Moderation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_REKOGNITION_API_KEY: AMAZON_REKOGNITION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-rekognition-content-moderation
+    baseUri: https://rekognition.amazonaws.com
+    description: Amazon Rekognition — Content Moderation business capability. Self-contained, no shared references.
+    resources:
+    - name: '#DetectModerationLabels'
+      path: /#DetectModerationLabels
+      operations:
+      - name: detectmoderationlabels
+        method: POST
+        description: Amazon Rekognition Detect Moderation Labels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_REKOGNITION_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-rekognition-content-moderation-rest
+    port: 8080
+    description: REST adapter for Amazon Rekognition — Content Moderation. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/detectmoderationlabels
+      name: detectmoderationlabels
+      description: 'REST surface for #DetectModerationLabels.'
+      operations:
+      - method: POST
+        name: detectmoderationlabels
+        description: Amazon Rekognition Detect Moderation Labels
+        call: amazon-rekognition-content-moderation.detectmoderationlabels
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-rekognition-content-moderation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Rekognition — Content Moderation. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-rekognition-detect-moderation-labels
+      description: Amazon Rekognition Detect Moderation Labels
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-rekognition-content-moderation.detectmoderationlabels
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

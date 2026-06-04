@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Quality Gated Enrollment
+  summary: Detect a face and check its quality, then index it into a collection only when a face is present.
+  description: >-
+    A quality-gated enrollment flow for Amazon Rekognition. The workflow runs
+    DetectFaces with full attributes to confirm a usable face is present in the
+    enrollment image and capture its quality, branches to index the face only
+    when a face was found, and adds it to the target collection. Each step
+    spells out its AWS JSON 1.1 request inline, including the protocol-required
+    X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: quality-gated-enrollment
+  summary: Detect and quality-check a face, then index it into a collection.
+  description: >-
+    Confirms a usable face exists in the enrollment image before indexing it
+    into the target collection, gating enrollment on face presence.
+  inputs:
+    type: object
+    required:
+    - collectionId
+    - bucket
+    - name
+    - externalImageId
+    properties:
+      collectionId:
+        type: string
+        description: ID of the collection to enroll the face into.
+      bucket:
+        type: string
+        description: S3 bucket holding the enrollment image.
+      name:
+        type: string
+        description: S3 object key of the enrollment image.
+      externalImageId:
+        type: string
+        description: External identifier to assign to the indexed face.
+  steps:
+  - stepId: detectFaces
+    description: Detect faces and full quality attributes in the enrollment image.
+    operationId: detectFaces
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectFaces
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        Attributes:
+        - ALL
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceDetails: $response.body#/FaceDetails
+    onSuccess:
+    - name: faceFound
+      type: goto
+      stepId: indexFaces
+      criteria:
+      - context: $response.body
+        condition: $.FaceDetails[0] empty false
+        type: jsonpath
+  - stepId: indexFaces
+    description: Index the validated face into the target collection with a quality filter.
+    operationId: indexFaces
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.IndexFaces
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        CollectionId: $inputs.collectionId
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        ExternalImageId: $inputs.externalImageId
+        MaxFaces: 1
+        QualityFilter: AUTO
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceRecords: $response.body#/FaceRecords
+      unindexedFaces: $response.body#/UnindexedFaces
+  outputs:
+    faceDetails: $steps.detectFaces.outputs.faceDetails
+    faceRecords: $steps.indexFaces.outputs.faceRecords
+    unindexedFaces: $steps.indexFaces.outputs.unindexedFaces

@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Video Label Detection Job
+  summary: Start an asynchronous video label detection job, poll until it succeeds, then read the results.
+  description: >-
+    The standard asynchronous stored-video analysis pattern for Amazon
+    Rekognition. The workflow starts a label detection job for a video in S3,
+    polls GetLabelDetection on the returned JobId until the JobStatus is no
+    longer IN_PROGRESS, branches on SUCCEEDED versus FAILED, and on success
+    reads the detected labels. Each step spells out its AWS JSON 1.1 request
+    inline, including the protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: video-label-detection-job
+  summary: Start a video label detection job, poll until done, and read results.
+  description: >-
+    Kicks off asynchronous label detection for a stored video, polls the job
+    until it reaches a terminal state, and retrieves the labels on success.
+  inputs:
+    type: object
+    required:
+    - videoBucket
+    - videoName
+    properties:
+      videoBucket:
+        type: string
+        description: S3 bucket holding the video to analyze.
+      videoName:
+        type: string
+        description: S3 object key of the video file.
+      minConfidence:
+        type: number
+        description: Minimum confidence for labels detected in the video.
+        default: 75.0
+  steps:
+  - stepId: startJob
+    description: Start the asynchronous label detection job for the stored video.
+    operationId: startLabelDetection
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.StartLabelDetection
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Video:
+          S3Object:
+            Bucket: $inputs.videoBucket
+            Name: $inputs.videoName
+        MinConfidence: $inputs.minConfidence
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobId: $response.body#/JobId
+  - stepId: pollJob
+    description: >-
+      Poll the label detection job until it leaves the IN_PROGRESS state, then
+      branch on the terminal status.
+    operationId: getLabelDetection
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.GetLabelDetection
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        JobId: $steps.startJob.outputs.jobId
+        MaxResults: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/JobStatus
+      labels: $response.body#/Labels
+      labelModelVersion: $response.body#/LabelModelVersion
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollJob
+      criteria:
+      - context: $response.body
+        condition: $.JobStatus == 'IN_PROGRESS'
+        type: jsonpath
+    - name: succeeded
+      type: goto
+      stepId: readResults
+      criteria:
+      - context: $response.body
+        condition: $.JobStatus == 'SUCCEEDED'
+        type: jsonpath
+    onFailure:
+    - name: jobFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.JobStatus == 'FAILED'
+        type: jsonpath
+  - stepId: readResults
+    description: Read the full label detection results for the succeeded job.
+    operationId: getLabelDetection
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.GetLabelDetection
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        JobId: $steps.startJob.outputs.jobId
+        MaxResults: 100
+        SortBy: TIMESTAMP
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/JobStatus
+      labels: $response.body#/Labels
+      videoMetadata: $response.body#/VideoMetadata
+  outputs:
+    jobId: $steps.startJob.outputs.jobId
+    jobStatus: $steps.readResults.outputs.jobStatus
+    labels: $steps.readResults.outputs.labels

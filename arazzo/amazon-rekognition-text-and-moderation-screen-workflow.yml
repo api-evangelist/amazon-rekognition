@@ -1,0 +1,81 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Text and Moderation Screen
+  summary: Extract text from an image and then screen the same image for unsafe content.
+  description: >-
+    A combined OCR-plus-safety flow for Amazon Rekognition. The workflow runs
+    DetectText to extract machine-readable text from an image and then runs
+    DetectModerationLabels against the same image to flag unsafe content, which
+    is useful for moderating image-based posts that also carry overlaid text.
+    Each step spells out its AWS JSON 1.1 request inline, including the
+    protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: text-and-moderation-screen
+  summary: Detect text then detect moderation labels for the same image.
+  description: >-
+    Extracts overlaid or embedded text from an image and screens the same image
+    for unsafe content in a single pass.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - name
+    properties:
+      bucket:
+        type: string
+        description: S3 bucket holding the image to analyze.
+      name:
+        type: string
+        description: S3 object key of the image.
+      minModerationConfidence:
+        type: number
+        description: Minimum confidence for returned moderation labels.
+        default: 50.0
+  steps:
+  - stepId: detectText
+    description: Extract machine-readable text from the image.
+    operationId: detectText
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectText
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      textDetections: $response.body#/TextDetections
+      textModelVersion: $response.body#/TextModelVersion
+  - stepId: detectModeration
+    description: Screen the same image for unsafe or inappropriate content.
+    operationId: detectModerationLabels
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectModerationLabels
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        MinConfidence: $inputs.minModerationConfidence
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      moderationLabels: $response.body#/ModerationLabels
+      moderationModelVersion: $response.body#/ModerationModelVersion
+  outputs:
+    textDetections: $steps.detectText.outputs.textDetections
+    moderationLabels: $steps.detectModeration.outputs.moderationLabels

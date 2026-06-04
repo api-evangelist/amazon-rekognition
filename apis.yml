@@ -58,6 +58,42 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-rekognition-text-detection.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-rekognition-celebrity-scene-context-workflow.yml
+    name: Amazon Rekognition Celebrity Scene Context
+    summary: Recognize celebrities in an image and then label the same image for scene context.
+  - url: arazzo/amazon-rekognition-custom-labels-and-moderate-workflow.yml
+    name: Amazon Rekognition Custom Labels and Moderate
+    summary: Run a Custom Labels model on an image and then screen the same image for unsafe content.
+  - url: arazzo/amazon-rekognition-detect-then-compare-faces-workflow.yml
+    name: Amazon Rekognition Detect then Compare Faces
+    summary: Confirm a face exists in the source image, then compare it against every face in a target image.
+  - url: arazzo/amazon-rekognition-enroll-and-search-face-workflow.yml
+    name: Amazon Rekognition Enroll and Search a Face
+    summary: Create a face collection, index a face into it, then search the collection by a query image.
+  - url: arazzo/amazon-rekognition-face-liveness-session-workflow.yml
+    name: Amazon Rekognition Face Liveness Session
+    summary: Create a Face Liveness session, then poll for its results until a terminal status is reached.
+  - url: arazzo/amazon-rekognition-label-and-moderate-image-workflow.yml
+    name: Amazon Rekognition Label and Moderate an Image
+    summary: Detect general labels in an image and then screen the same image for unsafe content.
+  - url: arazzo/amazon-rekognition-quality-gated-enrollment-workflow.yml
+    name: Amazon Rekognition Quality Gated Enrollment
+    summary: Detect a face and check its quality, then index it into a collection only when a face is present.
+  - url: arazzo/amazon-rekognition-reuse-or-create-collection-enroll-workflow.yml
+    name: Amazon Rekognition Reuse or Create Collection then Enroll
+    summary: List collections, branch to create the collection only if missing, then index a face into it.
+  - url: arazzo/amazon-rekognition-text-and-moderation-screen-workflow.yml
+    name: Amazon Rekognition Text and Moderation Screen
+    summary: Extract text from an image and then screen the same image for unsafe content.
+  - url: arazzo/amazon-rekognition-verify-face-against-collection-workflow.yml
+    name: Amazon Rekognition Verify a Face Against a Collection
+    summary: Detect a face in an image to confirm a single subject, then search a collection to verify identity.
+  - url: arazzo/amazon-rekognition-video-label-detection-job-workflow.yml
+    name: Amazon Rekognition Video Label Detection Job
+    summary: Start an asynchronous video label detection job, poll until it succeeds, then read the results.
 - type: Portal
   url: https://aws.amazon.com/
 - type: DeveloperPortal

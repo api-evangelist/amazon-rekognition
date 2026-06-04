@@ -1,0 +1,86 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Label and Moderate an Image
+  summary: Detect general labels in an image and then screen the same image for unsafe content.
+  description: >-
+    A content-understanding-plus-safety flow for Amazon Rekognition. The
+    workflow runs DetectLabels to understand what is in an image and then runs
+    DetectModerationLabels against the same image to screen it for unsafe or
+    inappropriate content. Each step spells out its AWS JSON 1.1 request inline,
+    including the protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: label-and-moderate-image
+  summary: Detect labels then detect moderation labels for the same image.
+  description: >-
+    Produces a descriptive label set for an image and a moderation screening of
+    the same image so user-generated content can be both understood and gated.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - name
+    properties:
+      bucket:
+        type: string
+        description: S3 bucket holding the image to analyze.
+      name:
+        type: string
+        description: S3 object key of the image.
+      minLabelConfidence:
+        type: number
+        description: Minimum confidence for returned general labels.
+        default: 75.0
+      minModerationConfidence:
+        type: number
+        description: Minimum confidence for returned moderation labels.
+        default: 50.0
+  steps:
+  - stepId: detectLabels
+    description: Detect general labels describing the contents of the image.
+    operationId: detectLabels
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectLabels
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        MaxLabels: 20
+        MinConfidence: $inputs.minLabelConfidence
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      labels: $response.body#/Labels
+      labelModelVersion: $response.body#/LabelModelVersion
+  - stepId: detectModeration
+    description: Screen the same image for unsafe or inappropriate content.
+    operationId: detectModerationLabels
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectModerationLabels
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        MinConfidence: $inputs.minModerationConfidence
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      moderationLabels: $response.body#/ModerationLabels
+      moderationModelVersion: $response.body#/ModerationModelVersion
+  outputs:
+    labels: $steps.detectLabels.outputs.labels
+    moderationLabels: $steps.detectModeration.outputs.moderationLabels

@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Face Liveness Session
+  summary: Create a Face Liveness session, then poll for its results until a terminal status is reached.
+  description: >-
+    The Face Liveness lifecycle for Amazon Rekognition. The workflow creates a
+    Face Liveness session and returns the SessionId used by a client to stream
+    frames, then polls GetFaceLivenessSessionResults until the session leaves
+    the CREATED or IN_PROGRESS state, branching on the terminal SUCCEEDED,
+    FAILED, or EXPIRED status. Each step spells out its AWS JSON 1.1 request
+    inline, including the protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: face-liveness-session
+  summary: Create a Face Liveness session then poll for its results.
+  description: >-
+    Initiates a Face Liveness session and polls for the result until the session
+    reaches a terminal state, returning the liveness confidence on success.
+  inputs:
+    type: object
+    properties:
+      clientRequestToken:
+        type: string
+        description: Idempotency token for creating the Face Liveness session.
+  steps:
+  - stepId: createSession
+    description: Create the Face Liveness session and obtain its session id.
+    operationId: createFaceLivenessSession
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.CreateFaceLivenessSession
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        ClientRequestToken: $inputs.clientRequestToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/SessionId
+  - stepId: pollResults
+    description: >-
+      Poll the Face Liveness session results until the session leaves the
+      CREATED or IN_PROGRESS state, then branch on the terminal status.
+    operationId: getFaceLivenessSessionResults
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.GetFaceLivenessSessionResults
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        SessionId: $steps.createSession.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/Status
+      confidence: $response.body#/Confidence
+      referenceImage: $response.body#/ReferenceImage
+    onSuccess:
+    - name: stillCreated
+      type: goto
+      stepId: pollResults
+      criteria:
+      - context: $response.body
+        condition: $.Status == 'CREATED'
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollResults
+      criteria:
+      - context: $response.body
+        condition: $.Status == 'IN_PROGRESS'
+        type: jsonpath
+    - name: terminal
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.Status == 'SUCCEEDED'
+        type: jsonpath
+  outputs:
+    sessionId: $steps.createSession.outputs.sessionId
+    status: $steps.pollResults.outputs.status
+    confidence: $steps.pollResults.outputs.confidence

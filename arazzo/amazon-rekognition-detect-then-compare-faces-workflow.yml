@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Detect then Compare Faces
+  summary: Confirm a face exists in the source image, then compare it against every face in a target image.
+  description: >-
+    A one-to-one face matching flow for Amazon Rekognition. The workflow runs
+    DetectFaces on the source image to confirm exactly one usable face is
+    present, then calls CompareFaces to measure similarity between the source
+    face and each face detected in the target image. Each step spells out its
+    AWS JSON 1.1 request inline, including the protocol-required X-Amz-Target
+    header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: detect-then-compare-faces
+  summary: Detect a source face then compare it against a target image.
+  description: >-
+    Verifies a face is present in the source image and then compares that face
+    against all faces detected in the target image, returning similarity scores.
+  inputs:
+    type: object
+    required:
+    - sourceBucket
+    - sourceName
+    - targetBucket
+    - targetName
+    properties:
+      sourceBucket:
+        type: string
+        description: S3 bucket holding the source image.
+      sourceName:
+        type: string
+        description: S3 object key of the source image.
+      targetBucket:
+        type: string
+        description: S3 bucket holding the target image.
+      targetName:
+        type: string
+        description: S3 object key of the target image.
+      similarityThreshold:
+        type: number
+        description: Minimum similarity for a match to be returned.
+        default: 80.0
+  steps:
+  - stepId: detectSourceFace
+    description: Confirm a face is present in the source image before comparing.
+    operationId: detectFaces
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectFaces
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.sourceBucket
+            Name: $inputs.sourceName
+        Attributes:
+        - DEFAULT
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceDetails: $response.body#/FaceDetails
+    onSuccess:
+    - name: sourceFaceFound
+      type: goto
+      stepId: compareFaces
+      criteria:
+      - context: $response.body
+        condition: $.FaceDetails[0] empty false
+        type: jsonpath
+  - stepId: compareFaces
+    description: Compare the source face against every face detected in the target image.
+    operationId: compareFaces
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.CompareFaces
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        SourceImage:
+          S3Object:
+            Bucket: $inputs.sourceBucket
+            Name: $inputs.sourceName
+        TargetImage:
+          S3Object:
+            Bucket: $inputs.targetBucket
+            Name: $inputs.targetName
+        SimilarityThreshold: $inputs.similarityThreshold
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceMatches: $response.body#/FaceMatches
+      unmatchedFaces: $response.body#/UnmatchedFaces
+  outputs:
+    sourceFaceDetails: $steps.detectSourceFace.outputs.faceDetails
+    faceMatches: $steps.compareFaces.outputs.faceMatches

@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Verify a Face Against a Collection
+  summary: Detect a face in an image to confirm a single subject, then search a collection to verify identity.
+  description: >-
+    A face-verification flow for Amazon Rekognition. The workflow first runs
+    DetectFaces against the probe image to confirm a face is present and capture
+    its quality attributes, then performs a SearchFacesByImage against an
+    existing collection to verify whether the probe matches an enrolled
+    identity. Each step spells out its AWS JSON 1.1 request inline, including the
+    protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: verify-face-against-collection
+  summary: Detect a probe face then search a collection to verify identity.
+  description: >-
+    Confirms a face exists in the probe image and then searches an existing
+    collection by that image to verify the subject against enrolled faces.
+  inputs:
+    type: object
+    required:
+    - collectionId
+    - probeBucket
+    - probeName
+    properties:
+      collectionId:
+        type: string
+        description: ID of the collection holding enrolled faces.
+      probeBucket:
+        type: string
+        description: S3 bucket holding the probe image to verify.
+      probeName:
+        type: string
+        description: S3 object key of the probe image.
+      faceMatchThreshold:
+        type: number
+        description: Minimum confidence for a verification match.
+        default: 90.0
+  steps:
+  - stepId: detectFaces
+    description: Detect faces in the probe image and return all facial attributes.
+    operationId: detectFaces
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectFaces
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.probeBucket
+            Name: $inputs.probeName
+        Attributes:
+        - ALL
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceDetails: $response.body#/FaceDetails
+    onSuccess:
+    - name: faceFound
+      type: goto
+      stepId: searchByImage
+      criteria:
+      - context: $response.body
+        condition: $.FaceDetails[0] empty false
+        type: jsonpath
+  - stepId: searchByImage
+    description: Search the collection for faces matching the probe image to verify identity.
+    operationId: searchFacesByImage
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.SearchFacesByImage
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        CollectionId: $inputs.collectionId
+        Image:
+          S3Object:
+            Bucket: $inputs.probeBucket
+            Name: $inputs.probeName
+        MaxFaces: 1
+        FaceMatchThreshold: $inputs.faceMatchThreshold
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceMatches: $response.body#/FaceMatches
+      searchedFaceConfidence: $response.body#/SearchedFaceConfidence
+  outputs:
+    faceDetails: $steps.detectFaces.outputs.faceDetails
+    faceMatches: $steps.searchByImage.outputs.faceMatches

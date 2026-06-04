@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Reuse or Create Collection then Enroll
+  summary: List collections, branch to create the collection only if missing, then index a face into it.
+  description: >-
+    An idempotent enrollment flow for Amazon Rekognition face collections. The
+    workflow lists the existing collections, branches based on whether the
+    target collection id is already present — creating it only when missing —
+    and then indexes the faces from an enrollment image into the collection.
+    Each step spells out its AWS JSON 1.1 request inline, including the
+    protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: reuse-or-create-collection-enroll
+  summary: Reuse an existing collection or create it, then index an enrollment image.
+  description: >-
+    Lists collections, branches to create the collection when it is not already
+    present, and indexes the enrollment image into the resulting collection.
+  inputs:
+    type: object
+    required:
+    - collectionId
+    - enrollBucket
+    - enrollName
+    properties:
+      collectionId:
+        type: string
+        description: ID of the collection to reuse or create.
+      enrollBucket:
+        type: string
+        description: S3 bucket holding the enrollment image.
+      enrollName:
+        type: string
+        description: S3 object key of the enrollment image to index.
+      externalImageId:
+        type: string
+        description: External identifier to assign to the indexed faces.
+  steps:
+  - stepId: listCollections
+    description: List the collection ids that already exist in the account.
+    operationId: listCollections
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.ListCollections
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        MaxResults: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      collectionIds: $response.body#/CollectionIds
+    onSuccess:
+    - name: collectionMissing
+      type: goto
+      stepId: createCollection
+      criteria:
+      - context: $response.body
+        condition: $.CollectionIds[?(@ == '$inputs.collectionId')] empty true
+        type: jsonpath
+    - name: collectionExists
+      type: goto
+      stepId: indexFaces
+      criteria:
+      - context: $response.body
+        condition: $.CollectionIds[?(@ == '$inputs.collectionId')] empty false
+        type: jsonpath
+  - stepId: createCollection
+    description: Create the collection because it was not found in the listing.
+    operationId: createCollection
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.CreateCollection
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        CollectionId: $inputs.collectionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      collectionArn: $response.body#/CollectionArn
+  - stepId: indexFaces
+    description: Index the enrollment image faces into the reused or newly created collection.
+    operationId: indexFaces
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.IndexFaces
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        CollectionId: $inputs.collectionId
+        Image:
+          S3Object:
+            Bucket: $inputs.enrollBucket
+            Name: $inputs.enrollName
+        ExternalImageId: $inputs.externalImageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceRecords: $response.body#/FaceRecords
+      unindexedFaces: $response.body#/UnindexedFaces
+  outputs:
+    collectionIds: $steps.listCollections.outputs.collectionIds
+    faceRecords: $steps.indexFaces.outputs.faceRecords

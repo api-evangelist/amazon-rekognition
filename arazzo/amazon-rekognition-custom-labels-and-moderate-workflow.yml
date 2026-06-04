@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Custom Labels and Moderate
+  summary: Run a Custom Labels model on an image and then screen the same image for unsafe content.
+  description: >-
+    A domain-specific tagging-plus-safety flow for Amazon Rekognition. The
+    workflow runs DetectCustomLabels against an image using a trained Custom
+    Labels project version to apply business-specific labels, then runs
+    DetectModerationLabels against the same image to screen it for unsafe
+    content before the custom labels are trusted. Each step spells out its AWS
+    JSON 1.1 request inline, including the protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: custom-labels-and-moderate
+  summary: Detect custom labels then detect moderation labels for the same image.
+  description: >-
+    Applies a trained Custom Labels model to an image and screens the same image
+    for unsafe content in one pass.
+  inputs:
+    type: object
+    required:
+    - projectVersionArn
+    - bucket
+    - name
+    properties:
+      projectVersionArn:
+        type: string
+        description: ARN of the trained Custom Labels model version to use.
+      bucket:
+        type: string
+        description: S3 bucket holding the image to analyze.
+      name:
+        type: string
+        description: S3 object key of the image.
+      minCustomConfidence:
+        type: number
+        description: Minimum confidence for returned custom labels.
+        default: 70.0
+      minModerationConfidence:
+        type: number
+        description: Minimum confidence for returned moderation labels.
+        default: 50.0
+  steps:
+  - stepId: detectCustomLabels
+    description: Apply the trained Custom Labels model to the image.
+    operationId: detectCustomLabels
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectCustomLabels
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        ProjectVersionArn: $inputs.projectVersionArn
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        MinConfidence: $inputs.minCustomConfidence
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customLabels: $response.body#/CustomLabels
+  - stepId: detectModeration
+    description: Screen the same image for unsafe or inappropriate content.
+    operationId: detectModerationLabels
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectModerationLabels
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        MinConfidence: $inputs.minModerationConfidence
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      moderationLabels: $response.body#/ModerationLabels
+      moderationModelVersion: $response.body#/ModerationModelVersion
+  outputs:
+    customLabels: $steps.detectCustomLabels.outputs.customLabels
+    moderationLabels: $steps.detectModeration.outputs.moderationLabels

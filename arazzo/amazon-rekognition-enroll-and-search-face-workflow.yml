@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Enroll and Search a Face
+  summary: Create a face collection, index a face into it, then search the collection by a query image.
+  description: >-
+    Builds the canonical face-recognition pipeline on Amazon Rekognition. The
+    workflow creates a new face collection, indexes the faces found in an
+    enrollment image into that collection with an external image id, and then
+    searches the same collection using a separate query image to find matching
+    faces. Each step spells out its AWS JSON 1.1 request inline — including the
+    protocol-required X-Amz-Target header — so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: enroll-and-search-face
+  summary: Create a collection, index an enrollment image, and search by a query image.
+  description: >-
+    Provisions a face collection, enrolls the faces from an enrollment image
+    into it, and then runs a search-by-image against the collection to find
+    matching faces above a confidence threshold.
+  inputs:
+    type: object
+    required:
+    - collectionId
+    - enrollBucket
+    - enrollName
+    - externalImageId
+    - queryBucket
+    - queryName
+    properties:
+      collectionId:
+        type: string
+        description: ID for the face collection to create and use.
+      enrollBucket:
+        type: string
+        description: S3 bucket holding the enrollment image.
+      enrollName:
+        type: string
+        description: S3 object key of the enrollment image to index.
+      externalImageId:
+        type: string
+        description: External identifier to assign to faces detected in the enrollment image.
+      queryBucket:
+        type: string
+        description: S3 bucket holding the query image to search with.
+      queryName:
+        type: string
+        description: S3 object key of the query image.
+      faceMatchThreshold:
+        type: number
+        description: Minimum confidence for a search match to be returned.
+        default: 80.0
+  steps:
+  - stepId: createCollection
+    description: Create the face collection that will store indexed face vectors.
+    operationId: createCollection
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.CreateCollection
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        CollectionId: $inputs.collectionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      collectionArn: $response.body#/CollectionArn
+      faceModelVersion: $response.body#/FaceModelVersion
+  - stepId: indexFaces
+    description: Detect faces in the enrollment image and add them to the collection.
+    operationId: indexFaces
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.IndexFaces
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        CollectionId: $inputs.collectionId
+        Image:
+          S3Object:
+            Bucket: $inputs.enrollBucket
+            Name: $inputs.enrollName
+        ExternalImageId: $inputs.externalImageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceRecords: $response.body#/FaceRecords
+      faceModelVersion: $response.body#/FaceModelVersion
+      unindexedFaces: $response.body#/UnindexedFaces
+  - stepId: searchByImage
+    description: Search the collection for faces matching the supplied query image.
+    operationId: searchFacesByImage
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.SearchFacesByImage
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        CollectionId: $inputs.collectionId
+        Image:
+          S3Object:
+            Bucket: $inputs.queryBucket
+            Name: $inputs.queryName
+        MaxFaces: 5
+        FaceMatchThreshold: $inputs.faceMatchThreshold
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      faceMatches: $response.body#/FaceMatches
+      searchedFaceConfidence: $response.body#/SearchedFaceConfidence
+  outputs:
+    collectionArn: $steps.createCollection.outputs.collectionArn
+    indexedFaceRecords: $steps.indexFaces.outputs.faceRecords
+    faceMatches: $steps.searchByImage.outputs.faceMatches

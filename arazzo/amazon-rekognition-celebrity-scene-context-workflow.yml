@@ -1,0 +1,82 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Rekognition Celebrity Scene Context
+  summary: Recognize celebrities in an image and then label the same image for scene context.
+  description: >-
+    A media-tagging flow for Amazon Rekognition. The workflow runs
+    RecognizeCelebrities against an image to identify any public figures present
+    and then runs DetectLabels against the same image to capture the surrounding
+    scene context, producing a richer set of tags for an editorial asset. Each
+    step spells out its AWS JSON 1.1 request inline, including the
+    protocol-required X-Amz-Target header.
+  version: 1.0.0
+sourceDescriptions:
+- name: rekognitionApi
+  url: ../openapi/amazon-rekognition-openapi.yml
+  type: openapi
+workflows:
+- workflowId: celebrity-scene-context
+  summary: Recognize celebrities then detect scene labels for the same image.
+  description: >-
+    Identifies recognized public figures in an image and augments the result
+    with general scene labels for the same image.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - name
+    properties:
+      bucket:
+        type: string
+        description: S3 bucket holding the image to analyze.
+      name:
+        type: string
+        description: S3 object key of the image.
+      minLabelConfidence:
+        type: number
+        description: Minimum confidence for returned scene labels.
+        default: 75.0
+  steps:
+  - stepId: recognizeCelebrities
+    description: Recognize any public figures present in the image.
+    operationId: recognizeCelebrities
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.RecognizeCelebrities
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      celebrityFaces: $response.body#/CelebrityFaces
+      unrecognizedFaces: $response.body#/UnrecognizedFaces
+  - stepId: detectLabels
+    description: Detect general scene labels for the same image to add context.
+    operationId: detectLabels
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: RekognitionService.DetectLabels
+    requestBody:
+      contentType: application/x-amz-json-1.1
+      payload:
+        Image:
+          S3Object:
+            Bucket: $inputs.bucket
+            Name: $inputs.name
+        MaxLabels: 20
+        MinConfidence: $inputs.minLabelConfidence
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      labels: $response.body#/Labels
+      labelModelVersion: $response.body#/LabelModelVersion
+  outputs:
+    celebrityFaces: $steps.recognizeCelebrities.outputs.celebrityFaces
+    labels: $steps.detectLabels.outputs.labels

@@ -1,138 +1,159 @@
-# Amazon Rekognition
+# Amazon Rekognition (amazon-rekognition)
+
 Amazon Rekognition is a cloud-based computer vision service that makes it easy to add image and video analysis to your applications, providing capabilities such as object and scene detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis using deep learning technology.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml)
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Tags
 
-## Tags:
-
- - AWS, Celebrity Recognition, Computer Vision, Content Moderation, Custom Labels, Deep Learning, Face Liveness, Facial Recognition, Image Analysis, Machine Learning, Object Detection, Text Detection, Video Analysis
+- AWS
+- Celebrity Recognition
+- Computer Vision
+- Content Moderation
+- Custom Labels
+- Deep Learning
+- Face Liveness
+- Facial Recognition
+- Image Analysis
+- Machine Learning
+- Object Detection
+- Text Detection
+- Video Analysis
 
 ## Timestamps
 
 - **Created:** 2024-01-15
-- **Modified:** 2026-04-19
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Amazon Rekognition
+
 Amazon Rekognition provides image and video analysis APIs for label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
 
-**Human URL:** [https://aws.amazon.com/rekognition/](https://aws.amazon.com/rekognition/)
+- **Human URL:** [https://aws.amazon.com/rekognition/](https://aws.amazon.com/rekognition/)
+- **Base URL:** `https://rekognition.amazonaws.com`
 
-#### Tags:
+#### Tags
 
- - Computer Vision, Image Analysis, Video Analysis, Facial Recognition, Machine Learning
+- Computer Vision
+- Image Analysis
+- Video Analysis
+- Facial Recognition
+- Machine Learning
 
 #### Properties
 
 - [Documentation](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html)
-- [OpenAPI](openapi/amazon-rekognition-openapi.yml)
-- [APIReference](https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html)
-- [GettingStarted](https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html)
+- [OpenAPI](openapi/amazon-rekognition-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/amazon-rekognition.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/amazon-rekognition.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [API Reference](https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html)
+- [Getting Started](https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html)
 - [Authentication](https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html)
 - [Pricing](https://aws.amazon.com/rekognition/pricing/)
-- [FAQ](https://aws.amazon.com/rekognition/faqs/)
+- [F A Q](https://aws.amazon.com/rekognition/faqs/)
 
 ## Common Properties
 
+- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
 - [Portal](https://aws.amazon.com/)
-- [DeveloperPortal](https://aws.amazon.com/rekognition/)
+- [Developer Portal](https://aws.amazon.com/rekognition/)
 - [Documentation](https://docs.aws.amazon.com/rekognition/)
 - [Console](https://console.aws.amazon.com/rekognition/)
-- [SignUp](https://portal.aws.amazon.com/billing/signup)
+- [Sign Up](https://portal.aws.amazon.com/billing/signup)
 - [Pricing](https://aws.amazon.com/rekognition/pricing/)
-- [TermsOfService](https://aws.amazon.com/service-terms/)
-- [PrivacyPolicy](https://aws.amazon.com/privacy/)
+- [Terms of Service](https://aws.amazon.com/service-terms/)
+- [Privacy Policy](https://aws.amazon.com/privacy/)
 - [Support](https://aws.amazon.com/support/)
-- [FAQ](https://aws.amazon.com/rekognition/faqs/)
+- [F A Q](https://aws.amazon.com/rekognition/faqs/)
 - [Blog](https://aws.amazon.com/blogs/machine-learning/)
-- [GitHubOrganization](https://github.com/aws)
-- [StatusPage](https://health.aws.amazon.com/health/status)
+- [GitHub Organization](https://github.com/aws)
+- [Status Page](https://health.aws.amazon.com/health/status)
 - [YouTube](https://www.youtube.com/user/AmazonWebServices)
-- [StackOverflow](https://stackoverflow.com/questions/tagged/amazon-rekognition)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/amazon-rekognition)
 - [Contact](https://aws.amazon.com/contact-us/)
 - [Security](https://aws.amazon.com/security/)
 - [Compliance](https://aws.amazon.com/compliance/)
-- [KnowledgeCenter](https://repost.aws/knowledge-center)
-- [SpectralRules](rules/amazon-rekognition-spectral-rules.yml)
+- [Knowledge Center](https://repost.aws/knowledge-center)
+- [Spectral Rules](rules/amazon-rekognition-spectral-rules.yml)
 - [Vocabulary](vocabulary/amazon-rekognition-vocabulary.yaml)
-- [NaftikoCapability](capabilities/shared/rekognition.yaml)
-- [NaftikoCapability](capabilities/computer-vision-workflows.yaml)
-- [JSON-LD](json-ld/amazon-rekognition-context.jsonld)
-- [JSONSchema](json-schema/amazon-rekognition-bounding-box-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-compare-faces-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-compare-faces-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-create-collection-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-create-collection-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-create-face-liveness-session-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-create-face-liveness-session-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-custom-labels-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-custom-labels-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-faces-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-faces-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-labels-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-labels-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-moderation-labels-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-moderation-labels-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detect-text-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-detectlabelsresponse-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-face-detail-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-get-face-liveness-session-results-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-get-face-liveness-session-results-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-get-label-detection-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-get-video-job-result-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-image-only-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-image-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-index-faces-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-index-faces-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-label-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-list-collections-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-notification-channel-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-recognize-celebrities-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-s3-object-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-search-faces-by-image-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-search-faces-by-image-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-start-label-detection-request-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-start-video-job-response-schema.json)
-- [JSONSchema](json-schema/amazon-rekognition-video-schema.json)
-- [JSONStructure](json-structure/amazon-rekognition-bounding-box-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-compare-faces-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-compare-faces-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-create-collection-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-create-collection-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-create-face-liveness-session-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-create-face-liveness-session-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-custom-labels-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-custom-labels-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-faces-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-faces-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-labels-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-labels-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-moderation-labels-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-moderation-labels-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detect-text-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-detectlabelsresponse-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-face-detail-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-get-face-liveness-session-results-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-get-face-liveness-session-results-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-get-label-detection-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-get-video-job-result-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-image-only-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-image-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-index-faces-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-index-faces-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-label-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-list-collections-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-notification-channel-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-recognize-celebrities-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-s3-object-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-search-faces-by-image-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-search-faces-by-image-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-start-label-detection-request-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-start-video-job-response-structure.json)
-- [JSONStructure](json-structure/amazon-rekognition-video-structure.json)
+- [Features](undefined)
+- [Use Cases](undefined)
+- [Integrations](undefined)
+- [JSON-LD](json-ld/amazon-rekognition-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [JSON Schema](json-schema/amazon-rekognition-bounding-box-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-compare-faces-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-compare-faces-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-create-collection-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-create-collection-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-create-face-liveness-session-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-create-face-liveness-session-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-custom-labels-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-custom-labels-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-faces-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-faces-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-labels-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-labels-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-moderation-labels-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-moderation-labels-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detect-text-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-detectlabelsresponse-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-face-detail-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-get-face-liveness-session-results-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-get-face-liveness-session-results-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-get-label-detection-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-get-video-job-result-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-image-only-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-image-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-index-faces-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-index-faces-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-label-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-list-collections-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-notification-channel-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-recognize-celebrities-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-s3-object-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-search-faces-by-image-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-search-faces-by-image-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-start-label-detection-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-start-video-job-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/amazon-rekognition-video-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Structure](json-structure/amazon-rekognition-bounding-box-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-compare-faces-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-compare-faces-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-create-collection-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-create-collection-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-create-face-liveness-session-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-create-face-liveness-session-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-custom-labels-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-custom-labels-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-faces-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-faces-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-labels-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-labels-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-moderation-labels-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-moderation-labels-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detect-text-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-detectlabelsresponse-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-face-detail-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-get-face-liveness-session-results-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-get-face-liveness-session-results-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-get-label-detection-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-get-video-job-result-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-image-only-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-image-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-index-faces-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-index-faces-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-label-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-list-collections-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-notification-channel-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-recognize-celebrities-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-s3-object-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-search-faces-by-image-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-search-faces-by-image-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-start-label-detection-request-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-start-video-job-response-structure.json)
+- [JSON Structure](json-structure/amazon-rekognition-video-structure.json)
 - [Example](examples/amazon-rekognition-bounding-box-example.json)
 - [Example](examples/amazon-rekognition-compare-faces-request-example.json)
 - [Example](examples/amazon-rekognition-compare-faces-response-example.json)
@@ -169,124 +190,4 @@ Amazon Rekognition provides image and video analysis APIs for label detection, f
 - [Example](examples/amazon-rekognition-start-label-detection-request-example.json)
 - [Example](examples/amazon-rekognition-start-video-job-response-example.json)
 - [Example](examples/amazon-rekognition-video-example.json)
-
-## Features
-
-| Name | Description |
-|------|-------------|
-| Object and Scene Detection | Detect thousands of objects, scenes, and concepts in images and videos with high confidence scores using deep learning. |
-| Facial Analysis | Detect and analyze faces with attributes including age range, emotions, gender, and facial landmarks. |
-| Face Comparison | Compare faces across images to determine if they are the same person with a similarity score. |
-| Face Collections | Create searchable face collections to index and search millions of faces in near real-time. |
-| Celebrity Recognition | Identify thousands of celebrities in images and videos across categories like sports, entertainment, and politics. |
-| Text Detection | Detect and extract printed and handwritten text from images and videos in multiple languages. |
-| Content Moderation | Detect explicit, inappropriate, or violent content in images and videos for automated content moderation. |
-| Custom Labels | Build and train custom image classifiers using your own labeled images for domain-specific object detection. |
-| Protective Equipment Detection | Detect personal protective equipment such as face covers, hand covers, and head covers on persons in images. |
-| Face Liveness Detection | Verify that a user is physically present during identity verification to prevent spoofing attacks. |
-| People Pathing | Track and follow identified people across frames in stored video footage. |
-| Video Segmentation | Identify technical cues and segments such as black frames, end credits, and color bars in video content. |
-| Streaming Video Analysis | Analyze live streaming video in real-time using Amazon Kinesis Video Streams integration. |
-| Image Properties Analysis | Evaluate image quality attributes including sharpness, brightness, contrast, and dominant colors. |
-
-## Use Cases
-
-| Name | Description |
-|------|-------------|
-| Identity Verification | Verify user identities by comparing selfies to ID documents or previously stored face images for onboarding and authentication. |
-| Content Moderation | Automatically moderate user-generated content on platforms to detect and filter explicit or inappropriate imagery. |
-| Searchable Media Libraries | Build searchable image and video archives by automatically tagging media with detected labels, faces, and text. |
-| Workplace Safety Compliance | Monitor camera feeds to detect whether workers are wearing required personal protective equipment in industrial settings. |
-| Fraud Prevention | Prevent identity fraud during digital onboarding by using face liveness detection to confirm real users. |
-| Smart Retail Analytics | Analyze in-store camera feeds to track customer behavior, measure foot traffic, and optimize product placement. |
-| Public Safety and Security | Search video archives for persons of interest by comparing faces against a known collection. |
-| Media and Entertainment | Automatically tag celebrities in photos and videos for media companies to improve content discoverability. |
-| Custom Object Detection | Train custom classifiers to detect proprietary products, logos, brand assets, or industry-specific objects. |
-
-## Integrations
-
-| Name | Description |
-|------|-------------|
-| Amazon S3 | Process images and videos stored in Amazon S3 buckets directly without downloading content. |
-| Amazon Kinesis Video Streams | Analyze live video streams in real-time by integrating with Kinesis Video Streams for streaming analysis. |
-| AWS Lambda | Trigger serverless analysis pipelines by invoking Rekognition from Lambda functions in event-driven architectures. |
-| Amazon SNS | Receive asynchronous notifications when stored video analysis jobs complete via Amazon SNS. |
-| AWS IAM | Control access to Rekognition APIs using AWS Identity and Access Management policies and roles. |
-| Amazon CloudWatch | Monitor Rekognition API usage, latency, and error metrics through CloudWatch dashboards and alarms. |
-| AWS Step Functions | Orchestrate multi-step computer vision workflows using Step Functions to chain Rekognition operations. |
-| Amazon Augmented AI (A2I) | Route low-confidence Rekognition predictions to human reviewers using Amazon Augmented AI for quality control. |
-
-## Artifacts
-
-Machine-readable API specifications organized by format.
-
-### OpenAPI
-
-- [amazon-rekognition-openapi.yml](openapi/amazon-rekognition-openapi.yml)
-
-### JSON Schema
-
-- [amazon-rekognition-bounding-box-schema.json](json-schema/amazon-rekognition-bounding-box-schema.json)
-- [amazon-rekognition-compare-faces-request-schema.json](json-schema/amazon-rekognition-compare-faces-request-schema.json)
-- [amazon-rekognition-compare-faces-response-schema.json](json-schema/amazon-rekognition-compare-faces-response-schema.json)
-- [amazon-rekognition-create-collection-request-schema.json](json-schema/amazon-rekognition-create-collection-request-schema.json)
-- [amazon-rekognition-create-collection-response-schema.json](json-schema/amazon-rekognition-create-collection-response-schema.json)
-- [amazon-rekognition-create-face-liveness-session-request-schema.json](json-schema/amazon-rekognition-create-face-liveness-session-request-schema.json)
-- [amazon-rekognition-create-face-liveness-session-response-schema.json](json-schema/amazon-rekognition-create-face-liveness-session-response-schema.json)
-- [amazon-rekognition-detect-custom-labels-request-schema.json](json-schema/amazon-rekognition-detect-custom-labels-request-schema.json)
-- [amazon-rekognition-detect-custom-labels-response-schema.json](json-schema/amazon-rekognition-detect-custom-labels-response-schema.json)
-- [amazon-rekognition-detect-faces-request-schema.json](json-schema/amazon-rekognition-detect-faces-request-schema.json)
-- ...and 26 more
-
-### JSON Structure
-
-- [amazon-rekognition-bounding-box-structure.json](json-structure/amazon-rekognition-bounding-box-structure.json)
-- [amazon-rekognition-compare-faces-request-structure.json](json-structure/amazon-rekognition-compare-faces-request-structure.json)
-- [amazon-rekognition-compare-faces-response-structure.json](json-structure/amazon-rekognition-compare-faces-response-structure.json)
-- [amazon-rekognition-create-collection-request-structure.json](json-structure/amazon-rekognition-create-collection-request-structure.json)
-- [amazon-rekognition-create-collection-response-structure.json](json-structure/amazon-rekognition-create-collection-response-structure.json)
-- [amazon-rekognition-create-face-liveness-session-request-structure.json](json-structure/amazon-rekognition-create-face-liveness-session-request-structure.json)
-- [amazon-rekognition-create-face-liveness-session-response-structure.json](json-structure/amazon-rekognition-create-face-liveness-session-response-structure.json)
-- [amazon-rekognition-detect-custom-labels-request-structure.json](json-structure/amazon-rekognition-detect-custom-labels-request-structure.json)
-- [amazon-rekognition-detect-custom-labels-response-structure.json](json-structure/amazon-rekognition-detect-custom-labels-response-structure.json)
-- [amazon-rekognition-detect-faces-request-structure.json](json-structure/amazon-rekognition-detect-faces-request-structure.json)
-- ...and 26 more
-
-### JSON-LD
-
-- [amazon-rekognition-context.jsonld](json-ld/amazon-rekognition-context.jsonld)
-
-### Examples
-
-- [amazon-rekognition-bounding-box-example.json](examples/amazon-rekognition-bounding-box-example.json)
-- [amazon-rekognition-compare-faces-request-example.json](examples/amazon-rekognition-compare-faces-request-example.json)
-- [amazon-rekognition-compare-faces-response-example.json](examples/amazon-rekognition-compare-faces-response-example.json)
-- [amazon-rekognition-create-collection-request-example.json](examples/amazon-rekognition-create-collection-request-example.json)
-- [amazon-rekognition-create-collection-response-example.json](examples/amazon-rekognition-create-collection-response-example.json)
-- [amazon-rekognition-create-face-liveness-session-request-example.json](examples/amazon-rekognition-create-face-liveness-session-request-example.json)
-- [amazon-rekognition-create-face-liveness-session-response-example.json](examples/amazon-rekognition-create-face-liveness-session-response-example.json)
-- [amazon-rekognition-detect-custom-labels-request-example.json](examples/amazon-rekognition-detect-custom-labels-request-example.json)
-- [amazon-rekognition-detect-custom-labels-response-example.json](examples/amazon-rekognition-detect-custom-labels-response-example.json)
-- [amazon-rekognition-detect-faces-request-example.json](examples/amazon-rekognition-detect-faces-request-example.json)
-- ...and 26 more
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [rekognition.yaml](capabilities/shared/rekognition.yaml)
-
-### Workflow Capabilities
-
-- [computer-vision-workflows.yaml](capabilities/computer-vision-workflows.yaml)
-
-## Vocabulary
-
-- [amazon-rekognition-vocabulary.yaml](vocabulary/amazon-rekognition-vocabulary.yaml)
-
-## Rules
-
-- [amazon-rekognition-spectral-rules.yml](rules/amazon-rekognition-spectral-rules.yml)
-
+- [Integrations](https://aws.amazon.com/partners/)

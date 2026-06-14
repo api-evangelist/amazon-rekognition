@@ -1,0 +1,1297 @@
+"""
+Amazon Rekognition GraphQL Schema
+Derived from the Amazon Rekognition REST API.
+Reference: https://docs.aws.amazon.com/rekognition/latest/APIReference/
+"""
+
+# ─── Scalars ─────────────────────────────────────────────────────────────────
+
+scalar AWSDateTime
+scalar AWSJSON
+scalar Long
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum GenderType {
+  Male
+  Female
+}
+
+enum EmotionName {
+  HAPPY
+  SAD
+  ANGRY
+  CONFUSED
+  DISGUSTED
+  SURPRISED
+  CALM
+  UNKNOWN
+  FEAR
+}
+
+enum Attribute {
+  DEFAULT
+  ALL
+  AGE_RANGE
+  SMILE
+  EYEGLASSES
+  SUNGLASSES
+  GENDER
+  BEARD
+  MUSTACHE
+  EYES_OPEN
+  MOUTH_OPEN
+  EMOTIONS
+}
+
+enum OrientationCorrection {
+  ROTATE_0
+  ROTATE_90
+  ROTATE_180
+  ROTATE_270
+}
+
+enum TextTypes {
+  LINE
+  WORD
+}
+
+enum JobStatus {
+  IN_PROGRESS
+  SUCCEEDED
+  FAILED
+  PARTIAL_SUCCESS
+}
+
+enum QualityFilter {
+  NONE
+  AUTO
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum BodyPart {
+  FACE
+  HEAD
+  LEFT_HAND
+  RIGHT_HAND
+}
+
+enum ProtectiveEquipmentType {
+  FACE_COVER
+  HAND_COVER
+  HEAD_COVER
+}
+
+enum LandmarkType {
+  eyeLeft
+  eyeRight
+  nose
+  mouthLeft
+  mouthRight
+  leftEyeBrowLeft
+  leftEyeBrowRight
+  leftEyeBrowUp
+  rightEyeBrowLeft
+  rightEyeBrowRight
+  rightEyeBrowUp
+  leftEyeLeft
+  leftEyeRight
+  leftEyeUp
+  leftEyeDown
+  rightEyeLeft
+  rightEyeRight
+  rightEyeUp
+  rightEyeDown
+  noseLeft
+  noseRight
+  mouthUp
+  mouthDown
+  leftPupil
+  rightPupil
+  upperJawlineLeft
+  midJawlineLeft
+  chinBottom
+  midJawlineRight
+  upperJawlineRight
+}
+
+enum ContentModerationSortBy {
+  NAME
+  TIMESTAMP
+}
+
+enum FaceSearchSortBy {
+  INDEX
+  TIMESTAMP
+}
+
+enum LabelDetectionSortBy {
+  NAME
+  TIMESTAMP
+}
+
+enum PersonTrackingSortBy {
+  INDEX
+  TIMESTAMP
+}
+
+enum SegmentType {
+  TECHNICAL_CUE
+  SHOT
+}
+
+enum TechnicalCueType {
+  ColorBars
+  EndCredits
+  BlackFrames
+  OpeningCredits
+  StudioLogo
+  Slate
+  Content
+}
+
+enum StreamProcessorStatus {
+  STOPPED
+  STARTING
+  RUNNING
+  FAILED
+  STOPPING
+  UPDATING
+}
+
+enum DatasetType {
+  TRAIN
+  TEST
+}
+
+enum ProjectStatus {
+  CREATING
+  CREATED
+  DELETING
+}
+
+enum ProjectVersionStatus {
+  TRAINING_IN_PROGRESS
+  TRAINING_COMPLETED
+  TRAINING_FAILED
+  STARTING
+  RUNNING
+  FAILED
+  STOPPING
+  STOPPED
+  DELETING
+}
+
+enum MediaAnalysisJobStatus {
+  CREATED
+  QUEUED
+  IN_PROGRESS
+  SUCCEEDED
+  FAILED
+  CANCEL_REQUESTED
+  CANCELLED
+}
+
+# ─── Core Geometry Types ──────────────────────────────────────────────────────
+
+"""An axis-aligned bounding box expressed as ratios of overall image size."""
+type BoundingBox {
+  width: Float
+  height: Float
+  left: Float
+  top: Float
+}
+
+"""A point within an image expressed as X,Y coordinates."""
+type Point {
+  x: Float
+  y: Float
+}
+
+"""A polygon defined by a list of points."""
+type Polygon {
+  points: [Point]
+}
+
+# ─── Image Input Types ────────────────────────────────────────────────────────
+
+"""An image stored in Amazon S3."""
+type S3Object {
+  bucket: String
+  name: String
+  version: String
+}
+
+"""Base64-encoded image bytes (up to 5 MB)."""
+type Bytes {
+  data: String
+}
+
+"""An image supplied as S3 reference or raw bytes."""
+type Image {
+  bytes: String
+  s3Object: S3Object
+}
+
+"""Extended image metadata returned from analysis operations."""
+type ImageDetail {
+  width: Int
+  height: Int
+  quality: ImageQuality
+  dominantColors: [DominantColor]
+  sharpness: Float
+  brightness: Float
+  contrast: Float
+}
+
+"""Perceived quality metrics for an image."""
+type ImageQuality {
+  brightness: Float
+  sharpness: Float
+  contrast: Float
+}
+
+"""A dominant color detected in the image."""
+type DominantColor {
+  red: Int
+  green: Int
+  blue: Int
+  hexCode: String
+  cssColor: String
+  simplifiedColor: String
+  pixelPercent: Float
+}
+
+# ─── Face Analysis Types ──────────────────────────────────────────────────────
+
+"""Age range estimate for a detected face."""
+type AgeRange {
+  low: Int
+  high: Int
+}
+
+"""Confidence that the face has a smile."""
+type Smile {
+  value: Boolean
+  confidence: Float
+}
+
+"""Confidence that the person is wearing eyeglasses."""
+type Eyeglasses {
+  value: Boolean
+  confidence: Float
+}
+
+"""Confidence that the person is wearing sunglasses."""
+type Sunglasses {
+  value: Boolean
+  confidence: Float
+}
+
+"""Estimated gender of the person."""
+type Gender {
+  value: GenderType
+  confidence: Float
+}
+
+"""Confidence that the person has a beard."""
+type Beard {
+  value: Boolean
+  confidence: Float
+}
+
+"""Confidence that the person has a mustache."""
+type Mustache {
+  value: Boolean
+  confidence: Float
+}
+
+"""Confidence that the person's left eye is open."""
+type EyeOpen {
+  value: Boolean
+  confidence: Float
+}
+
+"""Confidence that the person's mouth is open."""
+type MouthOpen {
+  value: Boolean
+  confidence: Float
+}
+
+"""An emotion detected on a face."""
+type FaceEmotion {
+  type: EmotionName
+  confidence: Float
+}
+
+"""3D pose of the detected face."""
+type FacePose {
+  roll: Float
+  yaw: Float
+  pitch: Float
+}
+
+"""Quality attributes of a detected face."""
+type FaceQuality {
+  brightness: Float
+  sharpness: Float
+}
+
+"""A facial landmark (e.g., eye corner, nose tip)."""
+type Landmark {
+  type: LandmarkType
+  x: Float
+  y: Float
+}
+
+"""Eye direction vector for a detected face."""
+type EyeDirection {
+  yaw: Float
+  pitch: Float
+  confidence: Float
+}
+
+"""All attributes associated with a detected face."""
+type FaceAttributes {
+  ageRange: AgeRange
+  smile: Smile
+  eyeglasses: Eyeglasses
+  sunglasses: Sunglasses
+  gender: Gender
+  beard: Beard
+  mustache: Mustache
+  eyesOpen: EyeOpen
+  mouthOpen: MouthOpen
+  emotions: [FaceEmotion]
+  pose: FacePose
+  quality: FaceQuality
+  landmarks: [Landmark]
+  eyeDirection: EyeDirection
+  confidence: Float
+}
+
+"""Full detail about a face detected in an image."""
+type FaceDetail {
+  boundingBox: BoundingBox
+  ageRange: AgeRange
+  smile: Smile
+  eyeglasses: Eyeglasses
+  sunglasses: Sunglasses
+  gender: Gender
+  beard: Beard
+  mustache: Mustache
+  eyesOpen: EyeOpen
+  mouthOpen: MouthOpen
+  emotions: [FaceEmotion]
+  landmarks: [Landmark]
+  pose: FacePose
+  quality: FaceQuality
+  confidence: Float
+  faceOccluded: FaceOccluded
+  eyeDirection: EyeDirection
+}
+
+"""Whether the face is occluded by another object."""
+type FaceOccluded {
+  value: Boolean
+  confidence: Float
+}
+
+"""A face record stored in a collection."""
+type Face {
+  faceId: ID
+  boundingBox: BoundingBox
+  imageId: ID
+  externalImageId: String
+  confidence: Float
+  indexFacesModelVersion: String
+  userId: String
+}
+
+"""A face with its similarity score in a face-comparison result."""
+type FaceMatch {
+  similarity: Float
+  face: Face
+}
+
+"""Result of comparing a source face to a target image."""
+type FaceMatchResult {
+  sourceImageFace: ComparedSourceImageFace
+  faceMatches: [CompareFacesMatch]
+  unmatchedFaces: [ComparedFace]
+  sourceImageOrientationCorrection: OrientationCorrection
+  targetImageOrientationCorrection: OrientationCorrection
+}
+
+"""The source face used in a comparison."""
+type ComparedSourceImageFace {
+  boundingBox: BoundingBox
+  confidence: Float
+}
+
+"""A face in the target image with its similarity score."""
+type CompareFacesMatch {
+  similarity: Float
+  face: ComparedFace
+}
+
+"""A face detected during comparison."""
+type ComparedFace {
+  boundingBox: BoundingBox
+  confidence: Float
+  landmarks: [Landmark]
+  pose: FacePose
+  quality: FaceQuality
+  emotions: [FaceEmotion]
+  smile: Smile
+}
+
+"""Result of searching for faces by image against a collection."""
+type FaceSearchResult {
+  searchedFaceBoundingBox: BoundingBox
+  searchedFaceConfidence: Float
+  faceMatches: [FaceMatch]
+  faceModelVersion: String
+}
+
+"""Response from indexing faces into a collection."""
+type IndexFacesResult {
+  faceRecords: [FaceRecord]
+  orientationCorrection: OrientationCorrection
+  faceModelVersion: String
+  unindexedFaces: [UnindexedFace]
+}
+
+"""A face record created during indexing."""
+type FaceRecord {
+  face: Face
+  faceDetail: FaceDetail
+}
+
+"""A face that was not indexed due to a reason."""
+type UnindexedFace {
+  reasons: [String]
+  faceDetail: FaceDetail
+}
+
+# ─── Label / Object Detection Types ──────────────────────────────────────────
+
+"""A category that a label belongs to."""
+type LabelCategory {
+  name: String
+}
+
+"""An instance of a label within the image (with a bounding box)."""
+type LabelInstance {
+  boundingBox: BoundingBox
+  confidence: Float
+}
+
+"""A label (object, scene, or concept) detected in an image or video."""
+type Label {
+  name: String
+  confidence: Float
+  instances: [LabelInstance]
+  parents: [LabelCategory]
+  aliases: [LabelAlias]
+  categories: [LabelCategory]
+}
+
+"""An alternative name for a label."""
+type LabelAlias {
+  name: String
+}
+
+# ─── Celebrity Recognition Types ─────────────────────────────────────────────
+
+"""URLs providing more information about a celebrity."""
+type CelebrityUrls {
+  urls: [String]
+}
+
+"""A celebrity detected in an image."""
+type Celebrity {
+  id: ID
+  name: String
+  matchConfidence: Float
+  face: ComparedFace
+  urls: [String]
+  knownGender: KnownGender
+}
+
+"""A celebrity with full face detail."""
+type CelebrityDetail {
+  id: ID
+  name: String
+  urls: [String]
+  confidence: Float
+  boundingBox: BoundingBox
+  face: FaceDetail
+  knownGender: KnownGender
+}
+
+"""Known gender of a celebrity."""
+type KnownGender {
+  type: GenderType
+}
+
+"""A recognized celebrity in the response."""
+type RecognizedCelebrity {
+  celebrity: CelebrityDetail
+  timestamp: Long
+}
+
+"""Response from celebrity recognition on an image."""
+type RecognizeCelebritiesResult {
+  celebrityFaces: [Celebrity]
+  unrecognizedFaces: [ComparedFace]
+  orientationCorrection: OrientationCorrection
+}
+
+# ─── Content Moderation Types ─────────────────────────────────────────────────
+
+"""A moderation label detected in an image or video."""
+type ModerationLabel {
+  confidence: Float
+  name: String
+  parentName: String
+  taxonomyLevel: Int
+}
+
+"""Content moderation detection in a video frame."""
+type ContentModeration {
+  timestamp: Long
+  moderationLabel: ModerationLabel
+  startTimestampMillis: Long
+  endTimestampMillis: Long
+  durationMillis: Long
+  contentTypes: [ContentType]
+}
+
+"""Content type classification for moderation."""
+type ContentType {
+  name: String
+  confidence: Float
+}
+
+# ─── Text Detection Types ─────────────────────────────────────────────────────
+
+"""Text detected in an image or video."""
+type TextDetection {
+  detectedText: String
+  type: TextTypes
+  id: Int
+  parentId: Int
+  confidence: Float
+  geometry: Geometry
+}
+
+"""A block of text (line-level) with associated word detections."""
+type TextBlock {
+  detectedText: String
+  type: TextTypes
+  id: Int
+  parentId: Int
+  confidence: Float
+  geometry: Geometry
+}
+
+"""Geometric information about where text appears in an image."""
+type Geometry {
+  boundingBox: BoundingBox
+  polygon: [Point]
+}
+
+# ─── Person / Body Types ──────────────────────────────────────────────────────
+
+"""Detail about a person detected in a video."""
+type PersonDetail {
+  index: Long
+  boundingBox: BoundingBox
+  face: FaceDetail
+}
+
+"""A person body-part detection result."""
+type PersonBody {
+  index: Long
+  timestamp: Long
+  person: PersonDetail
+}
+
+"""A body part detected on a person."""
+type HumanPart {
+  name: BodyPart
+  confidence: Float
+}
+
+"""All body parts detected on a person."""
+type BodyParts {
+  boundingBox: BoundingBox
+  confidence: Float
+  bodyParts: [EquipmentDetection]
+}
+
+# ─── Protective Equipment Types ───────────────────────────────────────────────
+
+"""Protective equipment detected on a person."""
+type ProtectiveEquipment {
+  personBoundingBox: BoundingBox
+  personConfidence: Float
+  bodyParts: [ProtectiveEquipmentBodyPart]
+}
+
+"""Protective equipment detected on a specific body part."""
+type ProtectiveEquipmentBodyPart {
+  name: BodyPart
+  confidence: Float
+  equipmentDetections: [EquipmentDetection]
+}
+
+"""A piece of detected equipment with its location."""
+type EquipmentDetection {
+  boundingBox: BoundingBox
+  confidence: Float
+  type: ProtectiveEquipmentType
+  coversBodyPart: CoversBodyPart
+}
+
+"""Whether the equipment covers the expected body part."""
+type CoversBodyPart {
+  value: Boolean
+  confidence: Float
+}
+
+"""Type of equipment detected."""
+type EquipmentType {
+  type: ProtectiveEquipmentType
+  confidence: Float
+}
+
+# ─── Video Analysis Types ─────────────────────────────────────────────────────
+
+"""A video stored in Amazon S3."""
+type Video {
+  s3Object: S3Object
+}
+
+"""Metadata about a video returned from analysis."""
+type VideoDetail {
+  codec: String
+  durationMillis: Long
+  format: String
+  frameRate: Float
+  frameHeight: Long
+  frameWidth: Long
+  colorRange: String
+}
+
+"""Notification channel for async video job completion."""
+type NotificationChannel {
+  snsTopicArn: String
+  roleArn: String
+}
+
+"""Result of starting an asynchronous video analysis job."""
+type StartJobResult {
+  jobId: ID
+}
+
+"""Result of polling an asynchronous video analysis job."""
+type GetJobResult {
+  jobStatus: JobStatus
+  statusMessage: String
+  videoMetadata: VideoDetail
+  nextToken: String
+  billableDurationSeconds: Int
+  errorCode: String
+  warnings: [Warning]
+}
+
+"""A warning returned from a video analysis job."""
+type Warning {
+  errorCode: String
+  message: String
+  sections: [Section]
+}
+
+"""A section referenced in a warning."""
+type Section {
+  startTimestamp: Long
+  endTimestamp: Long
+}
+
+# ─── Stream Processor Types ───────────────────────────────────────────────────
+
+"""Input to a stream processor (Kinesis Video Stream)."""
+type StreamProcessorInput {
+  kinesisVideoStream: KinesisVideoStream
+}
+
+"""A Kinesis Video Stream reference."""
+type KinesisVideoStream {
+  arn: String
+}
+
+"""Output configuration for a stream processor."""
+type StreamProcessorOutput {
+  kinesisDataStream: KinesisDataStream
+  s3Destination: S3Destination
+}
+
+"""A Kinesis Data Stream reference."""
+type KinesisDataStream {
+  arn: String
+}
+
+"""An S3 destination for stream processor output."""
+type S3Destination {
+  bucket: String
+  keyPrefix: String
+}
+
+"""Settings for a stream processor (face search or connected home)."""
+type StreamProcessorSettings {
+  faceSearch: FaceSearchSettings
+  connectedHome: ConnectedHomeSettings
+}
+
+"""Face search settings within a stream processor."""
+type FaceSearchSettings {
+  collectionId: ID
+  faceMatchThreshold: Float
+}
+
+"""A stream processor configuration."""
+type StreamProcessor {
+  name: String
+  status: StreamProcessorStatus
+  streamProcessorArn: String
+  input: StreamProcessorInput
+  output: StreamProcessorOutput
+  roleArn: String
+  settings: StreamProcessorSettings
+  notificationChannel: StreamProcessorNotificationChannel
+  kmsKeyId: String
+  regionsOfInterest: [RegionOfInterest]
+  dataSharingPreference: StreamProcessorDataSharingPreference
+}
+
+"""Notification channel for a stream processor."""
+type StreamProcessorNotificationChannel {
+  snsTopicArn: String
+}
+
+"""A region of interest within a frame."""
+type RegionOfInterest {
+  boundingBox: BoundingBox
+  polygon: [Point]
+}
+
+"""Data-sharing preference for a stream processor."""
+type StreamProcessorDataSharingPreference {
+  optIn: Boolean
+}
+
+# ─── Connected Home Types ─────────────────────────────────────────────────────
+
+"""Connected-home labels settings for a stream processor."""
+type ConnectedHomeSettings {
+  labels: [String]
+  minConfidence: Float
+}
+
+"""A connected home detection result."""
+type ConnectedHome {
+  labels: [String]
+  confidence: Float
+}
+
+"""A connected device detected in a stream."""
+type ConnectedDevice {
+  deviceId: String
+  type: String
+  confidence: Float
+}
+
+# ─── Face Collection Types ────────────────────────────────────────────────────
+
+"""A face collection (identity store)."""
+type Collection {
+  collectionId: ID
+  faceModelVersion: String
+  collectionArn: String
+  creationTimestamp: AWSDateTime
+}
+
+"""Detail about a face collection."""
+type CollectionDetail {
+  collectionId: ID
+  collectionArn: String
+  faceModelVersion: String
+  creationTimestamp: AWSDateTime
+  faceCount: Long
+}
+
+# ─── Video Segment Types ──────────────────────────────────────────────────────
+
+"""A detected segment in a video."""
+type SegmentDetection {
+  type: SegmentType
+  startTimestampMillis: Long
+  endTimestampMillis: Long
+  durationMillis: Long
+  startTimecodeSMPTE: String
+  endTimecodeSMPTE: String
+  durationSMPTE: String
+  technicalCueSegment: TechnicalCueSegment
+  shotSegment: ShotSegment
+}
+
+"""A technical cue segment (e.g., black frame, color bars)."""
+type TechnicalCue {
+  type: TechnicalCueType
+  confidence: Float
+}
+
+"""Detailed segment data for a technical cue."""
+type TechnicalCueSegment {
+  type: TechnicalCueType
+  confidence: Float
+}
+
+"""A shot segment within a video."""
+type Shot {
+  index: Long
+  confidence: Float
+}
+
+"""Detailed segment data for a shot."""
+type ShotSegment {
+  index: Long
+  confidence: Float
+}
+
+# ─── Media Analysis Types ─────────────────────────────────────────────────────
+
+"""Input configuration for a media analysis job."""
+type MediaAnalysisInput {
+  s3Object: S3Object
+}
+
+"""Operations configuration for a media analysis job."""
+type MediaAnalysisOperationsConfig {
+  detectModerationLabels: DetectModerationLabelsConfig
+}
+
+"""Configuration for moderation label detection within media analysis."""
+type DetectModerationLabelsConfig {
+  minConfidence: Float
+  projectVersion: String
+}
+
+"""Output configuration for a media analysis job."""
+type MediaAnalysisOutputConfig {
+  s3Bucket: String
+  s3KeyPrefix: String
+}
+
+"""A media analysis job."""
+type MediaAnalysis {
+  jobId: ID
+  jobName: String
+  operationsConfig: MediaAnalysisOperationsConfig
+  status: MediaAnalysisJobStatus
+  failureDetails: MediaAnalysisJobFailureDetails
+  creationTimestamp: AWSDateTime
+  completionTimestamp: AWSDateTime
+  input: MediaAnalysisInput
+  outputConfig: MediaAnalysisOutputConfig
+  kmsKeyId: String
+  results: MediaAnalysisResults
+  manifestSummary: MediaAnalysisManifestSummary
+}
+
+"""Failure details for a media analysis job."""
+type MediaAnalysisJobFailureDetails {
+  code: String
+  message: String
+}
+
+"""Results from a completed media analysis job."""
+type MediaAnalysisResults {
+  s3Object: S3Object
+  modelVersions: MediaAnalysisModelVersions
+}
+
+"""Model versions used in a media analysis job."""
+type MediaAnalysisModelVersions {
+  moderationDetection: String
+}
+
+"""Manifest summary for a media analysis job."""
+type MediaAnalysisManifestSummary {
+  s3Object: S3Object
+}
+
+# ─── Custom Labels / Project Types ────────────────────────────────────────────
+
+"""An Amazon Rekognition Custom Labels project."""
+type Project {
+  projectArn: String
+  creationTimestamp: AWSDateTime
+  status: ProjectStatus
+  datasets: [DatasetMetadata]
+}
+
+"""A trained model version within a Custom Labels project."""
+type ProjectVersion {
+  projectVersionArn: String
+  creationTimestamp: AWSDateTime
+  minInferenceUnits: Int
+  status: ProjectVersionStatus
+  statusMessage: String
+  billableTrainingTimeInSeconds: Long
+  trainingEndTimestamp: AWSDateTime
+  outputConfig: OutputConfig
+  trainingDataResult: TrainingDataResult
+  testingDataResult: TestingDataResult
+  evaluationResult: EvaluationResult
+  manifestSummary: GroundTruthManifest
+  kmsKeyId: String
+  maxInferenceUnits: Int
+  sourceProjectVersionArn: String
+}
+
+"""Output configuration for a Custom Labels project version."""
+type OutputConfig {
+  s3Bucket: String
+  s3KeyPrefix: String
+}
+
+"""Training data configuration."""
+type TrainingDataResult {
+  input: TrainingData
+  output: TrainingData
+  validation: ValidationData
+}
+
+"""Testing data configuration."""
+type TestingDataResult {
+  input: TestingData
+  output: TestingData
+  validation: ValidationData
+}
+
+"""Training data source."""
+type TrainingData {
+  assets: [Asset]
+}
+
+"""Testing data source."""
+type TestingData {
+  assets: [Asset]
+  autoCreate: Boolean
+}
+
+"""Validation data for training."""
+type ValidationData {
+  assets: [Asset]
+}
+
+"""An asset (e.g., manifest file) used in training or testing."""
+type Asset {
+  groundTruthManifest: GroundTruthManifest
+}
+
+"""A Ground Truth manifest file in S3."""
+type GroundTruthManifest {
+  s3Object: S3Object
+}
+
+"""Evaluation result for a Custom Labels model version."""
+type EvaluationResult {
+  f1Score: Float
+  summary: Summary
+}
+
+"""Summary of evaluation metrics."""
+type Summary {
+  s3Object: S3Object
+}
+
+"""Metadata about a dataset within a Custom Labels project."""
+type DatasetMetadata {
+  creationTimestamp: AWSDateTime
+  datasetType: DatasetType
+  datasetArn: String
+  status: String
+  statusMessage: String
+  statusMessageCode: String
+}
+
+"""Statistics about a dataset."""
+type DatasetStats {
+  labeledEntries: Int
+  totalEntries: Int
+  totalLabels: Int
+  errorEntries: Int
+}
+
+# ─── Auth / Token Types ───────────────────────────────────────────────────────
+
+"""An API key used for Rekognition operations (e.g., Face Liveness)."""
+type APIKey {
+  value: String
+}
+
+"""A session token returned by a create-session operation."""
+type Token {
+  sessionId: ID
+  clientRequestToken: String
+}
+
+# ─── Queries ──────────────────────────────────────────────────────────────────
+
+type Query {
+  """Detect labels (objects, scenes, concepts) in an image."""
+  detectLabels(image: ID!, maxLabels: Int, minConfidence: Float): [Label]
+
+  """Detect faces and their attributes in an image."""
+  detectFaces(image: ID!, attributes: [Attribute]): [FaceDetail]
+
+  """Compare a source face to faces in a target image."""
+  compareFaces(sourceImage: ID!, targetImage: ID!, similarityThreshold: Float): FaceMatchResult
+
+  """Recognize celebrities in an image."""
+  recognizeCelebrities(image: ID!): RecognizeCelebritiesResult
+
+  """Detect text in an image."""
+  detectText(image: ID!): [TextDetection]
+
+  """Detect moderation labels in an image."""
+  detectModerationLabels(image: ID!, minConfidence: Float, humanLoopConfig: ID): [ModerationLabel]
+
+  """Search for faces in a collection by providing an image."""
+  searchFacesByImage(collectionId: ID!, image: ID!, maxFaces: Int, faceMatchThreshold: Float): FaceSearchResult
+
+  """Search for faces in a collection by face ID."""
+  searchFaces(collectionId: ID!, faceId: ID!, maxFaces: Int, faceMatchThreshold: Float): [FaceMatch]
+
+  """List all face collections."""
+  listCollections(maxResults: Int, nextToken: String): [Collection]
+
+  """Describe a specific face collection."""
+  describeCollection(collectionId: ID!): CollectionDetail
+
+  """List faces in a collection."""
+  listFaces(collectionId: ID!, maxResults: Int, nextToken: String, userId: String): [Face]
+
+  """Detect personal protective equipment on persons in an image."""
+  detectProtectiveEquipment(image: ID!, summarizationAttributes: ID): [ProtectiveEquipment]
+
+  """Detect custom labels using a trained project version."""
+  detectCustomLabels(projectVersionArn: String!, image: ID!, minConfidence: Float, maxResults: Int): [Label]
+
+  """Get the results of a label detection video job."""
+  getLabelDetection(jobId: ID!, maxResults: Int, nextToken: String, sortBy: LabelDetectionSortBy): GetJobResult
+
+  """Get the results of a face detection video job."""
+  getFaceDetection(jobId: ID!, maxResults: Int, nextToken: String): GetJobResult
+
+  """Get the results of a celebrity recognition video job."""
+  getCelebrityRecognition(jobId: ID!, maxResults: Int, nextToken: String, sortBy: FaceSearchSortBy): GetJobResult
+
+  """Get the results of a content moderation video job."""
+  getContentModeration(jobId: ID!, maxResults: Int, nextToken: String, sortBy: ContentModerationSortBy): GetJobResult
+
+  """Get the results of a person tracking video job."""
+  getPersonTracking(jobId: ID!, maxResults: Int, nextToken: String, sortBy: PersonTrackingSortBy): GetJobResult
+
+  """Get the results of a text detection video job."""
+  getTextDetection(jobId: ID!, maxResults: Int, nextToken: String): GetJobResult
+
+  """Get the results of a segment detection video job."""
+  getSegmentDetection(jobId: ID!, maxResults: Int, nextToken: String): GetJobResult
+
+  """Get a face liveness session result."""
+  getFaceLivenessSessionResults(sessionId: ID!): FaceLivenessSessionResult
+
+  """Get details about a stream processor."""
+  describeStreamProcessor(name: String!): StreamProcessor
+
+  """List all stream processors."""
+  listStreamProcessors(maxResults: Int, nextToken: String): [StreamProcessor]
+
+  """Describe a Custom Labels project."""
+  describeProjects(projectArns: [String], maxResults: Int, nextToken: String, features: [String]): [Project]
+
+  """Describe versions of a Custom Labels project."""
+  describeProjectVersions(projectArn: String!, versionNames: [String], maxResults: Int, nextToken: String): [ProjectVersion]
+
+  """Get a media analysis job."""
+  getMediaAnalysisJob(jobId: ID!): MediaAnalysis
+
+  """List media analysis jobs."""
+  listMediaAnalysisJobs(maxResults: Int, nextToken: String): [MediaAnalysis]
+
+  """Get image properties (quality, dominant colors) for an image."""
+  getImageProperties(image: ID!): ImageDetail
+}
+
+# ─── Mutations ────────────────────────────────────────────────────────────────
+
+type Mutation {
+  """Create a new face collection."""
+  createCollection(collectionId: ID!, tags: AWSJSON): Collection
+
+  """Delete a face collection."""
+  deleteCollection(collectionId: ID!): Boolean
+
+  """Index one or more faces from an image into a collection."""
+  indexFaces(collectionId: ID!, image: ID!, externalImageId: String, attributes: [Attribute], qualityFilter: QualityFilter, maxFaces: Int): IndexFacesResult
+
+  """Delete faces from a collection by face ID."""
+  deleteFaces(collectionId: ID!, faceIds: [ID!]!): [ID]
+
+  """Start an asynchronous label detection job on a video."""
+  startLabelDetection(video: ID!, clientRequestToken: String, minConfidence: Float, jobTag: String, notificationChannel: ID, featuresConfig: ID): StartJobResult
+
+  """Start an asynchronous face detection job on a video."""
+  startFaceDetection(video: ID!, clientRequestToken: String, notificationChannel: ID, faceAttributes: Attribute, jobTag: String): StartJobResult
+
+  """Start an asynchronous celebrity recognition job on a video."""
+  startCelebrityRecognition(video: ID!, clientRequestToken: String, notificationChannel: ID, jobTag: String): StartJobResult
+
+  """Start an asynchronous content moderation job on a video."""
+  startContentModeration(video: ID!, minConfidence: Float, clientRequestToken: String, notificationChannel: ID, jobTag: String): StartJobResult
+
+  """Start an asynchronous person tracking job on a video."""
+  startPersonTracking(video: ID!, clientRequestToken: String, notificationChannel: ID, jobTag: String): StartJobResult
+
+  """Start an asynchronous text detection job on a video."""
+  startTextDetection(video: ID!, clientRequestToken: String, notificationChannel: ID, jobTag: String, filters: ID): StartJobResult
+
+  """Start an asynchronous segment detection job on a video."""
+  startSegmentDetection(video: ID!, clientRequestToken: String, notificationChannel: ID, jobTag: String, filters: ID, segmentTypes: [SegmentType]): StartJobResult
+
+  """Start an asynchronous face search job on a video."""
+  startFaceSearch(video: ID!, collectionId: ID!, clientRequestToken: String, notificationChannel: ID, faceMatchThreshold: Float, jobTag: String): StartJobResult
+
+  """Create a face liveness session."""
+  createFaceLivenessSession(clientRequestToken: String, kmsKeyId: String, settings: ID): Token
+
+  """Create a stream processor."""
+  createStreamProcessor(input: ID!, output: ID!, name: String!, settings: ID!, roleArn: String!, tags: AWSJSON, notificationChannel: ID, kmsKeyId: String, regionsOfInterest: [ID], dataSharingPreference: ID): StreamProcessor
+
+  """Delete a stream processor."""
+  deleteStreamProcessor(name: String!): Boolean
+
+  """Start a stream processor."""
+  startStreamProcessor(name: String!, startSelector: ID, stopSelector: ID): Boolean
+
+  """Stop a stream processor."""
+  stopStreamProcessor(name: String!): Boolean
+
+  """Update a stream processor."""
+  updateStreamProcessor(name: String!, settingsForUpdate: ID, regionsOfInterestForUpdate: [ID], dataSharingPreferenceForUpdate: ID, parametersToDelete: [String]): Boolean
+
+  """Create a Custom Labels project."""
+  createProject(projectName: String!, feature: String, autoUpdate: String): Project
+
+  """Delete a Custom Labels project."""
+  deleteProject(projectArn: String!): String
+
+  """Create a dataset within a project."""
+  createDataset(datasetType: DatasetType!, projectArn: String!, datasetSource: ID): DatasetMetadata
+
+  """Delete a dataset."""
+  deleteDataset(datasetArn: String!): Boolean
+
+  """Start training a new Custom Labels project version."""
+  createProjectVersion(projectArn: String!, versionName: String!, outputConfig: ID!, trainingData: ID, testingData: ID, tags: AWSJSON, kmsKeyId: String, featureConfig: ID): ProjectVersion
+
+  """Stop a running Custom Labels project version."""
+  stopProjectVersion(projectVersionArn: String!): String
+
+  """Delete a Custom Labels project version."""
+  deleteProjectVersion(projectVersionArn: String!): String
+
+  """Start a media analysis job."""
+  startMediaAnalysisJob(jobName: String, operationsConfig: ID!, input: ID!, outputConfig: ID!, clientRequestToken: String, kmsKeyId: String): MediaAnalysis
+
+  """Associate faces with a user in a collection."""
+  associateFaces(collectionId: ID!, userId: String!, faceIds: [ID!]!, userMatchThreshold: Float, clientRequestToken: String): AssociateFacesResult
+
+  """Disassociate faces from a user in a collection."""
+  disassociateFaces(collectionId: ID!, userId: String!, faceIds: [ID!]!, clientRequestToken: String): DisassociateFacesResult
+
+  """Create a user in a collection."""
+  createUser(collectionId: ID!, userId: String!, clientRequestToken: String): Boolean
+
+  """Delete a user from a collection."""
+  deleteUser(collectionId: ID!, userId: String!, clientRequestToken: String): Boolean
+
+  """Tag a Rekognition resource."""
+  tagResource(resourceArn: String!, tags: AWSJSON!): Boolean
+
+  """Remove tags from a Rekognition resource."""
+  untagResource(resourceArn: String!, tagKeys: [String!]!): Boolean
+}
+
+# ─── Additional Result Types ──────────────────────────────────────────────────
+
+"""A face liveness session result."""
+type FaceLivenessSessionResult {
+  sessionId: ID
+  status: String
+  confidence: Float
+  referenceImage: LivenessOutputImage
+  auditImages: [LivenessOutputImage]
+}
+
+"""An image captured during a face liveness session."""
+type LivenessOutputImage {
+  s3Object: S3Object
+  boundingBox: BoundingBox
+}
+
+"""Result of associating faces with a user."""
+type AssociateFacesResult {
+  associatedFaces: [AssociatedFace]
+  unsuccessfulFaceAssociations: [UnsuccessfulFaceAssociation]
+  userStatus: String
+}
+
+"""A successfully associated face."""
+type AssociatedFace {
+  faceId: ID
+}
+
+"""A face that could not be associated."""
+type UnsuccessfulFaceAssociation {
+  faceId: ID
+  userId: String
+  confidence: Float
+  reasons: [String]
+}
+
+"""Result of disassociating faces from a user."""
+type DisassociateFacesResult {
+  disassociatedFaces: [DisassociatedFace]
+  unsuccessfulFaceDisassociations: [UnsuccessfulFaceDisassociation]
+  userStatus: String
+}
+
+"""A successfully disassociated face."""
+type DisassociatedFace {
+  faceId: ID
+}
+
+"""A face that could not be disassociated."""
+type UnsuccessfulFaceDisassociation {
+  faceId: ID
+  userId: String
+  reasons: [String]
+}

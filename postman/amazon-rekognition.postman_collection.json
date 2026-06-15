@@ -1,0 +1,2585 @@
+{
+  "info": {
+    "_postman_id": "a630b2ff-3b12-4d2b-872a-3b48100519d9",
+    "name": "Amazon Rekognition",
+    "description": "Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:04.000Z",
+    "updatedAt": "2026-06-05T15:05:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a630b2ff-3b12-4d2b-872a-3b48100519d9"
+  },
+  "item": [
+    {
+      "name": "#DetectLabels",
+      "item": [
+        {
+          "name": "Amazon Rekognition Detect Labels",
+          "id": "fd95349f-8147-4713-ab55-1cb9f481bc1e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxLabels\": \"<integer>\",\n  \"MinConfidence\": \"<float>\",\n  \"Features\": [\n    \"GENERAL_LABELS\",\n    \"IMAGE_PROPERTIES\"\n  ],\n  \"Settings\": {}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#DetectLabels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "DetectLabels"
+            },
+            "description": "Detects instances of real-world entities within an image and returns labels with confidence scores."
+          },
+          "response": [
+            {
+              "id": "33b8dace-4499-4e4a-be26-4c2ed160b133",
+              "name": "Labels detected successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxLabels\": \"<integer>\",\n  \"MinConfidence\": \"<float>\",\n  \"Features\": [\n    \"GENERAL_LABELS\",\n    \"IMAGE_PROPERTIES\"\n  ],\n  \"Settings\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectLabels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectLabels"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Labels\": [\n    {\n      \"Name\": \"<string>\",\n      \"Confidence\": \"<float>\",\n      \"Instances\": [\n        {\n          \"BoundingBox\": {\n            \"Width\": \"<float>\",\n            \"Height\": \"<float>\",\n            \"Left\": \"<float>\",\n            \"Top\": \"<float>\"\n          },\n          \"Confidence\": \"<float>\"\n        },\n        {\n          \"BoundingBox\": {\n            \"Width\": \"<float>\",\n            \"Height\": \"<float>\",\n            \"Left\": \"<float>\",\n            \"Top\": \"<float>\"\n          },\n          \"Confidence\": \"<float>\"\n        }\n      ],\n      \"Parents\": [\n        {\n          \"Name\": \"<string>\"\n        },\n        {\n          \"Name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"Name\": \"<string>\",\n      \"Confidence\": \"<float>\",\n      \"Instances\": [\n        {\n          \"BoundingBox\": {\n            \"Width\": \"<float>\",\n            \"Height\": \"<float>\",\n            \"Left\": \"<float>\",\n            \"Top\": \"<float>\"\n          },\n          \"Confidence\": \"<float>\"\n        },\n        {\n          \"BoundingBox\": {\n            \"Width\": \"<float>\",\n            \"Height\": \"<float>\",\n            \"Left\": \"<float>\",\n            \"Top\": \"<float>\"\n          },\n          \"Confidence\": \"<float>\"\n        }\n      ],\n      \"Parents\": [\n        {\n          \"Name\": \"<string>\"\n        },\n        {\n          \"Name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"OrientationCorrection\": \"<string>\",\n  \"LabelModelVersion\": \"<string>\",\n  \"ImageProperties\": {}\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-33b8dace-4499-4e4a-be26-4c2ed160b133"
+            },
+            {
+              "id": "63dc671a-8d45-4ae5-95be-e1c63793c360",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxLabels\": \"<integer>\",\n  \"MinConfidence\": \"<float>\",\n  \"Features\": [\n    \"GENERAL_LABELS\",\n    \"IMAGE_PROPERTIES\"\n  ],\n  \"Settings\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectLabels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectLabels"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-63dc671a-8d45-4ae5-95be-e1c63793c360"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-fd95349f-8147-4713-ab55-1cb9f481bc1e"
+        }
+      ],
+      "id": "ee00667e-c38c-4269-9504-e01c887afad3",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-ee00667e-c38c-4269-9504-e01c887afad3"
+    },
+    {
+      "name": "#DetectFaces",
+      "item": [
+        {
+          "name": "Amazon Rekognition Detect Faces",
+          "id": "6ff0a921-b97b-437a-a80e-feefa23763f4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"Attributes\": [\n    \"DEFAULT\",\n    \"DEFAULT\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#DetectFaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "DetectFaces"
+            },
+            "description": "Detects faces within an image and returns detailed facial attributes for each detected face."
+          },
+          "response": [
+            {
+              "id": "af7c4b9b-7398-4b84-81a9-163eb0f13e44",
+              "name": "Faces detected successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"Attributes\": [\n    \"DEFAULT\",\n    \"DEFAULT\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectFaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectFaces"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"FaceDetails\": [\n    {\n      \"BoundingBox\": {\n        \"Width\": \"<float>\",\n        \"Height\": \"<float>\",\n        \"Left\": \"<float>\",\n        \"Top\": \"<float>\"\n      },\n      \"AgeRange\": {\n        \"Low\": \"<integer>\",\n        \"High\": \"<integer>\"\n      },\n      \"Smile\": {\n        \"Value\": \"<boolean>\",\n        \"Confidence\": \"<float>\"\n      },\n      \"Gender\": {\n        \"Value\": \"Female\",\n        \"Confidence\": \"<float>\"\n      },\n      \"Emotions\": [\n        {\n          \"Type\": \"ANGRY\",\n          \"Confidence\": \"<float>\"\n        },\n        {\n          \"Type\": \"UNKNOWN\",\n          \"Confidence\": \"<float>\"\n        }\n      ],\n      \"Confidence\": \"<float>\"\n    },\n    {\n      \"BoundingBox\": {\n        \"Width\": \"<float>\",\n        \"Height\": \"<float>\",\n        \"Left\": \"<float>\",\n        \"Top\": \"<float>\"\n      },\n      \"AgeRange\": {\n        \"Low\": \"<integer>\",\n        \"High\": \"<integer>\"\n      },\n      \"Smile\": {\n        \"Value\": \"<boolean>\",\n        \"Confidence\": \"<float>\"\n      },\n      \"Gender\": {\n        \"Value\": \"Male\",\n        \"Confidence\": \"<float>\"\n      },\n      \"Emotions\": [\n        {\n          \"Type\": \"ANGRY\",\n          \"Confidence\": \"<float>\"\n        },\n        {\n          \"Type\": \"DISGUSTED\",\n          \"Confidence\": \"<float>\"\n        }\n      ],\n      \"Confidence\": \"<float>\"\n    }\n  ],\n  \"OrientationCorrection\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-af7c4b9b-7398-4b84-81a9-163eb0f13e44"
+            },
+            {
+              "id": "b7a3965d-a326-45d7-831c-b95035f99481",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"Attributes\": [\n    \"DEFAULT\",\n    \"DEFAULT\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectFaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectFaces"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-b7a3965d-a326-45d7-831c-b95035f99481"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-6ff0a921-b97b-437a-a80e-feefa23763f4"
+        }
+      ],
+      "id": "76dc108d-bf6d-4c24-bb96-cdcd92ca10f9",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-76dc108d-bf6d-4c24-bb96-cdcd92ca10f9"
+    },
+    {
+      "name": "#CompareFaces",
+      "item": [
+        {
+          "name": "Amazon Rekognition Compare Faces",
+          "id": "40646d24-3c08-4379-9d94-42d169d76de8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SourceImage\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"TargetImage\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"SimilarityThreshold\": \"<float>\",\n  \"QualityFilter\": \"HIGH\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#CompareFaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "CompareFaces"
+            },
+            "description": "Compares a face in the source input image with each face detected in the target input image."
+          },
+          "response": [
+            {
+              "id": "2dc95b3e-3cef-42bd-88d6-aab9247d9d68",
+              "name": "Face comparison completed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SourceImage\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"TargetImage\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"SimilarityThreshold\": \"<float>\",\n  \"QualityFilter\": \"HIGH\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#CompareFaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "CompareFaces"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"SourceImageFace\": {\n    \"BoundingBox\": {\n      \"Width\": \"<float>\",\n      \"Height\": \"<float>\",\n      \"Left\": \"<float>\",\n      \"Top\": \"<float>\"\n    },\n    \"Confidence\": \"<float>\"\n  },\n  \"FaceMatches\": [\n    {\n      \"Similarity\": \"<float>\",\n      \"Face\": {\n        \"BoundingBox\": {\n          \"Width\": \"<float>\",\n          \"Height\": \"<float>\",\n          \"Left\": \"<float>\",\n          \"Top\": \"<float>\"\n        },\n        \"Confidence\": \"<float>\"\n      }\n    },\n    {\n      \"Similarity\": \"<float>\",\n      \"Face\": {\n        \"BoundingBox\": {\n          \"Width\": \"<float>\",\n          \"Height\": \"<float>\",\n          \"Left\": \"<float>\",\n          \"Top\": \"<float>\"\n        },\n        \"Confidence\": \"<float>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-2dc95b3e-3cef-42bd-88d6-aab9247d9d68"
+            },
+            {
+              "id": "4a34f82b-9db9-4ddd-8390-01ee3b13b5f9",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SourceImage\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"TargetImage\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"SimilarityThreshold\": \"<float>\",\n  \"QualityFilter\": \"HIGH\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#CompareFaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "CompareFaces"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-4a34f82b-9db9-4ddd-8390-01ee3b13b5f9"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-40646d24-3c08-4379-9d94-42d169d76de8"
+        }
+      ],
+      "id": "ef6e06c5-5bce-45fb-9deb-156a71f1ab5f",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-ef6e06c5-5bce-45fb-9deb-156a71f1ab5f"
+    },
+    {
+      "name": "#DetectText",
+      "item": [
+        {
+          "name": "Amazon Rekognition Detect Text",
+          "id": "d3c63c48-8fd1-43bb-8a92-30b056cf239e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#DetectText",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "DetectText"
+            },
+            "description": "Detects text in the input image and converts it into machine-readable text."
+          },
+          "response": [
+            {
+              "id": "13d3fe53-c01c-46c8-b3e8-dc1528d81c48",
+              "name": "Text detected successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectText",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectText"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"TextDetections\": [\n    {\n      \"DetectedText\": \"<string>\",\n      \"Type\": \"WORD\",\n      \"Id\": \"<integer>\",\n      \"ParentId\": \"<integer>\",\n      \"Confidence\": \"<float>\",\n      \"Geometry\": {\n        \"BoundingBox\": {\n          \"Width\": \"<float>\",\n          \"Height\": \"<float>\",\n          \"Left\": \"<float>\",\n          \"Top\": \"<float>\"\n        }\n      }\n    },\n    {\n      \"DetectedText\": \"<string>\",\n      \"Type\": \"WORD\",\n      \"Id\": \"<integer>\",\n      \"ParentId\": \"<integer>\",\n      \"Confidence\": \"<float>\",\n      \"Geometry\": {\n        \"BoundingBox\": {\n          \"Width\": \"<float>\",\n          \"Height\": \"<float>\",\n          \"Left\": \"<float>\",\n          \"Top\": \"<float>\"\n        }\n      }\n    }\n  ],\n  \"TextModelVersion\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-13d3fe53-c01c-46c8-b3e8-dc1528d81c48"
+            },
+            {
+              "id": "6ff7214d-0483-4a05-a293-2824174d7ef5",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectText",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectText"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-6ff7214d-0483-4a05-a293-2824174d7ef5"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-d3c63c48-8fd1-43bb-8a92-30b056cf239e"
+        }
+      ],
+      "id": "9ba7e9e0-365c-4957-835f-47a1c1ee447f",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-9ba7e9e0-365c-4957-835f-47a1c1ee447f"
+    },
+    {
+      "name": "#DetectModerationLabels",
+      "item": [
+        {
+          "name": "Amazon Rekognition Detect Moderation Labels",
+          "id": "c627c38b-1c46-41e2-8312-6f722194412b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MinConfidence\": \"<float>\",\n  \"HumanLoopConfig\": {},\n  \"ProjectVersion\": \"<string>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#DetectModerationLabels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "DetectModerationLabels"
+            },
+            "description": "Detects unsafe content such as explicit adult content or violent content in an image."
+          },
+          "response": [
+            {
+              "id": "db48e015-b952-4d68-9d40-ce9fbcabf069",
+              "name": "Moderation labels detected successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MinConfidence\": \"<float>\",\n  \"HumanLoopConfig\": {},\n  \"ProjectVersion\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectModerationLabels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectModerationLabels"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ModerationLabels\": [\n    {\n      \"Confidence\": \"<float>\",\n      \"Name\": \"<string>\",\n      \"ParentName\": \"<string>\"\n    },\n    {\n      \"Confidence\": \"<float>\",\n      \"Name\": \"<string>\",\n      \"ParentName\": \"<string>\"\n    }\n  ],\n  \"ModerationModelVersion\": \"<string>\",\n  \"HumanLoopActivationOutput\": {},\n  \"ProjectVersion\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-db48e015-b952-4d68-9d40-ce9fbcabf069"
+            },
+            {
+              "id": "ec253e0f-54f2-4249-b4f3-3898d10c4bfb",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MinConfidence\": \"<float>\",\n  \"HumanLoopConfig\": {},\n  \"ProjectVersion\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectModerationLabels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectModerationLabels"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-ec253e0f-54f2-4249-b4f3-3898d10c4bfb"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-c627c38b-1c46-41e2-8312-6f722194412b"
+        }
+      ],
+      "id": "8d0d42bd-41a9-49a5-a70f-d5d1d391438e",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-8d0d42bd-41a9-49a5-a70f-d5d1d391438e"
+    },
+    {
+      "name": "#RecognizeCelebrities",
+      "item": [
+        {
+          "name": "Amazon Rekognition Recognize Celebrities",
+          "id": "68665fe6-53d4-4618-aabc-bdf347fb9838",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#RecognizeCelebrities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "RecognizeCelebrities"
+            },
+            "description": "Returns an array of celebrities recognized in the input image."
+          },
+          "response": [
+            {
+              "id": "e186e6c0-64e1-4244-a1ca-6da7f66c67d9",
+              "name": "Celebrities recognized successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#RecognizeCelebrities",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "RecognizeCelebrities"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"CelebrityFaces\": [\n    {\n      \"Urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Name\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"MatchConfidence\": \"<float>\",\n      \"KnownGender\": {}\n    },\n    {\n      \"Urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Name\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"MatchConfidence\": \"<float>\",\n      \"KnownGender\": {}\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-e186e6c0-64e1-4244-a1ca-6da7f66c67d9"
+            },
+            {
+              "id": "e313c210-6803-405e-bcaf-c605bac10a35",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#RecognizeCelebrities",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "RecognizeCelebrities"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-e313c210-6803-405e-bcaf-c605bac10a35"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-68665fe6-53d4-4618-aabc-bdf347fb9838"
+        }
+      ],
+      "id": "06810a3e-398e-4163-8335-402030f77634",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-06810a3e-398e-4163-8335-402030f77634"
+    },
+    {
+      "name": "#CreateCollection",
+      "item": [
+        {
+          "name": "Amazon Rekognition Create Collection",
+          "id": "b4668720-aec8-49a2-87c0-54bf95ad9823",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Tags\": {\n    \"labore94\": \"<string>\",\n    \"ex9e\": \"<string>\",\n    \"non4\": \"<string>\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#CreateCollection",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "CreateCollection"
+            },
+            "description": "Creates a collection in an AWS Region for storing and searching face data."
+          },
+          "response": [
+            {
+              "id": "d44e7bbd-dc3b-4f3a-881c-6bba8696be80",
+              "name": "Collection created successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Tags\": {\n    \"labore94\": \"<string>\",\n    \"ex9e\": \"<string>\",\n    \"non4\": \"<string>\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#CreateCollection",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "CreateCollection"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"StatusCode\": \"<integer>\",\n  \"CollectionArn\": \"<string>\",\n  \"FaceModelVersion\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-d44e7bbd-dc3b-4f3a-881c-6bba8696be80"
+            },
+            {
+              "id": "64fa24a2-d63e-4aa2-9da4-241b5cf2b358",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Tags\": {\n    \"labore94\": \"<string>\",\n    \"ex9e\": \"<string>\",\n    \"non4\": \"<string>\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#CreateCollection",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "CreateCollection"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-64fa24a2-d63e-4aa2-9da4-241b5cf2b358"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-b4668720-aec8-49a2-87c0-54bf95ad9823"
+        }
+      ],
+      "id": "98195f0c-bdfb-432c-8d53-34bb302b8016",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-98195f0c-bdfb-432c-8d53-34bb302b8016"
+    },
+    {
+      "name": "#ListCollections",
+      "item": [
+        {
+          "name": "Amazon Rekognition List Collections",
+          "id": "1577f308-4fcf-4f9a-977c-8061d7caab3d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#ListCollections",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "ListCollections"
+            },
+            "description": "Returns list of collection IDs in your AWS account."
+          },
+          "response": [
+            {
+              "id": "2a247100-cf53-4030-9c54-494217db5210",
+              "name": "Collections listed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#ListCollections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ListCollections"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"CollectionIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"NextToken\": \"<string>\",\n  \"FaceModelVersions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-2a247100-cf53-4030-9c54-494217db5210"
+            },
+            {
+              "id": "bcf73c3c-b71f-444d-93dc-7c6e44512aeb",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#ListCollections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ListCollections"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-bcf73c3c-b71f-444d-93dc-7c6e44512aeb"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-1577f308-4fcf-4f9a-977c-8061d7caab3d"
+        }
+      ],
+      "id": "fe3a70f2-8a20-452c-a56e-ae2a02825bc1",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-fe3a70f2-8a20-452c-a56e-ae2a02825bc1"
+    },
+    {
+      "name": "#IndexFaces",
+      "item": [
+        {
+          "name": "Amazon Rekognition Index Faces",
+          "id": "6a4ebab7-2d79-4ef2-8c6b-cfe12e9a1ebe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"ExternalImageId\": \"<string>\",\n  \"DetectionAttributes\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"MaxFaces\": \"<integer>\",\n  \"QualityFilter\": \"NONE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#IndexFaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "IndexFaces"
+            },
+            "description": "Detects faces in the input image and adds them to the specified collection."
+          },
+          "response": [
+            {
+              "id": "f1114d6f-5f41-4d53-940e-691a96e3c17b",
+              "name": "Faces indexed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"ExternalImageId\": \"<string>\",\n  \"DetectionAttributes\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"MaxFaces\": \"<integer>\",\n  \"QualityFilter\": \"NONE\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#IndexFaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "IndexFaces"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"OrientationCorrection\": \"<string>\",\n  \"FaceModelVersion\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-f1114d6f-5f41-4d53-940e-691a96e3c17b"
+            },
+            {
+              "id": "2863b418-665e-497b-bc14-defdc6555ad9",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"ExternalImageId\": \"<string>\",\n  \"DetectionAttributes\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"MaxFaces\": \"<integer>\",\n  \"QualityFilter\": \"NONE\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#IndexFaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "IndexFaces"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-2863b418-665e-497b-bc14-defdc6555ad9"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-6a4ebab7-2d79-4ef2-8c6b-cfe12e9a1ebe"
+        }
+      ],
+      "id": "fae721db-45b2-4950-9b6b-547041695bc4",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-fae721db-45b2-4950-9b6b-547041695bc4"
+    },
+    {
+      "name": "#SearchFacesByImage",
+      "item": [
+        {
+          "name": "Amazon Rekognition Search Faces by Image",
+          "id": "87831488-05ff-4bf2-b6dc-092a741bde3a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxFaces\": \"<integer>\",\n  \"FaceMatchThreshold\": \"<float>\",\n  \"QualityFilter\": \"HIGH\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#SearchFacesByImage",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "SearchFacesByImage"
+            },
+            "description": "For a given input image, searches the specified collection for matching faces."
+          },
+          "response": [
+            {
+              "id": "a2e9193a-5df7-4138-a14e-12c52154cf70",
+              "name": "Face search completed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxFaces\": \"<integer>\",\n  \"FaceMatchThreshold\": \"<float>\",\n  \"QualityFilter\": \"HIGH\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#SearchFacesByImage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "SearchFacesByImage"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"SearchedFaceBoundingBox\": {\n    \"Width\": \"<float>\",\n    \"Height\": \"<float>\",\n    \"Left\": \"<float>\",\n    \"Top\": \"<float>\"\n  },\n  \"SearchedFaceConfidence\": \"<float>\",\n  \"FaceModelVersion\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-a2e9193a-5df7-4138-a14e-12c52154cf70"
+            },
+            {
+              "id": "6a842f2a-94de-4d23-b86f-b68968968e13",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CollectionId\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxFaces\": \"<integer>\",\n  \"FaceMatchThreshold\": \"<float>\",\n  \"QualityFilter\": \"HIGH\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#SearchFacesByImage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "SearchFacesByImage"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-6a842f2a-94de-4d23-b86f-b68968968e13"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-87831488-05ff-4bf2-b6dc-092a741bde3a"
+        }
+      ],
+      "id": "ca08daed-7770-40ad-bc47-d9e9f999786b",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-ca08daed-7770-40ad-bc47-d9e9f999786b"
+    },
+    {
+      "name": "#StartLabelDetection",
+      "item": [
+        {
+          "name": "Amazon Rekognition Start Label Detection",
+          "id": "432297b0-bd13-45d3-9a2b-64ae1a0d9e79",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Video\": {\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"ClientRequestToken\": \"<string>\",\n  \"MinConfidence\": \"<float>\",\n  \"NotificationChannel\": {\n    \"SNSTopicArn\": \"<string>\",\n    \"RoleArn\": \"<string>\"\n  },\n  \"JobTag\": \"<string>\",\n  \"Features\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Settings\": {}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#StartLabelDetection",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "StartLabelDetection"
+            },
+            "description": "Starts asynchronous detection of labels in a stored video."
+          },
+          "response": [
+            {
+              "id": "8d3d6328-4119-477c-86fb-bb9d7080bee9",
+              "name": "Label detection job started successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Video\": {\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"ClientRequestToken\": \"<string>\",\n  \"MinConfidence\": \"<float>\",\n  \"NotificationChannel\": {\n    \"SNSTopicArn\": \"<string>\",\n    \"RoleArn\": \"<string>\"\n  },\n  \"JobTag\": \"<string>\",\n  \"Features\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Settings\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#StartLabelDetection",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "StartLabelDetection"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"JobId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-8d3d6328-4119-477c-86fb-bb9d7080bee9"
+            },
+            {
+              "id": "ef34bcac-503f-4e4c-a5e6-102dea44ec2f",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Video\": {\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"ClientRequestToken\": \"<string>\",\n  \"MinConfidence\": \"<float>\",\n  \"NotificationChannel\": {\n    \"SNSTopicArn\": \"<string>\",\n    \"RoleArn\": \"<string>\"\n  },\n  \"JobTag\": \"<string>\",\n  \"Features\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Settings\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#StartLabelDetection",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "StartLabelDetection"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-ef34bcac-503f-4e4c-a5e6-102dea44ec2f"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-432297b0-bd13-45d3-9a2b-64ae1a0d9e79"
+        }
+      ],
+      "id": "f6ad4b45-54e9-4dde-bab5-37eec8e3b7dc",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-f6ad4b45-54e9-4dde-bab5-37eec8e3b7dc"
+    },
+    {
+      "name": "#GetLabelDetection",
+      "item": [
+        {
+          "name": "Amazon Rekognition Get Label Detection",
+          "id": "9bfe4567-6286-4646-81a2-26355447729f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"JobId\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\",\n  \"SortBy\": \"NAME\",\n  \"AggregateBy\": \"SEGMENTS\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#GetLabelDetection",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "GetLabelDetection"
+            },
+            "description": "Gets the label detection results of a Rekognition Video analysis started by StartLabelDetection."
+          },
+          "response": [
+            {
+              "id": "fdd4c84c-2eae-49a2-84ea-09810cfd9cd4",
+              "name": "Label detection results retrieved successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"JobId\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\",\n  \"SortBy\": \"NAME\",\n  \"AggregateBy\": \"SEGMENTS\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#GetLabelDetection",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "GetLabelDetection"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"JobStatus\": \"IN_PROGRESS\",\n  \"StatusMessage\": \"<string>\",\n  \"VideoMetadata\": {},\n  \"NextToken\": \"<string>\",\n  \"Labels\": [\n    {\n      \"Timestamp\": \"<integer>\",\n      \"Label\": {\n        \"Name\": \"<string>\",\n        \"Confidence\": \"<float>\",\n        \"Instances\": [\n          {\n            \"BoundingBox\": {\n              \"Width\": \"<float>\",\n              \"Height\": \"<float>\",\n              \"Left\": \"<float>\",\n              \"Top\": \"<float>\"\n            },\n            \"Confidence\": \"<float>\"\n          },\n          {\n            \"BoundingBox\": {\n              \"Width\": \"<float>\",\n              \"Height\": \"<float>\",\n              \"Left\": \"<float>\",\n              \"Top\": \"<float>\"\n            },\n            \"Confidence\": \"<float>\"\n          }\n        ],\n        \"Parents\": [\n          {\n            \"Name\": \"<string>\"\n          },\n          {\n            \"Name\": \"<string>\"\n          }\n        ]\n      }\n    },\n    {\n      \"Timestamp\": \"<integer>\",\n      \"Label\": {\n        \"Name\": \"<string>\",\n        \"Confidence\": \"<float>\",\n        \"Instances\": [\n          {\n            \"BoundingBox\": {\n              \"Width\": \"<float>\",\n              \"Height\": \"<float>\",\n              \"Left\": \"<float>\",\n              \"Top\": \"<float>\"\n            },\n            \"Confidence\": \"<float>\"\n          },\n          {\n            \"BoundingBox\": {\n              \"Width\": \"<float>\",\n              \"Height\": \"<float>\",\n              \"Left\": \"<float>\",\n              \"Top\": \"<float>\"\n            },\n            \"Confidence\": \"<float>\"\n          }\n        ],\n        \"Parents\": [\n          {\n            \"Name\": \"<string>\"\n          },\n          {\n            \"Name\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ],\n  \"LabelModelVersion\": \"<string>\",\n  \"JobId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-fdd4c84c-2eae-49a2-84ea-09810cfd9cd4"
+            },
+            {
+              "id": "385250f5-dd9a-471b-8790-76942b4eeb0b",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"JobId\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\",\n  \"SortBy\": \"NAME\",\n  \"AggregateBy\": \"SEGMENTS\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#GetLabelDetection",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "GetLabelDetection"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-385250f5-dd9a-471b-8790-76942b4eeb0b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-9bfe4567-6286-4646-81a2-26355447729f"
+        }
+      ],
+      "id": "53dff6a6-5ee6-4989-bed9-8ce873637ad9",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-53dff6a6-5ee6-4989-bed9-8ce873637ad9"
+    },
+    {
+      "name": "#CreateFaceLivenessSession",
+      "item": [
+        {
+          "name": "Amazon Rekognition Create Face Liveness Session",
+          "id": "53e0063d-4cdc-4f12-97cf-47f8d0bd02ea",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"KmsKeyId\": \"<string>\",\n  \"Settings\": {},\n  \"ClientRequestToken\": \"<string>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#CreateFaceLivenessSession",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "CreateFaceLivenessSession"
+            },
+            "description": "Initiates a Face Liveness session and returns a SessionId for streaming."
+          },
+          "response": [
+            {
+              "id": "83a7861a-828c-49fe-b495-dd46be1d150d",
+              "name": "Face liveness session created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"KmsKeyId\": \"<string>\",\n  \"Settings\": {},\n  \"ClientRequestToken\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#CreateFaceLivenessSession",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "CreateFaceLivenessSession"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"SessionId\": \"<uuid>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-83a7861a-828c-49fe-b495-dd46be1d150d"
+            },
+            {
+              "id": "c81f02ba-2e7a-4b35-876d-ff3bd1402e74",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"KmsKeyId\": \"<string>\",\n  \"Settings\": {},\n  \"ClientRequestToken\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#CreateFaceLivenessSession",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "CreateFaceLivenessSession"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-c81f02ba-2e7a-4b35-876d-ff3bd1402e74"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-53e0063d-4cdc-4f12-97cf-47f8d0bd02ea"
+        }
+      ],
+      "id": "6f7bb6da-a7fe-43f3-b974-7f11fa07c449",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-6f7bb6da-a7fe-43f3-b974-7f11fa07c449"
+    },
+    {
+      "name": "#GetFaceLivenessSessionResults",
+      "item": [
+        {
+          "name": "Amazon Rekognition Get Face Liveness Session Results",
+          "id": "1b0221a8-6720-4ce0-be86-c15fd3443ba1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SessionId\": \"<uuid>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#GetFaceLivenessSessionResults",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "GetFaceLivenessSessionResults"
+            },
+            "description": "Retrieves the results of a specific Face Liveness session."
+          },
+          "response": [
+            {
+              "id": "71c24b27-52d9-4e19-9ae4-8e74fd924db3",
+              "name": "Face liveness session results retrieved.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SessionId\": \"<uuid>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#GetFaceLivenessSessionResults",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "GetFaceLivenessSessionResults"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"SessionId\": \"<uuid>\",\n  \"Status\": \"CREATED\",\n  \"Confidence\": \"<float>\",\n  \"ReferenceImage\": {}\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-71c24b27-52d9-4e19-9ae4-8e74fd924db3"
+            },
+            {
+              "id": "6b7fa385-7771-41ec-9d8b-596ce95e1918",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SessionId\": \"<uuid>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#GetFaceLivenessSessionResults",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "GetFaceLivenessSessionResults"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-6b7fa385-7771-41ec-9d8b-596ce95e1918"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-1b0221a8-6720-4ce0-be86-c15fd3443ba1"
+        }
+      ],
+      "id": "f96a98e5-90c1-468d-9d18-095f23025d82",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-f96a98e5-90c1-468d-9d18-095f23025d82"
+    },
+    {
+      "name": "#DetectCustomLabels",
+      "item": [
+        {
+          "name": "Amazon Rekognition Detect Custom Labels",
+          "id": "6952b5a6-03ad-48aa-a7b9-d3bba437a35a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.1"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ProjectVersionArn\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxResults\": \"<integer>\",\n  \"MinConfidence\": \"<float>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#DetectCustomLabels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "DetectCustomLabels"
+            },
+            "description": "Detects custom labels in a supplied image using an Amazon Rekognition Custom Labels model."
+          },
+          "response": [
+            {
+              "id": "86bab7d3-6082-48d4-9c52-ca46b6ac7b47",
+              "name": "Custom labels detected.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ProjectVersionArn\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxResults\": \"<integer>\",\n  \"MinConfidence\": \"<float>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectCustomLabels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectCustomLabels"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"CustomLabels\": [\n    {\n      \"Name\": \"<string>\",\n      \"Confidence\": \"<float>\",\n      \"Geometry\": {}\n    },\n    {\n      \"Name\": \"<string>\",\n      \"Confidence\": \"<float>\",\n      \"Geometry\": {}\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-86bab7d3-6082-48d4-9c52-ca46b6ac7b47"
+            },
+            {
+              "id": "51fabea5-a99c-4047-96b0-941690b88b60",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ProjectVersionArn\": \"<string>\",\n  \"Image\": {\n    \"Bytes\": \"<string>\",\n    \"S3Object\": {\n      \"Bucket\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Version\": \"<string>\"\n    }\n  },\n  \"MaxResults\": \"<integer>\",\n  \"MinConfidence\": \"<float>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#DetectCustomLabels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DetectCustomLabels"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.1"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-51fabea5-a99c-4047-96b0-941690b88b60"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-6952b5a6-03ad-48aa-a7b9-d3bba437a35a"
+        }
+      ],
+      "id": "d54b41f5-00ed-498e-9333-f39071cac8f3",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-d54b41f5-00ed-498e-9333-f39071cac8f3"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://rekognition.amazonaws.com"
+    }
+  ]
+}

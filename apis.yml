@@ -44,53 +44,39 @@ apis:
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amazon-rekognition/overview
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/amazon-rekognition-celebrity-scene-context-workflow.yml
-    name: Amazon Rekognition Celebrity Scene Context
-    summary: Recognize celebrities in an image and then label the same image for scene
-      context.
-  - url: arazzo/amazon-rekognition-custom-labels-and-moderate-workflow.yml
-    name: Amazon Rekognition Custom Labels and Moderate
-    summary: Run a Custom Labels model on an image and then screen the same image
-      for unsafe content.
-  - url: arazzo/amazon-rekognition-detect-then-compare-faces-workflow.yml
-    name: Amazon Rekognition Detect then Compare Faces
-    summary: Confirm a face exists in the source image, then compare it against every
-      face in a target image.
-  - url: arazzo/amazon-rekognition-enroll-and-search-face-workflow.yml
-    name: Amazon Rekognition Enroll and Search a Face
-    summary: Create a face collection, index a face into it, then search the collection
-      by a query image.
-  - url: arazzo/amazon-rekognition-face-liveness-session-workflow.yml
-    name: Amazon Rekognition Face Liveness Session
-    summary: Create a Face Liveness session, then poll for its results until a terminal
-      status is reached.
-  - url: arazzo/amazon-rekognition-label-and-moderate-image-workflow.yml
-    name: Amazon Rekognition Label and Moderate an Image
-    summary: Detect general labels in an image and then screen the same image for
-      unsafe content.
-  - url: arazzo/amazon-rekognition-quality-gated-enrollment-workflow.yml
-    name: Amazon Rekognition Quality Gated Enrollment
-    summary: Detect a face and check its quality, then index it into a collection
-      only when a face is present.
-  - url: arazzo/amazon-rekognition-reuse-or-create-collection-enroll-workflow.yml
-    name: Amazon Rekognition Reuse or Create Collection then Enroll
-    summary: List collections, branch to create the collection only if missing, then
-      index a face into it.
-  - url: arazzo/amazon-rekognition-text-and-moderation-screen-workflow.yml
-    name: Amazon Rekognition Text and Moderation Screen
-    summary: Extract text from an image and then screen the same image for unsafe
-      content.
-  - url: arazzo/amazon-rekognition-verify-face-against-collection-workflow.yml
-    name: Amazon Rekognition Verify a Face Against a Collection
-    summary: Detect a face in an image to confirm a single subject, then search a
-      collection to verify identity.
-  - url: arazzo/amazon-rekognition-video-label-detection-job-workflow.yml
-    name: Amazon Rekognition Video Label Detection Job
-    summary: Start an asynchronous video label detection job, poll until it succeeds,
-      then read the results.
+- type: Arazzo
+  url: arazzo/amazon-rekognition-celebrity-scene-context-workflow.yml
+  name: Amazon Rekognition Celebrity Scene Context
+- type: Arazzo
+  url: arazzo/amazon-rekognition-custom-labels-and-moderate-workflow.yml
+  name: Amazon Rekognition Custom Labels and Moderate
+- type: Arazzo
+  url: arazzo/amazon-rekognition-detect-then-compare-faces-workflow.yml
+  name: Amazon Rekognition Detect then Compare Faces
+- type: Arazzo
+  url: arazzo/amazon-rekognition-enroll-and-search-face-workflow.yml
+  name: Amazon Rekognition Enroll and Search a Face
+- type: Arazzo
+  url: arazzo/amazon-rekognition-face-liveness-session-workflow.yml
+  name: Amazon Rekognition Face Liveness Session
+- type: Arazzo
+  url: arazzo/amazon-rekognition-label-and-moderate-image-workflow.yml
+  name: Amazon Rekognition Label and Moderate an Image
+- type: Arazzo
+  url: arazzo/amazon-rekognition-quality-gated-enrollment-workflow.yml
+  name: Amazon Rekognition Quality Gated Enrollment
+- type: Arazzo
+  url: arazzo/amazon-rekognition-reuse-or-create-collection-enroll-workflow.yml
+  name: Amazon Rekognition Reuse or Create Collection then Enroll
+- type: Arazzo
+  url: arazzo/amazon-rekognition-text-and-moderation-screen-workflow.yml
+  name: Amazon Rekognition Text and Moderation Screen
+- type: Arazzo
+  url: arazzo/amazon-rekognition-verify-face-against-collection-workflow.yml
+  name: Amazon Rekognition Verify a Face Against a Collection
+- type: Arazzo
+  url: arazzo/amazon-rekognition-video-label-detection-job-workflow.yml
+  name: Amazon Rekognition Video Label Detection Job
 - type: Portal
   url: https://aws.amazon.com/
 - type: DeveloperPortal
@@ -99,7 +85,7 @@ common:
   url: https://docs.aws.amazon.com/rekognition/
 - type: Console
   url: https://console.aws.amazon.com/rekognition/
-- type: SignUp
+- type: Signup
   url: https://portal.aws.amazon.com/billing/signup
 - type: Pricing
   url: https://aws.amazon.com/rekognition/pricing/
@@ -378,77 +364,77 @@ common:
   url: json-structure/amazon-rekognition-start-video-job-response-structure.json
 - type: JSONStructure
   url: json-structure/amazon-rekognition-video-structure.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-bounding-box-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-compare-faces-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-compare-faces-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-create-collection-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-create-collection-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-create-face-liveness-session-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-create-face-liveness-session-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-custom-labels-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-custom-labels-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-faces-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-faces-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-labels-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-labels-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-moderation-labels-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-moderation-labels-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detect-text-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-detectlabelsresponse-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-face-detail-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-get-face-liveness-session-results-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-get-face-liveness-session-results-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-get-label-detection-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-get-video-job-result-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-image-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-image-only-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-index-faces-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-index-faces-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-label-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-list-collections-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-notification-channel-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-recognize-celebrities-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-s3-object-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-search-faces-by-image-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-search-faces-by-image-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-start-label-detection-request-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-start-video-job-response-example.json
-- type: Example
+- type: Examples
   url: examples/amazon-rekognition-video-example.json
 - type: Integrations
   url: https://aws.amazon.com/partners/

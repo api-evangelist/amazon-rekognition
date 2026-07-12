@@ -42,6 +42,14 @@ apis:
   - url: graphql/amazon-rekognition-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/amazon-rekognition-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/amazon-rekognition-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/amazon-rekognition-domain-security.yml
+- type: Authentication
+  url: authentication/amazon-rekognition-authentication.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amazon-rekognition/overview
 - type: Arazzo

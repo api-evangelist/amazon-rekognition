@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/amazon-rekognition-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: aws_signature
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256
+    signature.
+  sources:
+  - openapi/amazon-rekognition-openapi.yml

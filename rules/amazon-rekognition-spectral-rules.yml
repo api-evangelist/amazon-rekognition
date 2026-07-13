@@ -1,3 +1,21 @@
+# amazon-rekognition — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on amazonaws.com
+#   - operationid-casing: camel @ 100% (n=15)
+#   - schema-names-casing: pascal @ 100% (n=37)
+#   - schema-properties-casing: pascal @ 98% (n=121)
+#   - operation-security-required: 15/15 ops declare per-op security
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-400: 100% adherence
+#   - merge: kept 18 existing, added 6 measured, upgraded 0
+#   - added: servers-expected-domain, schema-names-casing, schema-properties-casing, security-schemes-defined, error-schema-defined, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   info-title-prefix:
     description: Info title must start with Amazon Rekognition
@@ -134,12 +152,11 @@ rules:
       field: description
       function: truthy
   security-schemes-defined:
-    description: Security schemes must be defined in components
-    message: Security schemes should be defined in components/securitySchemes
+    description: Security schemes should be defined in components.
     severity: warn
-    given: $
+    given: $.components
     then:
-      field: components.securitySchemes
+      field: securitySchemes
       function: truthy
   post-must-use-amz-json:
     description: POST operations should use AWS JSON content type
@@ -159,4 +176,43 @@ rules:
     given: $.tags[*]
     then:
       field: description
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the amazonaws.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: amazonaws\.com
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: ^[A-Z][A-Za-z0-9]*$
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy

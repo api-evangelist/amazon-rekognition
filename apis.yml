@@ -42,6 +42,8 @@ apis:
   - url: graphql/amazon-rekognition-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/amazon-rekognition-agentic-access.yml
 - type: TrustCenter
   url: security/amazon-rekognition-trust-center.yml
 - type: VulnerabilityDisclosure

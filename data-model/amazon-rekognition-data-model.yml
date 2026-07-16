@@ -1,0 +1,48 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from the schema $ref links and id/reference fields in
+  openapi/amazon-rekognition-openapi.yml (S3Object, Image, Collection, Face,
+  Label, FaceDetail, video jobs, liveness sessions), cross-checked against the
+  Amazon Rekognition API reference (docs.aws.amazon.com/rekognition). Captures the
+  core entity-relationship graph behind image/video analysis and face search.
+docs: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field name;
+  direction is from the entity that owns the reference.
+entities:
+  - {name: Image, id_prefix: '', domain: input, description: Input image supplied as raw Bytes or an S3Object.}
+  - {name: Video, id_prefix: '', domain: input, description: Input video supplied as an S3Object for asynchronous analysis.}
+  - {name: S3Object, id_prefix: '', domain: input, description: Reference to an image/video stored in Amazon S3 (Bucket, Name, Version).}
+  - {name: Collection, id_prefix: 'collection/', domain: face-search, description: A server-side container of indexed face vectors, identified by CollectionId/CollectionArn.}
+  - {name: Face, id_prefix: '', domain: face-search, description: An indexed face vector stored in a collection (FaceId, ExternalImageId).}
+  - {name: FaceRecord, id_prefix: '', domain: face-search, description: The face plus detail returned when indexing into a collection.}
+  - {name: FaceMatch, id_prefix: '', domain: face-search, description: A matched face with a Similarity score from a search/compare.}
+  - {name: FaceDetail, id_prefix: '', domain: analysis, description: Detected facial attributes (bounding box, age range, emotions, gender, landmarks).}
+  - {name: Label, id_prefix: '', domain: analysis, description: A detected real-world entity with confidence, instances, and parent taxonomy.}
+  - {name: ModerationLabel, id_prefix: '', domain: analysis, description: A detected unsafe-content label with a parent category.}
+  - {name: TextDetection, id_prefix: '', domain: analysis, description: A detected line or word of text with geometry and confidence.}
+  - {name: Celebrity, id_prefix: '', domain: analysis, description: A recognized celebrity with Id, name, urls, and match confidence.}
+  - {name: CustomLabel, id_prefix: '', domain: custom-labels, description: A label produced by a trained Custom Labels model version.}
+  - {name: VideoJob, id_prefix: '', domain: video, description: An asynchronous stored-video analysis job identified by JobId.}
+  - {name: NotificationChannel, id_prefix: '', domain: video, description: An SNS topic + IAM role for video-job completion notifications.}
+  - {name: FaceLivenessSession, id_prefix: '', domain: liveness, description: A Face Liveness session identified by SessionId, returning a Status and Confidence.}
+relationships:
+  - {from: Image, to: S3Object, kind: has_one, via: S3Object}
+  - {from: Video, to: S3Object, kind: has_one, via: S3Object}
+  - {from: Collection, to: Face, kind: has_many, via: CollectionId}
+  - {from: FaceRecord, to: Face, kind: has_one, via: Face}
+  - {from: IndexFaces, to: Collection, kind: belongs_to, via: CollectionId}
+  - {from: SearchFacesByImage, to: Collection, kind: belongs_to, via: CollectionId}
+  - {from: SearchFacesByImage, to: FaceMatch, kind: has_many, via: FaceMatches}
+  - {from: CompareFaces, to: FaceMatch, kind: has_many, via: FaceMatches}
+  - {from: DetectFaces, to: FaceDetail, kind: has_many, via: FaceDetails}
+  - {from: DetectLabels, to: Label, kind: has_many, via: Labels}
+  - {from: DetectModerationLabels, to: ModerationLabel, kind: has_many, via: ModerationLabels}
+  - {from: DetectText, to: TextDetection, kind: has_many, via: TextDetections}
+  - {from: RecognizeCelebrities, to: Celebrity, kind: has_many, via: CelebrityFaces}
+  - {from: DetectCustomLabels, to: CustomLabel, kind: has_many, via: CustomLabels}
+  - {from: VideoJob, to: Video, kind: belongs_to, via: Video}
+  - {from: VideoJob, to: NotificationChannel, kind: has_one, via: NotificationChannel}
+  - {from: VideoJob, to: Label, kind: has_many, via: Labels}
+  - {from: FaceLivenessSession, to: Image, kind: has_one, via: ReferenceImage}

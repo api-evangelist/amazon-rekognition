@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.aws.amazon.com/rekognition/latest/dg/document-history.html
+description: >-
+  Recent entries from the Amazon Rekognition Developer Guide document history.
+  The live document-history page is the source of truth; this captures the recent
+  window. There is no per-request API version to bump — the service API version is
+  fixed at 2016-06-27 and features ship additively (see
+  lifecycle/amazon-rekognition-lifecycle.yml).
+scheme: dated-document-history
+current_api_version: '2016-06-27'
+docs: https://docs.aws.amazon.com/rekognition/latest/dg/document-history.html
+entries:
+  - date: '2026-04-30'
+    breaking: true
+    highlight: >-
+      Amazon Rekognition Streaming Video and Bulk Image Analysis are no longer
+      open to new customers. Existing users within the prior 12 months continue as normal.
+  - date: '2026-03-31'
+    breaking: false
+    highlight: >-
+      Advance notice that Streaming Video and Bulk Image Analysis will close to new
+      customers on April 30, 2026.
+  - date: '2024-02-01'
+    breaking: false
+    highlight: >-
+      Content Moderation enhanced for improved accuracy, new labels, and detection
+      of animated/illustrated content.
+  - date: '2023-10-23'
+    breaking: false
+    highlight: Bulk image analysis via the asynchronous StartMediaAnalysisJob operation with a manifest file.
+  - date: '2023-10-12'
+    breaking: false
+    highlight: Custom content moderation with adapters that extend DetectModerationLabels accuracy.
+  - date: '2023-06-12'
+    breaking: false
+    highlight: Face collections now support user vectors, aggregating multiple face vectors per user for higher accuracy.
+  - date: '2023-05-31'
+    breaking: false
+    highlight: Face detection can now infer gaze direction.
+  - date: '2023-05-05'
+    breaking: false
+    highlight: New FaceOccluded attribute on DetectFaces and IndexFaces indicates partially captured faces.
+  - date: '2023-04-11'
+    breaking: false
+    highlight: Face Liveness detection added to verify physical presence and detect spoof/bypass attacks.

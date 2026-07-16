@@ -1,0 +1,40 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/rekognition/latest/dg/document-history.html,
+  https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html,
+  https://aws.amazon.com/rekognition/faqs/, and the AWS Service Health Dashboard.
+  Amazon Rekognition pins a fixed API version date (2016-06-27) in the service
+  model; it does not version by URI path or a request header.
+versioning:
+  scheme: fixed-service-version
+  current: '2016-06-27'
+  mechanism: >-
+    The AWS JSON protocol targets a fixed service API version (2016-06-27);
+    changes are additive and delivered through the SDKs. Individual deep-learning
+    models are separately versioned and returned in responses (e.g.
+    LabelModelVersion, FaceModelVersion, ModerationModelVersion, TextModelVersion).
+  docs: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+deprecation:
+  policy_url: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
+  sunset_header: false
+  notes: >-
+    AWS announces feature availability changes through the developer-guide
+    document history and dedicated availability-changes pages rather than RFC 8594
+    Sunset/Deprecation HTTP headers.
+  changes:
+    - name: Streaming Video and Bulk Image Analysis
+      status: closed-to-new-customers
+      effective: '2026-04-30'
+      note: >-
+        No longer open to new customers as of April 30, 2026. Existing accounts
+        that used these features within the prior 12 months can continue as normal.
+sla:
+  url: https://aws.amazon.com/rekognition/sla/
+  public_uptime_target: '99.9%'
+  notes: >-
+    AWS publishes a Service Level Agreement for Amazon Rekognition with a monthly
+    uptime commitment and service credits.
+status_page: https://health.aws.amazon.com/health/status
+rate_limits: rate-limits/amazon-rekognition-rate-limits.yml
+deprecated_operations: []

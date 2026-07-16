@@ -1,0 +1,111 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/rekognition/latest/dg/service_code_examples.html and
+  the AWS SDK landing pages. Amazon Rekognition is accessed through the multi-service
+  AWS SDKs (there is no Rekognition-only client library except the generated
+  service module inside each SDK). Package names/urls verified against the public
+  registries at fetch time; registry front-ends may return 403 to automated clients.
+packages:
+  - language: python
+    registry: pypi
+    name: boto3
+    url: https://pypi.org/project/boto3/
+    source: https://github.com/boto/boto3
+    install: pip install boto3
+    official: true
+    note: AWS SDK for Python; Rekognition client via boto3.client('rekognition').
+  - language: javascript
+    registry: npm
+    name: "@aws-sdk/client-rekognition"
+    url: https://www.npmjs.com/package/@aws-sdk/client-rekognition
+    source: https://github.com/aws/aws-sdk-js-v3
+    install: npm install @aws-sdk/client-rekognition
+    official: true
+    note: AWS SDK for JavaScript v3, modular Rekognition client.
+  - language: javascript
+    registry: npm
+    name: aws-sdk
+    url: https://www.npmjs.com/package/aws-sdk
+    source: https://github.com/aws/aws-sdk-js
+    install: npm install aws-sdk
+    official: true
+    note: AWS SDK for JavaScript v2 (maintenance mode); new(AWS.Rekognition).
+  - language: java
+    registry: maven
+    name: software.amazon.awssdk:rekognition
+    url: https://central.sonatype.com/artifact/software.amazon.awssdk/rekognition
+    source: https://github.com/aws/aws-sdk-java-v2
+    install: "implementation 'software.amazon.awssdk:rekognition'"
+    official: true
+    note: AWS SDK for Java 2.x Rekognition module.
+  - language: csharp
+    registry: nuget
+    name: AWSSDK.Rekognition
+    url: https://www.nuget.org/packages/AWSSDK.Rekognition
+    source: https://github.com/aws/aws-sdk-net
+    install: dotnet add package AWSSDK.Rekognition
+    official: true
+    note: AWS SDK for .NET Rekognition assembly.
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/aws/aws-sdk-go-v2/service/rekognition
+    url: https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/rekognition
+    source: https://github.com/aws/aws-sdk-go-v2
+    install: go get github.com/aws/aws-sdk-go-v2/service/rekognition
+    official: true
+    note: AWS SDK for Go v2 Rekognition service package.
+  - language: ruby
+    registry: rubygems
+    name: aws-sdk-rekognition
+    url: https://rubygems.org/gems/aws-sdk-rekognition
+    source: https://github.com/aws/aws-sdk-ruby
+    install: gem install aws-sdk-rekognition
+    official: true
+    note: AWS SDK for Ruby Rekognition gem.
+  - language: php
+    registry: packagist
+    name: aws/aws-sdk-php
+    url: https://packagist.org/packages/aws/aws-sdk-php
+    source: https://github.com/aws/aws-sdk-php
+    install: composer require aws/aws-sdk-php
+    official: true
+    note: AWS SDK for PHP; RekognitionClient.
+  - language: rust
+    registry: crates.io
+    name: aws-sdk-rekognition
+    url: https://crates.io/crates/aws-sdk-rekognition
+    source: https://github.com/awslabs/aws-sdk-rust
+    install: cargo add aws-sdk-rekognition
+    official: true
+    note: AWS SDK for Rust Rekognition crate.
+  - language: javascript
+    registry: npm
+    name: "@aws-amplify/ui-react-liveness"
+    url: https://www.npmjs.com/package/@aws-amplify/ui-react-liveness
+    source: https://github.com/aws-amplify/amplify-ui
+    install: npm install @aws-amplify/ui-react-liveness @aws-amplify/ui-react aws-amplify
+    official: true
+    note: >-
+      Amplify UI FaceLivenessDetector React component for Rekognition Face
+      Liveness. See components/amazon-rekognition-components.yml.
+  - language: python
+    registry: pypi
+    name: awscli
+    url: https://pypi.org/project/awscli/
+    source: https://github.com/aws/aws-cli
+    install: pip install awscli
+    official: true
+    note: >-
+      AWS CLI; `aws rekognition <command>`. Command surface in
+      cli/amazon-rekognition-cli.yml.
+  - language: python
+    registry: pypi
+    name: awslabs.amazon-rekognition-mcp-server
+    url: https://pypi.org/project/awslabs.amazon-rekognition-mcp-server/
+    source: https://github.com/awslabs/mcp
+    install: uvx awslabs.amazon-rekognition-mcp-server@latest
+    official: true
+    note: >-
+      AWS Labs MCP server for Rekognition (ARCHIVED/deprecated; AWS directs users
+      to the AWS API MCP Server). See mcp/amazon-rekognition-mcp.yml.

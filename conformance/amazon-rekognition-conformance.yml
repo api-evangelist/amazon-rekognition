@@ -1,0 +1,50 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/amazon-rekognition-openapi.yml (securitySchemes, error
+  schema, pagination parameters) and AWS compliance documentation
+  (https://aws.amazon.com/compliance/, https://aws.amazon.com/rekognition/faqs/).
+standards:
+  - id: aws-sigv4
+    conforms: true
+    evidence: securityScheme aws_signature — Authorization header with AWS4-HMAC-SHA256 (SigV4).
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 securityScheme; access is authorized via AWS IAM, not OAuth.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration on the API host; no OIDC discovery.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use AWS JSON 1.1 {"__type","Message"}, not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: List operations use MaxResults + NextToken cursor pagination.
+  - id: idempotency
+    conforms: partial
+    evidence: >-
+      ClientRequestToken provides idempotency for asynchronous video jobs and
+      Face Liveness sessions; there is no global idempotency key for synchronous
+      analysis calls.
+  - id: json-api
+    conforms: false
+    evidence: AWS JSON 1.1 RPC-style protocol, not JSON:API.
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: false
+  - id: soc2
+    conforms: true
+    evidence: Amazon Rekognition is in scope of AWS SOC 1/2/3 reports (aws.amazon.com/compliance/).
+  - id: iso-27001
+    conforms: true
+    evidence: Amazon Rekognition is covered by AWS ISO 27001/27017/27018 certifications.
+  - id: hipaa
+    conforms: true
+    evidence: Amazon Rekognition is a HIPAA-eligible service under the AWS BAA.
+  - id: pci-dss
+    conforms: true
+    evidence: Amazon Rekognition is in scope of the AWS PCI DSS Level 1 attestation.
+  - id: fedramp
+    conforms: true
+    evidence: Amazon Rekognition is FedRAMP authorized in AWS GovCloud / US regions per AWS compliance scope.

@@ -1,0 +1,55 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/cli/latest/reference/rekognition/ — the AWS CLI
+  command surface for Amazon Rekognition. The CLI binary is catalogued in
+  packages/amazon-rekognition-packages.yml (awscli); this artifact enumerates its
+  rekognition command group.
+docs: https://docs.aws.amazon.com/cli/latest/reference/rekognition/
+repo: https://github.com/aws/aws-cli
+binary: aws
+command_group: aws rekognition <command>
+install:
+  pip: pip install awscli
+  homebrew: brew install awscli
+  bundled_installer: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+auth:
+  detail: Uses AWS credentials/profile (aws configure); signs requests with SigV4.
+commands:
+  image_analysis:
+    - {name: detect-labels, description: Detect real-world entities (objects, scenes, concepts) in an image.}
+    - {name: detect-faces, description: Detect faces and facial attributes in an image.}
+    - {name: compare-faces, description: Compare a source face against faces in a target image.}
+    - {name: detect-text, description: Detect and extract text from an image.}
+    - {name: detect-moderation-labels, description: Detect unsafe / inappropriate content in an image.}
+    - {name: recognize-celebrities, description: Recognize celebrities in an image.}
+    - {name: detect-protective-equipment, description: Detect PPE (face/hand/head covers) on persons in an image.}
+    - {name: detect-custom-labels, description: Detect custom labels using a trained Custom Labels model version.}
+  collections_faces:
+    - {name: create-collection, description: Create a face collection.}
+    - {name: list-collections, description: List collection IDs in the account.}
+    - {name: delete-collection, description: Delete a face collection.}
+    - {name: describe-collection, description: Describe an existing collection.}
+    - {name: index-faces, description: Detect faces in an image and add them to a collection.}
+    - {name: list-faces, description: List faces in a collection.}
+    - {name: delete-faces, description: Delete faces from a collection.}
+    - {name: search-faces, description: Search a collection for faces matching a face ID.}
+    - {name: search-faces-by-image, description: Search a collection for faces matching a supplied image.}
+  video_async:
+    - {name: start-label-detection, description: Start asynchronous label detection on a stored video.}
+    - {name: get-label-detection, description: Get results of a label-detection video job.}
+    - {name: start-face-detection, description: Start asynchronous face detection on a stored video.}
+    - {name: start-content-moderation, description: Start asynchronous content moderation on a stored video.}
+    - {name: start-segment-detection, description: Start technical-cue / shot segment detection on a stored video.}
+  face_liveness:
+    - {name: create-face-liveness-session, description: Create a Face Liveness session and get a SessionId.}
+    - {name: get-face-liveness-session-results, description: Retrieve the results of a Face Liveness session.}
+  projects_custom_labels:
+    - {name: create-project, description: Create a Custom Labels / Rekognition project.}
+    - {name: create-project-version, description: Train a project version (model).}
+    - {name: start-project-version, description: Start a trained model version for inference.}
+    - {name: stop-project-version, description: Stop a running model version.}
+  stream_processors:
+    - {name: create-stream-processor, description: Create a stream processor for streaming video analysis.}
+    - {name: start-stream-processor, description: Start a stream processor.}
+    - {name: stop-stream-processor, description: Stop a stream processor.}

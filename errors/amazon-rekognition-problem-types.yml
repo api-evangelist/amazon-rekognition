@@ -1,0 +1,85 @@
+generated: '2026-06-20'
+method: searched
+format: aws-json-error
+source: >-
+  Derived from the ErrorResponse schema (__type/message) referenced by the 400
+  responses across openapi/amazon-rekognition-openapi.yml, then enriched from the
+  Amazon Rekognition error reference at
+  https://docs.aws.amazon.com/rekognition/latest/dg/error-handling.html.
+  Amazon Rekognition does NOT use RFC 9457 application/problem+json; errors are
+  returned as an AWS JSON 1.1 body {"__type", "Code", "Message", "Logref"} with the
+  HTTP status code and an x-amzn-RequestId header.
+docs: https://docs.aws.amazon.com/rekognition/latest/dg/error-handling.html
+envelope:
+  media_type: application/x-amz-json-1.1
+  shape: '{ "__type": string, "Code": string, "Message": string, "Logref": string }'
+  request_id_header: x-amzn-RequestId
+problems:
+  - exception: AccessDeniedException
+    status: 400
+    retryable: false
+    meaning: The caller is not authorized to perform the action; use an IAM user/role ARN with the required permission.
+  - exception: GroupFacesInProgressException
+    status: 400
+    retryable: false
+    meaning: There is an existing GroupFaces job for this collection; retry after it finishes.
+  - exception: IdempotentParameterMismatchException
+    status: 400
+    retryable: false
+    meaning: A ClientRequestToken was reused with different input parameters than the previous call.
+  - exception: ImageTooLargeException
+    status: 400
+    retryable: false
+    meaning: The input image size/resolution exceeds the allowed limit.
+  - exception: InvalidImageFormatException
+    status: 400
+    retryable: false
+    meaning: The provided image format is not supported (use .JPEG or .PNG).
+  - exception: InvalidPaginationTokenException
+    status: 400
+    retryable: false
+    meaning: The pagination token (NextToken) is invalid or expired.
+  - exception: InvalidParameterException
+    status: 400
+    retryable: false
+    meaning: An input parameter violated a constraint; validate parameters before retrying.
+  - exception: InvalidS3ObjectException
+    status: 400
+    retryable: false
+    meaning: Rekognition cannot access the specified S3 object; check the key, region, and access permissions.
+  - exception: LimitExceededException
+    status: 400
+    retryable: false
+    meaning: A Rekognition service limit was exceeded (e.g. too many concurrent video jobs or stream processors).
+  - exception: ProvisionedThroughputExceededException
+    status: 400
+    retryable: true
+    meaning: Request rate or S3 download limit exceeded; back off and retry, or request a TPS quota increase.
+  - exception: ResourceAlreadyExistsException
+    status: 400
+    retryable: false
+    meaning: A collection with the specified ID already exists.
+  - exception: ResourceInUseException
+    status: 400
+    retryable: false
+    meaning: The specified resource (e.g. stream processor) is in use; retry when available.
+  - exception: ResourceNotFoundException
+    status: 400
+    retryable: false
+    meaning: The specified resource does not exist.
+  - exception: ThrottlingException
+    status: 400
+    retryable: true
+    meaning: Sudden increase in request rate; slow down and retry with exponential backoff.
+  - exception: VideoTooLargeException
+    status: 400
+    retryable: false
+    meaning: The supplied media file size or duration is too large.
+  - exception: InternalServerError
+    status: 500
+    retryable: true
+    meaning: Amazon Rekognition experienced a service issue; retry with exponential backoff.
+  - exception: ThrottlingException
+    status: 500
+    retryable: true
+    meaning: Service Unavailable — Rekognition is temporarily unable to process the request; retry with backoff.

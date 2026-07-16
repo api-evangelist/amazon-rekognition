@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  Probed the /.well-known/ discovery surface on the API host
+  (rekognition.amazonaws.com) and the corporate/website host (aws.amazon.com).
+  The API host is a SigV4-signed JSON endpoint and does not serve unauthenticated
+  discovery documents. The corporate host publishes an RFC 9116 security.txt.
+hosts:
+  - host: https://rekognition.amazonaws.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 000
+        note: No response to unauthenticated GET (SigV4-only endpoint).
+      - path: /.well-known/openid-configuration
+        status: 000
+      - path: /.well-known/oauth-authorization-server
+        status: 000
+      - path: /.well-known/api-catalog
+        status: 000
+      - path: /.well-known/ai-plugin.json
+        status: 000
+  - host: https://aws.amazon.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: amazon-rekognition-security.txt
+      - path: /.well-known/ai-plugin.json
+        status: 301
+        note: Redirect; no AI plugin manifest served.

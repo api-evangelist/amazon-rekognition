@@ -1,17 +1,33 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-06-20'
+method: searched
 source: openapi/amazon-rekognition-openapi.yml
+docs: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+description: >-
+  Amazon Rekognition authorizes requests with AWS Identity and Access Management
+  (IAM). Every call must be signed with AWS Signature Version 4 (SigV4) using the
+  caller's access key / temporary credentials; the OpenAPI models this as an
+  apiKey scheme on the Authorization header. Fine-grained authorization is
+  controlled by IAM policies (e.g. AmazonRekognitionFullAccess,
+  AmazonRekognitionReadOnlyAccess) and rekognition:* actions.
 summary:
   types:
   - apiKey
   api_key_in:
   - header
+  authorization: AWS IAM (SigV4)
 schemes:
 - name: aws_signature
   type: apiKey
   in: header
   parameter: Authorization
   description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256
-    signature.
+    signature computed from AWS IAM credentials.
   sources:
   - openapi/amazon-rekognition-openapi.yml
+iam:
+  managed_policies:
+    - AmazonRekognitionFullAccess
+    - AmazonRekognitionReadOnlyAccess
+    - AmazonRekognitionCustomLabelsFullAccess
+  action_prefix: "rekognition:"
+  docs: https://docs.aws.amazon.com/rekognition/latest/dg/security-iam-awsmanpol.html

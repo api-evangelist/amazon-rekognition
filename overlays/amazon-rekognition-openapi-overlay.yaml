@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Amazon Rekognition
+  version: 1.0.0
+extends: openapi/amazon-rekognition-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: amazon-rekognition
+      x-apievangelist-provider: Amazon Web Services
+      x-api-protocol: aws-json-1.1
+      x-authentication: AWS Signature Version 4 (IAM)
+      x-artifacts:
+        packages: packages/amazon-rekognition-packages.yml
+        mcp: mcp/amazon-rekognition-mcp.yml
+        authentication: authentication/amazon-rekognition-authentication.yml
+        errors: errors/amazon-rekognition-problem-types.yml
+        conventions: conventions/amazon-rekognition-conventions.yml
+        lifecycle: lifecycle/amazon-rekognition-lifecycle.yml
+        changelog: changelog/amazon-rekognition-changelog.yml
+        data_model: data-model/amazon-rekognition-data-model.yml
+        conformance: conformance/amazon-rekognition-conformance.yml
+        cli: cli/amazon-rekognition-cli.yml
+        components: components/amazon-rekognition-components.yml
+  - target: $.info
+    update:
+      x-lifecycle-notice: >-
+        Amazon Rekognition Streaming Video and Bulk Image Analysis are no longer
+        open to new customers as of April 30, 2026. See
+        lifecycle/amazon-rekognition-lifecycle.yml.
+  - target: $.paths['/#CreateFaceLivenessSession'].post
+    update:
+      x-embedded-component: >-
+        Amplify UI FaceLivenessDetector (@aws-amplify/ui-react-liveness) is the
+        recommended client for the Face Liveness flow. See
+        components/amazon-rekognition-components.yml.

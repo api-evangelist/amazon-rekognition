@@ -1,0 +1,80 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html,
+  https://docs.aws.amazon.com/rekognition/latest/dg/error-handling.html, and
+  derived from openapi/amazon-rekognition-openapi.yml. Cross-cutting request/
+  response semantics that apply across every Amazon Rekognition operation.
+description: >-
+  How the Amazon Rekognition API behaves across operations: protocol, auth,
+  idempotency, pagination, request tracing, versioning, error envelope, and
+  throttling signals.
+base_url: https://rekognition.amazonaws.com
+api_style: >-
+  AWS JSON 1.1 RPC over HTTPS. Every call is an HTTP POST with an
+  X-Amz-Target: RekognitionService.<Action> header and a JSON body; the operation
+  is selected by the target header rather than the URL path.
+content_type: application/x-amz-json-1.1
+authentication:
+  scheme: AWS Signature Version 4 (SigV4) over IAM credentials
+  header: Authorization (AWS4-HMAC-SHA256)
+  docs: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  detail: authentication/amazon-rekognition-authentication.yml
+idempotency:
+  supported: partial
+  mechanism: ClientRequestToken request field
+  applies_to: >-
+    Asynchronous video jobs (StartLabelDetection and other Start* operations) and
+    CreateFaceLivenessSession. Reusing a token with different parameters raises
+    IdempotentParameterMismatchException. Synchronous analysis calls have no
+    global idempotency key.
+pagination:
+  style: cursor
+  request_params:
+    MaxResults: Maximum number of results per page.
+    NextToken: Opaque token returned by the prior page; omit for the first page.
+  response_fields:
+    NextToken: Present when more results are available; pass it on the next call.
+  note: Invalid or expired tokens raise InvalidPaginationTokenException.
+field_expansion:
+  supported: false
+metadata:
+  supported: true
+  mechanism: Tags (key/value) on collections, stream processors, and Custom Labels projects.
+  note: External identifiers can be attached to indexed faces via ExternalImageId.
+request_tracing:
+  request_id_header: x-amzn-RequestId
+  description: Every response carries an x-amzn-RequestId used for AWS Support and CloudTrail correlation.
+  audit_log: AWS CloudTrail records Rekognition API calls.
+versioning:
+  scheme: fixed-service-version
+  current: '2016-06-27'
+  model_versions: >-
+    Deep-learning model versions are returned per response (LabelModelVersion,
+    FaceModelVersion, ModerationModelVersion, TextModelVersion).
+  detail: lifecycle/amazon-rekognition-lifecycle.yml
+  changelog: changelog/amazon-rekognition-changelog.yml
+error_envelope:
+  media_type: application/x-amz-json-1.1
+  rfc9457: false
+  shape: '{ "__type": string, "Code": string, "Message": string, "Logref": string }'
+  detail: errors/amazon-rekognition-problem-types.yml
+  docs: https://docs.aws.amazon.com/rekognition/latest/dg/error-handling.html
+rate_limits:
+  signal_exceptions: [ProvisionedThroughputExceededException, ThrottlingException]
+  guidance: Retry retryable throttling errors with exponential backoff and jitter (built into the AWS SDKs).
+  detail: rate-limits/amazon-rekognition-rate-limits.yml
+async_jobs:
+  pattern: >-
+    Video and bulk operations are asynchronous: a Start* call returns a JobId,
+    completion is signaled via an Amazon SNS NotificationChannel, and results are
+    retrieved with the matching Get* operation.
+other_conventions:
+  - name: Image input
+    detail: Images are supplied as base64 Bytes (up to 5 MB) or as an S3Object {Bucket, Name, Version}.
+  - name: Video input
+    detail: Videos are supplied as an S3Object; results delivered asynchronously.
+  - name: Confidence scores
+    detail: Detection results carry a Confidence value between 0 and 100.
+  - name: Regional endpoints
+    detail: Rekognition is a regional service; use rekognition.<region>.amazonaws.com in practice.

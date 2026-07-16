@@ -1,0 +1,48 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://ui.docs.amplify.aws/react/connected-components/liveness and
+  https://aws.amazon.com/blogs/mobile/detect-real-users-with-aws-amplify-and-face-liveness/.
+  Client-side / embeddable UI components for Amazon Rekognition (distinct from the
+  server-side SDKs in packages/amazon-rekognition-packages.yml).
+description: >-
+  Amplify UI provides a prebuilt FaceLivenessDetector connected component that
+  drives the Rekognition Face Liveness flow (StartFaceLivenessSession streaming +
+  GetFaceLivenessSessionResults) with the camera UI, challenges, and result
+  handling built in.
+components:
+  - family: Face Liveness
+    items:
+      - name: FaceLivenessDetector
+        framework: React
+        package: "@aws-amplify/ui-react-liveness"
+        loader_libs:
+          - "@aws-amplify/ui-react-liveness"
+          - "@aws-amplify/ui-react"
+          - aws-amplify
+        docs: https://ui.docs.amplify.aws/react/connected-components/liveness
+        description: >-
+          React component that renders the Face Liveness challenge UI (Face
+          Movement, or Face Movement and Light), streams to Rekognition, and
+          surfaces the liveness result. By default uses a Cognito Identity Pool to
+          sign requests to Rekognition.
+        challenges:
+          - FaceMovementChallenge
+          - FaceMovementAndLightChallenge
+        binds_operations:
+          - openapi/amazon-rekognition-openapi.yml#createFaceLivenessSession
+          - openapi/amazon-rekognition-openapi.yml#getFaceLivenessSessionResults
+      - name: FaceLivenessDetector (Swift)
+        framework: iOS / Swift
+        package: amplify-ui-swift-liveness
+        loader_libs:
+          - https://github.com/aws-amplify/amplify-ui-swift-liveness
+        docs: https://ui.docs.amplify.aws/swift/connected-components/liveness
+        description: Amplify UI Swift FaceLivenessDetector for native iOS Face Liveness.
+      - name: FaceLivenessDetector (Android)
+        framework: Android / Kotlin
+        package: com.amplifyframework.ui:liveness
+        loader_libs:
+          - https://github.com/aws-amplify/amplify-ui-android-liveness
+        docs: https://ui.docs.amplify.aws/android/connected-components/liveness
+        description: Amplify UI Android FaceLivenessDetector for native Android Face Liveness.

@@ -7,7 +7,7 @@ description: Amazon Rekognition is a cloud-based computer vision service that ma
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.18'
 kind: company
 apis:
@@ -52,6 +52,34 @@ common:
   url: security/amazon-rekognition-domain-security.yml
 - type: Authentication
   url: authentication/amazon-rekognition-authentication.yml
+- type: Packages
+  url: packages/amazon-rekognition-packages.yml
+- type: MCPServer
+  url: mcp/amazon-rekognition-mcp.yml
+- type: WellKnown
+  url: well-known/amazon-rekognition-well-known.yml
+- type: SecurityTxt
+  url: well-known/amazon-rekognition-security.txt
+- type: LLMsTxt
+  url: llms/amazon-rekognition-llms.txt
+- type: Overlay
+  url: overlays/amazon-rekognition-openapi-overlay.yaml
+- type: ErrorCatalog
+  url: errors/amazon-rekognition-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/amazon-rekognition-lifecycle.yml
+- type: Conformance
+  url: conformance/amazon-rekognition-conformance.yml
+- type: Conventions
+  url: conventions/amazon-rekognition-conventions.yml
+- type: ChangeLog
+  url: changelog/amazon-rekognition-changelog.yml
+- type: CLI
+  url: cli/amazon-rekognition-cli.yml
+- type: Components
+  url: components/amazon-rekognition-components.yml
+- type: DataModel
+  url: data-model/amazon-rekognition-data-model.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amazon-rekognition/overview
 - type: Arazzo

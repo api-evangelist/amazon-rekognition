@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Amazon Rekognition Celebrity Recognition Face Liveness API
+  description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
+  version: '2016-06-27'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://rekognition.amazonaws.com
+  description: Amazon Rekognition global endpoint
+tags:
+- name: Face Liveness
+  description: Verify that a user is physically present during identity verification.
+paths:
+  /#CreateFaceLivenessSession:
+    post:
+      operationId: createFaceLivenessSession
+      summary: Amazon Rekognition Create Face Liveness Session
+      description: Initiates a Face Liveness session and returns a SessionId for streaming.
+      tags:
+      - Face Liveness
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/CreateFaceLivenessSessionRequest'
+            examples:
+              createFaceLivenessSessionRequestExample:
+                summary: Default createFaceLivenessSession request
+                x-microcks-default: true
+                value:
+                  ClientRequestToken: token-abc123
+      responses:
+        '200':
+          description: Face liveness session created.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/CreateFaceLivenessSessionResponse'
+              examples:
+                createFaceLivenessSession200Example:
+                  summary: Default createFaceLivenessSession 200 response
+                  x-microcks-default: true
+                  value:
+                    SessionId: 550e8400-e29b-41d4-a716-446655440000
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#GetFaceLivenessSessionResults:
+    post:
+      operationId: getFaceLivenessSessionResults
+      summary: Amazon Rekognition Get Face Liveness Session Results
+      description: Retrieves the results of a specific Face Liveness session.
+      tags:
+      - Face Liveness
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/GetFaceLivenessSessionResultsRequest'
+            examples:
+              getFaceLivenessSessionResultsRequestExample:
+                summary: Default getFaceLivenessSessionResults request
+                x-microcks-default: true
+                value:
+                  SessionId: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: Face liveness session results retrieved.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/GetFaceLivenessSessionResultsResponse'
+              examples:
+                getFaceLivenessSessionResults200Example:
+                  summary: Default getFaceLivenessSessionResults 200 response
+                  x-microcks-default: true
+                  value:
+                    SessionId: 550e8400-e29b-41d4-a716-446655440000
+                    Status: SUCCEEDED
+                    Confidence: 98.5
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateFaceLivenessSessionRequest:
+      type: object
+      properties:
+        KmsKeyId:
+          type: string
+        Settings:
+          type: object
+        ClientRequestToken:
+          type: string
+    GetFaceLivenessSessionResultsRequest:
+      type: object
+      required:
+      - SessionId
+      properties:
+        SessionId:
+          type: string
+          format: uuid
+          description: The sessionId for the Face Liveness session.
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    CreateFaceLivenessSessionResponse:
+      type: object
+      properties:
+        SessionId:
+          type: string
+          description: A unique 128-bit UUID identifying a Face Liveness session.
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+    GetFaceLivenessSessionResultsResponse:
+      type: object
+      properties:
+        SessionId:
+          type: string
+          format: uuid
+        Status:
+          type: string
+          enum:
+          - CREATED
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          - EXPIRED
+        Confidence:
+          type: number
+          format: float
+          description: Confidence value between 0 and 100 of live presence.
+          example: 98.5
+        ReferenceImage:
+          type: object
+        AuditImages:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256 signature.

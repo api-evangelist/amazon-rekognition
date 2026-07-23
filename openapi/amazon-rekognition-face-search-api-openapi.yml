@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Amazon Rekognition Celebrity Recognition Face Search API
+  description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
+  version: '2016-06-27'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://rekognition.amazonaws.com
+  description: Amazon Rekognition global endpoint
+tags:
+- name: Face Search
+  description: Search for matching faces within collections.
+paths:
+  /#SearchFacesByImage:
+    post:
+      operationId: searchFacesByImage
+      summary: Amazon Rekognition Search Faces by Image
+      description: For a given input image, searches the specified collection for matching faces.
+      tags:
+      - Face Search
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/SearchFacesByImageRequest'
+            examples:
+              searchFacesByImageRequestExample:
+                summary: Default searchFacesByImage request
+                x-microcks-default: true
+                value:
+                  CollectionId: my-face-collection
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: query.jpg
+                  MaxFaces: 5
+                  FaceMatchThreshold: 80.0
+      responses:
+        '200':
+          description: Face search completed successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/SearchFacesByImageResponse'
+              examples:
+                searchFacesByImage200Example:
+                  summary: Default searchFacesByImage 200 response
+                  x-microcks-default: true
+                  value:
+                    FaceMatches: []
+                    FaceModelVersion: '6.0'
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SearchFacesByImageResponse:
+      type: object
+      properties:
+        SearchedFaceBoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        SearchedFaceConfidence:
+          type: number
+          format: float
+        FaceMatches:
+          type: array
+          items:
+            type: object
+        FaceModelVersion:
+          type: string
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    SearchFacesByImageRequest:
+      type: object
+      required:
+      - CollectionId
+      - Image
+      properties:
+        CollectionId:
+          type: string
+          example: my-face-collection
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxFaces:
+          type: integer
+          example: 5
+        FaceMatchThreshold:
+          type: number
+          format: float
+          example: 80.0
+        QualityFilter:
+          type: string
+          enum:
+          - NONE
+          - AUTO
+          - LOW
+          - MEDIUM
+          - HIGH
+    BoundingBox:
+      type: object
+      description: Identifies the bounding box around the label, face, text or object.
+      properties:
+        Width:
+          type: number
+          format: float
+          description: Width of the bounding box as a ratio of the overall image width.
+          example: 0.35
+        Height:
+          type: number
+          format: float
+          description: Height of the bounding box as a ratio of the overall image height.
+          example: 0.45
+        Left:
+          type: number
+          format: float
+          description: Left coordinate of the bounding box as a ratio of overall image width.
+          example: 0.1
+        Top:
+          type: number
+          format: float
+          description: Top coordinate of the bounding box as a ratio of overall image height.
+          example: 0.05
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256 signature.

@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: Amazon Rekognition Celebrity Recognition Text Detection API
+  description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
+  version: '2016-06-27'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://rekognition.amazonaws.com
+  description: Amazon Rekognition global endpoint
+tags:
+- name: Text Detection
+  description: Detect and extract text from images and videos.
+paths:
+  /#DetectText:
+    post:
+      operationId: detectText
+      summary: Amazon Rekognition Detect Text
+      description: Detects text in the input image and converts it into machine-readable text.
+      tags:
+      - Text Detection
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/ImageOnlyRequest'
+            examples:
+              detectTextRequestExample:
+                summary: Default detectText request
+                x-microcks-default: true
+                value:
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: signage.jpg
+      responses:
+        '200':
+          description: Text detected successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/DetectTextResponse'
+              examples:
+                detectText200Example:
+                  summary: Default detectText 200 response
+                  x-microcks-default: true
+                  value:
+                    TextDetections:
+                    - DetectedText: Hello World
+                      Type: LINE
+                      Id: 0
+                      Confidence: 99.1
+                    TextModelVersion: '3.1'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DetectTextResponse:
+      type: object
+      properties:
+        TextDetections:
+          type: array
+          description: An array of text detected in the input image.
+          items:
+            type: object
+            properties:
+              DetectedText:
+                type: string
+                example: Hello World
+              Type:
+                type: string
+                enum:
+                - LINE
+                - WORD
+              Id:
+                type: integer
+              ParentId:
+                type: integer
+              Confidence:
+                type: number
+                format: float
+              Geometry:
+                type: object
+                properties:
+                  BoundingBox:
+                    $ref: '#/components/schemas/BoundingBox'
+        TextModelVersion:
+          type: string
+          example: '3.1'
+    ImageOnlyRequest:
+      type: object
+      required:
+      - Image
+      description: Request containing only an image.
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    BoundingBox:
+      type: object
+      description: Identifies the bounding box around the label, face, text or object.
+      properties:
+        Width:
+          type: number
+          format: float
+          description: Width of the bounding box as a ratio of the overall image width.
+          example: 0.35
+        Height:
+          type: number
+          format: float
+          description: Height of the bounding box as a ratio of the overall image height.
+          example: 0.45
+        Left:
+          type: number
+          format: float
+          description: Left coordinate of the bounding box as a ratio of overall image width.
+          example: 0.1
+        Top:
+          type: number
+          format: float
+          description: Top coordinate of the bounding box as a ratio of overall image height.
+          example: 0.05
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256 signature.

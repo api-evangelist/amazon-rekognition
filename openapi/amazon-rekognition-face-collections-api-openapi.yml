@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  title: Amazon Rekognition Celebrity Recognition Face Collections API
+  description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
+  version: '2016-06-27'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://rekognition.amazonaws.com
+  description: Amazon Rekognition global endpoint
+tags:
+- name: Face Collections
+  description: Create and manage searchable face collections.
+paths:
+  /#CreateCollection:
+    post:
+      operationId: createCollection
+      summary: Amazon Rekognition Create Collection
+      description: Creates a collection in an AWS Region for storing and searching face data.
+      tags:
+      - Face Collections
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/CreateCollectionRequest'
+            examples:
+              createCollectionRequestExample:
+                summary: Default createCollection request
+                x-microcks-default: true
+                value:
+                  CollectionId: my-face-collection
+      responses:
+        '200':
+          description: Collection created successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/CreateCollectionResponse'
+              examples:
+                createCollection200Example:
+                  summary: Default createCollection 200 response
+                  x-microcks-default: true
+                  value:
+                    StatusCode: 200
+                    CollectionArn: aws:rekognition:us-east-1:123456789012:collection/my-face-collection
+                    FaceModelVersion: '6.0'
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#ListCollections:
+    post:
+      operationId: listCollections
+      summary: Amazon Rekognition List Collections
+      description: Returns list of collection IDs in your AWS account.
+      tags:
+      - Face Collections
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/PaginationRequest'
+            examples:
+              listCollectionsRequestExample:
+                summary: Default listCollections request
+                x-microcks-default: true
+                value:
+                  MaxResults: 20
+      responses:
+        '200':
+          description: Collections listed successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ListCollectionsResponse'
+              examples:
+                listCollections200Example:
+                  summary: Default listCollections 200 response
+                  x-microcks-default: true
+                  value:
+                    CollectionIds:
+                    - my-face-collection
+                    FaceModelVersions:
+                    - '6.0'
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#IndexFaces:
+    post:
+      operationId: indexFaces
+      summary: Amazon Rekognition Index Faces
+      description: Detects faces in the input image and adds them to the specified collection.
+      tags:
+      - Face Collections
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/IndexFacesRequest'
+            examples:
+              indexFacesRequestExample:
+                summary: Default indexFaces request
+                x-microcks-default: true
+                value:
+                  CollectionId: my-face-collection
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: employee.jpg
+                  ExternalImageId: user-123
+      responses:
+        '200':
+          description: Faces indexed successfully.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/IndexFacesResponse'
+              examples:
+                indexFaces200Example:
+                  summary: Default indexFaces 200 response
+                  x-microcks-default: true
+                  value:
+                    FaceRecords: []
+                    FaceModelVersion: '6.0'
+                    UnindexedFaces: []
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    IndexFacesRequest:
+      type: object
+      required:
+      - CollectionId
+      - Image
+      properties:
+        CollectionId:
+          type: string
+          example: my-face-collection
+        Image:
+          $ref: '#/components/schemas/Image'
+        ExternalImageId:
+          type: string
+          description: ID you want to assign to all faces detected in the image.
+          example: user-123
+        DetectionAttributes:
+          type: array
+          items:
+            type: string
+            enum:
+            - DEFAULT
+            - ALL
+        MaxFaces:
+          type: integer
+          description: Maximum number of faces to index.
+        QualityFilter:
+          type: string
+          enum:
+          - NONE
+          - AUTO
+          - LOW
+          - MEDIUM
+          - HIGH
+    ListCollectionsResponse:
+      type: object
+      properties:
+        CollectionIds:
+          type: array
+          items:
+            type: string
+        NextToken:
+          type: string
+        FaceModelVersions:
+          type: array
+          items:
+            type: string
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+    PaginationRequest:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+          example: 20
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    CreateCollectionResponse:
+      type: object
+      properties:
+        StatusCode:
+          type: integer
+          example: 200
+        CollectionArn:
+          type: string
+          example: aws:rekognition:us-east-1:123456789012:collection/my-face-collection
+        FaceModelVersion:
+          type: string
+          example: '6.0'
+    CreateCollectionRequest:
+      type: object
+      required:
+      - CollectionId
+      properties:
+        CollectionId:
+          type: string
+          description: ID for the collection to create.
+          example: my-face-collection
+        Tags:
+          type: object
+          additionalProperties:
+            type: string
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
+    IndexFacesResponse:
+      type: object
+      properties:
+        FaceRecords:
+          type: array
+          items:
+            type: object
+        OrientationCorrection:
+          type: string
+        FaceModelVersion:
+          type: string
+        UnindexedFaces:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256 signature.

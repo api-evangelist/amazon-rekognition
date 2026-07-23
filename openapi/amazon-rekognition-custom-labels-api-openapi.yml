@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: Amazon Rekognition Celebrity Recognition Custom Labels API
+  description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
+  version: '2016-06-27'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://rekognition.amazonaws.com
+  description: Amazon Rekognition global endpoint
+tags:
+- name: Custom Labels
+  description: Train and use custom image classifiers.
+paths:
+  /#DetectCustomLabels:
+    post:
+      operationId: detectCustomLabels
+      summary: Amazon Rekognition Detect Custom Labels
+      description: Detects custom labels in a supplied image using an Amazon Rekognition Custom Labels model.
+      tags:
+      - Custom Labels
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/DetectCustomLabelsRequest'
+            examples:
+              detectCustomLabelsRequestExample:
+                summary: Default detectCustomLabels request
+                x-microcks-default: true
+                value:
+                  ProjectVersionArn: arn:aws:rekognition:us-east-1:123456789012:project/my-project/version/v1/1234567890
+                  Image:
+                    S3Object:
+                      Bucket: my-bucket
+                      Name: product.jpg
+                  MinConfidence: 70.0
+      responses:
+        '200':
+          description: Custom labels detected.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/DetectCustomLabelsResponse'
+              examples:
+                detectCustomLabels200Example:
+                  summary: Default detectCustomLabels 200 response
+                  x-microcks-default: true
+                  value:
+                    CustomLabels:
+                    - Name: MyProduct
+                      Confidence: 92.3
+        '400':
+          description: Invalid request.
+          content:
+            application/x-amz-json-1.1:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    DetectCustomLabelsRequest:
+      type: object
+      required:
+      - ProjectVersionArn
+      - Image
+      properties:
+        ProjectVersionArn:
+          type: string
+          description: The ARN of the model version to use.
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxResults:
+          type: integer
+        MinConfidence:
+          type: number
+          format: float
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
+    DetectCustomLabelsResponse:
+      type: object
+      properties:
+        CustomLabels:
+          type: array
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+                example: MyProduct
+              Confidence:
+                type: number
+                format: float
+                example: 92.3
+              Geometry:
+                type: object
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4. Include the Authorization header with AWS4-HMAC-SHA256 signature.

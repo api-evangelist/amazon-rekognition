@@ -4,6 +4,19 @@ description: Amazon Rekognition is a cloud-based computer vision service that ma
   such as object and scene detection, facial analysis, face comparison, celebrity
   recognition, text detection, content moderation, custom labels, face liveness detection,
   and streaming video analysis using deep learning technology.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml
 created: '2024-01-15'
@@ -11,24 +24,18 @@ modified: '2026-06-20'
 specificationVersion: '0.18'
 kind: company
 apis:
-- name: Amazon Rekognition
-  description: Amazon Rekognition provides image and video analysis APIs for label
-    detection, facial analysis, face comparison, celebrity recognition, text detection,
-    content moderation, custom labels, face liveness detection, and streaming video
-    analysis.
+- aid: amazon-rekognition:amazon-rekognition-celebrity-recognition-api
+  name: Amazon Rekognition Celebrity Recognition API
+  description: Identify celebrities in images and videos.
   humanURL: https://aws.amazon.com/rekognition/
   baseURL: https://rekognition.amazonaws.com
   tags:
-  - Computer Vision
-  - Image Analysis
-  - Video Analysis
-  - Facial Recognition
-  - Machine Learning
+  - Celebrity Recognition
   properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-celebrity-recognition-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-openapi.yml
   - type: APIReference
     url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
   - type: GettingStarted
@@ -39,8 +46,224 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - url: graphql/amazon-rekognition-graphql.md
-    type: GraphQL
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-content-moderation-api
+  name: Amazon Rekognition Content Moderation API
+  description: Detect inappropriate or explicit content.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Content Moderation
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-content-moderation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-custom-labels-api
+  name: Amazon Rekognition Custom Labels API
+  description: Train and use custom image classifiers.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Custom Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-custom-labels-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-face-collections-api
+  name: Amazon Rekognition Face Collections API
+  description: Create and manage searchable face collections.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Face Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-face-collections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-face-liveness-api
+  name: Amazon Rekognition Face Liveness API
+  description: Verify that a user is physically present during identity verification.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Face Liveness
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-face-liveness-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-face-search-api
+  name: Amazon Rekognition Face Search API
+  description: Search for matching faces within collections.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Face Search
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-face-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-facial-analysis-api
+  name: Amazon Rekognition Facial Analysis API
+  description: Detect and analyze faces with detailed attributes.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Facial Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-facial-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-image-analysis-api
+  name: Amazon Rekognition Image Analysis API
+  description: Detect labels, objects, scenes, and concepts in images.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Image Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-image-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-stored-video-analysis-api
+  name: Amazon Rekognition Stored Video Analysis API
+  description: Asynchronous analysis of videos stored in Amazon S3.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Stored Video Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-stored-video-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
+- aid: amazon-rekognition:amazon-rekognition-text-detection-api
+  name: Amazon Rekognition Text Detection API
+  description: Detect and extract text from images and videos.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Text Detection
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-text-detection-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: GraphQL
+    url: graphql/amazon-rekognition-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/amazon-rekognition-agentic-access.yml

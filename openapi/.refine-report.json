@@ -1,0 +1,32 @@
+{
+  "provider": "amazon-rekognition",
+  "sources": [
+    "amazon-rekognition-celebrity-recognition-api-openapi.yml",
+    "amazon-rekognition-content-moderation-api-openapi.yml",
+    "amazon-rekognition-custom-labels-api-openapi.yml",
+    "amazon-rekognition-face-collections-api-openapi.yml",
+    "amazon-rekognition-face-liveness-api-openapi.yml",
+    "amazon-rekognition-face-search-api-openapi.yml",
+    "amazon-rekognition-facial-analysis-api-openapi.yml",
+    "amazon-rekognition-image-analysis-api-openapi.yml",
+    "amazon-rekognition-stored-video-analysis-api-openapi.yml",
+    "amazon-rekognition-text-detection-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-rekognition-celebrity-recognition-api-openapi.yml",
+    "amazon-rekognition-content-moderation-api-openapi.yml",
+    "amazon-rekognition-custom-labels-api-openapi.yml",
+    "amazon-rekognition-face-collections-api-openapi.yml",
+    "amazon-rekognition-face-liveness-api-openapi.yml",
+    "amazon-rekognition-face-search-api-openapi.yml",
+    "amazon-rekognition-facial-analysis-api-openapi.yml",
+    "amazon-rekognition-image-analysis-api-openapi.yml",
+    "amazon-rekognition-stored-video-analysis-api-openapi.yml",
+    "amazon-rekognition-text-detection-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

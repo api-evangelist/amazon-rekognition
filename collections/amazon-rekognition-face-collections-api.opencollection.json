@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Rekognition Celebrity Recognition Face Collections API",
+    "version": "2016-06-27"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Face Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Rekognition Create Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rekognition.amazonaws.com/#CreateCollection",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a collection in an AWS Region for storing and searching face data."
+        },
+        {
+          "info": {
+            "name": "Amazon Rekognition List Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rekognition.amazonaws.com/#ListCollections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns list of collection IDs in your AWS account."
+        },
+        {
+          "info": {
+            "name": "Amazon Rekognition Index Faces",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rekognition.amazonaws.com/#IndexFaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Detects faces in the input image and adds them to the specified collection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

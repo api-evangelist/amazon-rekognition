@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Rekognition Celebrity Recognition Image Analysis API",
+    "version": "2016-06-27"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Image Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Rekognition Detect Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rekognition.amazonaws.com/#DetectLabels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Detects instances of real-world entities within an image and returns labels with confidence scores."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

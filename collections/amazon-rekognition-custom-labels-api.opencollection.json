@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Rekognition Celebrity Recognition Custom Labels API",
+    "version": "2016-06-27"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Rekognition Detect Custom Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rekognition.amazonaws.com/#DetectCustomLabels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Detects custom labels in a supplied image using an Amazon Rekognition Custom Labels model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

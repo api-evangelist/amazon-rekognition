@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Rekognition Celebrity Recognition Face Search API",
+    "version": "2016-06-27"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Face Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Rekognition Search Faces by Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rekognition.amazonaws.com/#SearchFacesByImage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "For a given input image, searches the specified collection for matching faces."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

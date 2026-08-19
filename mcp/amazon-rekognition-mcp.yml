@@ -1,12 +1,10 @@
 generated: '2026-06-20'
 method: searched
 status: published
-source: >-
-  https://pypi.org/project/awslabs.amazon-rekognition-mcp-server/ and
-  https://github.com/awslabs/mcp — the AWS Labs open-source MCP server for Amazon
-  Rekognition. NOTE: this server has been ARCHIVED and marked deprecated; AWS
-  directs users to the AWS API MCP Server (awslabs.aws-api-mcp-server) for
-  Rekognition image analysis. Recorded here as the real first-party MCP surface.
+source: 'https://pypi.org/project/awslabs.amazon-rekognition-mcp-server/ and https://github.com/awslabs/mcp
+  — the AWS Labs open-source MCP server for Amazon Rekognition. NOTE: this server has been ARCHIVED and
+  marked deprecated; AWS directs users to the AWS API MCP Server (awslabs.aws-api-mcp-server) for Rekognition
+  image analysis. Recorded here as the real first-party MCP surface.'
 server:
   name: awslabs.amazon-rekognition-mcp-server
   vendor: AWS Labs
@@ -16,31 +14,36 @@ server:
   package: https://pypi.org/project/awslabs.amazon-rekognition-mcp-server/
   deprecated: true
   successor: awslabs.aws-api-mcp-server
-  auth: >-
-    Uses a local boto3 session (AWS profile / credentials); the profile must have
-    IAM permissions for the Amazon Rekognition actions invoked.
+  auth: Uses a local boto3 session (AWS profile / credentials); the profile must have IAM permissions
+    for the Amazon Rekognition actions invoked.
 tools:
-  - name: list_collections
-    description: Returns the list of face collection IDs and their face model versions.
-    source_operation: openapi/amazon-rekognition-openapi.yml#listCollections
-  - name: index_faces
-    description: Detects faces in an image and adds them to a specified collection.
-    source_operation: openapi/amazon-rekognition-openapi.yml#indexFaces
-  - name: search_faces_by_image
-    description: Searches a collection for faces matching a supplied face image.
-    source_operation: openapi/amazon-rekognition-openapi.yml#searchFacesByImage
-  - name: detect_labels
-    description: Detects real-world entities (objects, scenes, concepts) within an image.
-    source_operation: openapi/amazon-rekognition-openapi.yml#detectLabels
-  - name: detect_moderation_labels
-    description: Detects unsafe / inappropriate content in an image.
-    source_operation: openapi/amazon-rekognition-openapi.yml#detectModerationLabels
-  - name: recognize_celebrities
-    description: Recognizes celebrities in an image.
-    source_operation: openapi/amazon-rekognition-openapi.yml#recognizeCelebrities
-  - name: compare_faces
-    description: Compares a face in a source image with faces detected in a target image.
-    source_operation: openapi/amazon-rekognition-openapi.yml#compareFaces
-  - name: detect_text
-    description: Detects text in an image.
-    source_operation: openapi/amazon-rekognition-openapi.yml#detectText
+- name: list_collections
+  description: Returns the list of face collection IDs and their face model versions.
+  source_operation: openapi/amazon-rekognition-openapi.yml#listCollections
+- name: index_faces
+  description: Detects faces in an image and adds them to a specified collection.
+  source_operation: openapi/amazon-rekognition-openapi.yml#indexFaces
+- name: search_faces_by_image
+  description: Searches a collection for faces matching a supplied face image.
+  source_operation: openapi/amazon-rekognition-openapi.yml#searchFacesByImage
+- name: detect_labels
+  description: Detects real-world entities (objects, scenes, concepts) within an image.
+  source_operation: openapi/amazon-rekognition-openapi.yml#detectLabels
+- name: detect_moderation_labels
+  description: Detects unsafe / inappropriate content in an image.
+  source_operation: openapi/amazon-rekognition-openapi.yml#detectModerationLabels
+- name: recognize_celebrities
+  description: Recognizes celebrities in an image.
+  source_operation: openapi/amazon-rekognition-openapi.yml#recognizeCelebrities
+- name: compare_faces
+  description: Compares a face in a source image with faces detected in a target image.
+  source_operation: openapi/amazon-rekognition-openapi.yml#compareFaces
+- name: detect_text
+  description: Detects text in an image.
+  source_operation: openapi/amazon-rekognition-openapi.yml#detectText
+deployment:
+  mode: local-stdio
+  verified: searched
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

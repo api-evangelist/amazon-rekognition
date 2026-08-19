@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Rekognition Celebrity Recognition Text Detection API",
+    "version": "2016-06-27"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Text Detection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Rekognition Detect Text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rekognition.amazonaws.com/#DetectText",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Detects text in the input image and converts it into machine-readable text."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

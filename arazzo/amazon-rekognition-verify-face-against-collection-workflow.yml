@@ -11,8 +11,11 @@ info:
     protocol-required X-Amz-Target header.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: faceSearchApi
+  url: ../openapi/amazon-rekognition-face-search-api-openapi.yml
+  type: openapi
+- name: facialAnalysisApi
+  url: ../openapi/amazon-rekognition-facial-analysis-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: verify-face-against-collection

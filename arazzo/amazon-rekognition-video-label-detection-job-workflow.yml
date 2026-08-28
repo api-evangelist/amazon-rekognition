@@ -11,8 +11,8 @@ info:
     inline, including the protocol-required X-Amz-Target header.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: storedVideoAnalysisApi
+  url: ../openapi/amazon-rekognition-stored-video-analysis-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: video-label-detection-job

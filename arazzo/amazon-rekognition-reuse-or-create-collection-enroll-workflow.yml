@@ -11,8 +11,8 @@ info:
     protocol-required X-Amz-Target header.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: faceCollectionsApi
+  url: ../openapi/amazon-rekognition-face-collections-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: reuse-or-create-collection-enroll

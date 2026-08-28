@@ -12,8 +12,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: faceCollectionsApi
+  url: ../openapi/amazon-rekognition-face-collections-api-openapi.yml
+  type: openapi
+- name: faceSearchApi
+  url: ../openapi/amazon-rekognition-face-search-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: enroll-and-search-face

@@ -11,8 +11,11 @@ info:
     X-Amz-Target header.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: faceCollectionsApi
+  url: ../openapi/amazon-rekognition-face-collections-api-openapi.yml
+  type: openapi
+- name: facialAnalysisApi
+  url: ../openapi/amazon-rekognition-facial-analysis-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: quality-gated-enrollment

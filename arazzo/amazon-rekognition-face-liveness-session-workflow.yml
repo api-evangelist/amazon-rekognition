@@ -11,8 +11,8 @@ info:
     inline, including the protocol-required X-Amz-Target header.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: faceLivenessApi
+  url: ../openapi/amazon-rekognition-face-liveness-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: face-liveness-session

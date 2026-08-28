@@ -11,8 +11,11 @@ info:
     protocol-required X-Amz-Target header.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: contentModerationApi
+  url: ../openapi/amazon-rekognition-content-moderation-api-openapi.yml
+  type: openapi
+- name: textDetectionApi
+  url: ../openapi/amazon-rekognition-text-detection-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: text-and-moderation-screen

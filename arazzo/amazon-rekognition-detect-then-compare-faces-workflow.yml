@@ -11,8 +11,8 @@ info:
     header.
   version: 1.0.0
 sourceDescriptions:
-- name: rekognitionApi
-  url: ../openapi/amazon-rekognition-openapi.yml
+- name: facialAnalysisApi
+  url: ../openapi/amazon-rekognition-facial-analysis-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: detect-then-compare-faces

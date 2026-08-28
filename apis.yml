@@ -4,6 +4,18 @@ description: Amazon Rekognition is a cloud-based computer vision service that ma
   such as object and scene detection, facial analysis, face comparison, celebrity
   recognition, text detection, content moderation, custom labels, face liveness detection,
   and streaming video analysis using deep learning technology.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve

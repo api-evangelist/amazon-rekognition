@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon Rekognition Celebrity Recognition API
   description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
@@ -66,14 +66,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ImageOnlyRequest:
+    S3Object:
       type: object
-      required:
-      - Image
-      description: Request containing only an image.
+      description: Provides the S3 bucket name and object name.
       properties:
-        Image:
-          $ref: '#/components/schemas/Image'
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
     Image:
       type: object
       description: Provides the input image either as bytes or an S3 object.
@@ -122,22 +130,14 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Request has invalid parameters.
-    S3Object:
+    ImageOnlyRequest:
       type: object
-      description: Provides the S3 bucket name and object name.
+      required:
+      - Image
+      description: Request containing only an image.
       properties:
-        Bucket:
-          type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
+        Image:
+          $ref: '#/components/schemas/Image'
   securitySchemes:
     aws_signature:
       type: apiKey

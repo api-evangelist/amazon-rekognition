@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon Rekognition Celebrity Recognition Stored Video Analysis API
   description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
@@ -112,6 +112,46 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    GetVideoJobResultRequest:
+      type: object
+      required:
+      - JobId
+      properties:
+        JobId:
+          type: string
+          description: Job identifier from the start job call.
+          example: 1234567890abcdef
+        MaxResults:
+          type: integer
+          example: 100
+        NextToken:
+          type: string
+        SortBy:
+          type: string
+          enum:
+          - NAME
+          - TIMESTAMP
+        AggregateBy:
+          type: string
+          enum:
+          - TIMESTAMPS
+          - SEGMENTS
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
     StartLabelDetectionRequest:
       type: object
       required:
@@ -135,6 +175,87 @@ components:
             type: string
         Settings:
           type: object
+    BoundingBox:
+      type: object
+      description: Identifies the bounding box around the label, face, text or object.
+      properties:
+        Width:
+          type: number
+          format: float
+          description: Width of the bounding box as a ratio of the overall image width.
+          example: 0.35
+        Height:
+          type: number
+          format: float
+          description: Height of the bounding box as a ratio of the overall image height.
+          example: 0.45
+        Left:
+          type: number
+          format: float
+          description: Left coordinate of the bounding box as a ratio of overall image width.
+          example: 0.1
+        Top:
+          type: number
+          format: float
+          description: Top coordinate of the bounding box as a ratio of overall image height.
+          example: 0.05
+    NotificationChannel:
+      type: object
+      description: Amazon SNS topic for completion status notifications.
+      properties:
+        SNSTopicArn:
+          type: string
+          description: The Amazon SNS topic ARN to post completion status.
+          example: arn:aws:sns:us-east-1:123456789012:AmazonRekognitionTopic
+        RoleArn:
+          type: string
+          description: The ARN of an IAM role that gives Rekognition publishing permissions.
+          example: arn:aws:iam::123456789012:role/RekognitionRole
+    Label:
+      type: object
+      description: Structure containing details about the detected label.
+      properties:
+        Name:
+          type: string
+          description: The name of the label detected in the image or video.
+          example: Person
+        Confidence:
+          type: number
+          format: float
+          description: Level of confidence for the label.
+          example: 98.5
+        Instances:
+          type: array
+          description: Bounding boxes for each instance of the detected object.
+          items:
+            type: object
+            properties:
+              BoundingBox:
+                $ref: '#/components/schemas/BoundingBox'
+              Confidence:
+                type: number
+                format: float
+        Parents:
+          type: array
+          description: The parent labels for a label in the taxonomy hierarchy.
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+    StartVideoJobResponse:
+      type: object
+      properties:
+        JobId:
+          type: string
+          description: The identifier for the video analysis job.
+          example: 1234567890abcdef
+    Video:
+      type: object
+      description: Video file stored in an Amazon S3 bucket.
+      properties:
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
     GetLabelDetectionResponse:
       type: object
       properties:
@@ -176,127 +297,6 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Request has invalid parameters.
-    NotificationChannel:
-      type: object
-      description: Amazon SNS topic for completion status notifications.
-      properties:
-        SNSTopicArn:
-          type: string
-          description: The Amazon SNS topic ARN to post completion status.
-          example: arn:aws:sns:us-east-1:123456789012:AmazonRekognitionTopic
-        RoleArn:
-          type: string
-          description: The ARN of an IAM role that gives Rekognition publishing permissions.
-          example: arn:aws:iam::123456789012:role/RekognitionRole
-    Video:
-      type: object
-      description: Video file stored in an Amazon S3 bucket.
-      properties:
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
-    GetVideoJobResultRequest:
-      type: object
-      required:
-      - JobId
-      properties:
-        JobId:
-          type: string
-          description: Job identifier from the start job call.
-          example: 1234567890abcdef
-        MaxResults:
-          type: integer
-          example: 100
-        NextToken:
-          type: string
-        SortBy:
-          type: string
-          enum:
-          - NAME
-          - TIMESTAMP
-        AggregateBy:
-          type: string
-          enum:
-          - TIMESTAMPS
-          - SEGMENTS
-    BoundingBox:
-      type: object
-      description: Identifies the bounding box around the label, face, text or object.
-      properties:
-        Width:
-          type: number
-          format: float
-          description: Width of the bounding box as a ratio of the overall image width.
-          example: 0.35
-        Height:
-          type: number
-          format: float
-          description: Height of the bounding box as a ratio of the overall image height.
-          example: 0.45
-        Left:
-          type: number
-          format: float
-          description: Left coordinate of the bounding box as a ratio of overall image width.
-          example: 0.1
-        Top:
-          type: number
-          format: float
-          description: Top coordinate of the bounding box as a ratio of overall image height.
-          example: 0.05
-    S3Object:
-      type: object
-      description: Provides the S3 bucket name and object name.
-      properties:
-        Bucket:
-          type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
-    StartVideoJobResponse:
-      type: object
-      properties:
-        JobId:
-          type: string
-          description: The identifier for the video analysis job.
-          example: 1234567890abcdef
-    Label:
-      type: object
-      description: Structure containing details about the detected label.
-      properties:
-        Name:
-          type: string
-          description: The name of the label detected in the image or video.
-          example: Person
-        Confidence:
-          type: number
-          format: float
-          description: Level of confidence for the label.
-          example: 98.5
-        Instances:
-          type: array
-          description: Bounding boxes for each instance of the detected object.
-          items:
-            type: object
-            properties:
-              BoundingBox:
-                $ref: '#/components/schemas/BoundingBox'
-              Confidence:
-                type: number
-                format: float
-        Parents:
-          type: array
-          description: The parent labels for a label in the taxonomy hierarchy.
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
   securitySchemes:
     aws_signature:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon Rekognition Celebrity Recognition Face Search API
   description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
@@ -69,20 +69,46 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SearchFacesByImageResponse:
+    S3Object:
       type: object
+      description: Provides the S3 bucket name and object name.
       properties:
-        SearchedFaceBoundingBox:
-          $ref: '#/components/schemas/BoundingBox'
-        SearchedFaceConfidence:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
+    BoundingBox:
+      type: object
+      description: Identifies the bounding box around the label, face, text or object.
+      properties:
+        Width:
           type: number
           format: float
-        FaceMatches:
-          type: array
-          items:
-            type: object
-        FaceModelVersion:
-          type: string
+          description: Width of the bounding box as a ratio of the overall image width.
+          example: 0.35
+        Height:
+          type: number
+          format: float
+          description: Height of the bounding box as a ratio of the overall image height.
+          example: 0.45
+        Left:
+          type: number
+          format: float
+          description: Left coordinate of the bounding box as a ratio of overall image width.
+          example: 0.1
+        Top:
+          type: number
+          format: float
+          description: Top coordinate of the bounding box as a ratio of overall image height.
+          example: 0.05
     Image:
       type: object
       description: Provides the input image either as bytes or an S3 object.
@@ -93,18 +119,6 @@ components:
           description: Blob of image bytes up to 5 MBs.
         S3Object:
           $ref: '#/components/schemas/S3Object'
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
     SearchFacesByImageRequest:
       type: object
       required:
@@ -131,46 +145,32 @@ components:
           - LOW
           - MEDIUM
           - HIGH
-    BoundingBox:
+    ErrorResponse:
       type: object
-      description: Identifies the bounding box around the label, face, text or object.
+      description: Standard error response from the Amazon Rekognition API.
       properties:
-        Width:
-          type: number
-          format: float
-          description: Width of the bounding box as a ratio of the overall image width.
-          example: 0.35
-        Height:
-          type: number
-          format: float
-          description: Height of the bounding box as a ratio of the overall image height.
-          example: 0.45
-        Left:
-          type: number
-          format: float
-          description: Left coordinate of the bounding box as a ratio of overall image width.
-          example: 0.1
-        Top:
-          type: number
-          format: float
-          description: Top coordinate of the bounding box as a ratio of overall image height.
-          example: 0.05
-    S3Object:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    SearchFacesByImageResponse:
       type: object
-      description: Provides the S3 bucket name and object name.
       properties:
-        Bucket:
+        SearchedFaceBoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        SearchedFaceConfidence:
+          type: number
+          format: float
+        FaceMatches:
+          type: array
+          items:
+            type: object
+        FaceModelVersion:
           type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
   securitySchemes:
     aws_signature:
       type: apiKey

@@ -1,9 +1,8 @@
 name: Amazon Rekognition
-description: Amazon Rekognition is a cloud-based computer vision service that makes
-  it easy to add image and video analysis to your applications, providing capabilities
-  such as object and scene detection, facial analysis, face comparison, celebrity
-  recognition, text detection, content moderation, custom labels, face liveness detection,
-  and streaming video analysis using deep learning technology.
+description: Amazon Rekognition is a cloud-based computer vision service that makes it easy to add image
+  and video analysis to your applications, providing capabilities such as object and scene detection,
+  facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom
+  labels, face liveness detection, and streaming video analysis using deep learning technology.
 deliveryModel:
   model: saas
   open_source: false
@@ -33,7 +32,7 @@ accessModel:
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-06-20'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 kind: company
 apis:
@@ -278,6 +277,8 @@ apis:
   - type: GraphQL
     url: graphql/amazon-rekognition-graphql.md
 common:
+- type: Website
+  url: https://amazon.com
 - type: AgenticAccess
   url: agentic-access/amazon-rekognition-agentic-access.yml
 - type: TrustCenter
@@ -396,102 +397,96 @@ common:
 - type: Features
   data:
   - name: Object and Scene Detection
-    description: Detect thousands of objects, scenes, and concepts in images and videos
-      with high confidence scores using deep learning.
+    description: Detect thousands of objects, scenes, and concepts in images and videos with high confidence
+      scores using deep learning.
   - name: Facial Analysis
-    description: Detect and analyze faces with attributes including age range, emotions,
-      gender, and facial landmarks.
+    description: Detect and analyze faces with attributes including age range, emotions, gender, and facial
+      landmarks.
   - name: Face Comparison
-    description: Compare faces across images to determine if they are the same person
-      with a similarity score.
+    description: Compare faces across images to determine if they are the same person with a similarity
+      score.
   - name: Face Collections
-    description: Create searchable face collections to index and search millions of
-      faces in near real-time.
+    description: Create searchable face collections to index and search millions of faces in near real-time.
   - name: Celebrity Recognition
-    description: Identify thousands of celebrities in images and videos across categories
-      like sports, entertainment, and politics.
+    description: Identify thousands of celebrities in images and videos across categories like sports,
+      entertainment, and politics.
   - name: Text Detection
-    description: Detect and extract printed and handwritten text from images and videos
-      in multiple languages.
+    description: Detect and extract printed and handwritten text from images and videos in multiple languages.
   - name: Content Moderation
-    description: Detect explicit, inappropriate, or violent content in images and
-      videos for automated content moderation.
+    description: Detect explicit, inappropriate, or violent content in images and videos for automated
+      content moderation.
   - name: Custom Labels
-    description: Build and train custom image classifiers using your own labeled images
-      for domain-specific object detection.
+    description: Build and train custom image classifiers using your own labeled images for domain-specific
+      object detection.
   - name: Protective Equipment Detection
-    description: Detect personal protective equipment such as face covers, hand covers,
-      and head covers on persons in images.
+    description: Detect personal protective equipment such as face covers, hand covers, and head covers
+      on persons in images.
   - name: Face Liveness Detection
-    description: Verify that a user is physically present during identity verification
-      to prevent spoofing attacks.
+    description: Verify that a user is physically present during identity verification to prevent spoofing
+      attacks.
   - name: People Pathing
-    description: Track and follow identified people across frames in stored video
-      footage.
+    description: Track and follow identified people across frames in stored video footage.
   - name: Video Segmentation
-    description: Identify technical cues and segments such as black frames, end credits,
-      and color bars in video content.
+    description: Identify technical cues and segments such as black frames, end credits, and color bars
+      in video content.
   - name: Streaming Video Analysis
-    description: Analyze live streaming video in real-time using Amazon Kinesis Video
-      Streams integration.
+    description: Analyze live streaming video in real-time using Amazon Kinesis Video Streams integration.
   - name: Image Properties Analysis
-    description: Evaluate image quality attributes including sharpness, brightness,
-      contrast, and dominant colors.
+    description: Evaluate image quality attributes including sharpness, brightness, contrast, and dominant
+      colors.
 - type: UseCases
   data:
   - name: Identity Verification
-    description: Verify user identities by comparing selfies to ID documents or previously
-      stored face images for onboarding and authentication.
+    description: Verify user identities by comparing selfies to ID documents or previously stored face
+      images for onboarding and authentication.
   - name: Content Moderation
-    description: Automatically moderate user-generated content on platforms to detect
-      and filter explicit or inappropriate imagery.
+    description: Automatically moderate user-generated content on platforms to detect and filter explicit
+      or inappropriate imagery.
   - name: Searchable Media Libraries
-    description: Build searchable image and video archives by automatically tagging
-      media with detected labels, faces, and text.
+    description: Build searchable image and video archives by automatically tagging media with detected
+      labels, faces, and text.
   - name: Workplace Safety Compliance
-    description: Monitor camera feeds to detect whether workers are wearing required
-      personal protective equipment in industrial settings.
+    description: Monitor camera feeds to detect whether workers are wearing required personal protective
+      equipment in industrial settings.
   - name: Fraud Prevention
-    description: Prevent identity fraud during digital onboarding by using face liveness
-      detection to confirm real users.
+    description: Prevent identity fraud during digital onboarding by using face liveness detection to
+      confirm real users.
   - name: Smart Retail Analytics
-    description: Analyze in-store camera feeds to track customer behavior, measure
-      foot traffic, and optimize product placement.
+    description: Analyze in-store camera feeds to track customer behavior, measure foot traffic, and optimize
+      product placement.
   - name: Public Safety and Security
-    description: Search video archives for persons of interest by comparing faces
-      against a known collection.
+    description: Search video archives for persons of interest by comparing faces against a known collection.
   - name: Media and Entertainment
-    description: Automatically tag celebrities in photos and videos for media companies
-      to improve content discoverability.
+    description: Automatically tag celebrities in photos and videos for media companies to improve content
+      discoverability.
   - name: Custom Object Detection
-    description: Train custom classifiers to detect proprietary products, logos, brand
-      assets, or industry-specific objects.
+    description: Train custom classifiers to detect proprietary products, logos, brand assets, or industry-specific
+      objects.
 - type: Integrations
   data:
   - name: Amazon S3
-    description: Process images and videos stored in Amazon S3 buckets directly without
-      downloading content.
+    description: Process images and videos stored in Amazon S3 buckets directly without downloading content.
   - name: Amazon Kinesis Video Streams
-    description: Analyze live video streams in real-time by integrating with Kinesis
-      Video Streams for streaming analysis.
+    description: Analyze live video streams in real-time by integrating with Kinesis Video Streams for
+      streaming analysis.
   - name: AWS Lambda
-    description: Trigger serverless analysis pipelines by invoking Rekognition from
-      Lambda functions in event-driven architectures.
+    description: Trigger serverless analysis pipelines by invoking Rekognition from Lambda functions in
+      event-driven architectures.
   - name: Amazon SNS
-    description: Receive asynchronous notifications when stored video analysis jobs
-      complete via Amazon SNS.
+    description: Receive asynchronous notifications when stored video analysis jobs complete via Amazon
+      SNS.
   - name: AWS IAM
-    description: Control access to Rekognition APIs using AWS Identity and Access
-      Management policies and roles.
+    description: Control access to Rekognition APIs using AWS Identity and Access Management policies
+      and roles.
   - name: Amazon CloudWatch
-    description: Monitor Rekognition API usage, latency, and error metrics through
-      CloudWatch dashboards and alarms.
+    description: Monitor Rekognition API usage, latency, and error metrics through CloudWatch dashboards
+      and alarms.
   - name: AWS Step Functions
-    description: Orchestrate multi-step computer vision workflows using Step Functions
-      to chain Rekognition operations.
+    description: Orchestrate multi-step computer vision workflows using Step Functions to chain Rekognition
+      operations.
   - name: Amazon Augmented AI (A2I)
-    description: Route low-confidence Rekognition predictions to human reviewers using
-      Amazon Augmented AI for quality control.
+    description: Route low-confidence Rekognition predictions to human reviewers using Amazon Augmented
+      AI for quality control.
 - type: JSONLD
   url: json-ld/amazon-rekognition-context.jsonld
 - type: JSONSchema

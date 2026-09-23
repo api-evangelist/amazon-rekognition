@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Rekognition Celebrity Recognition Custom Labels API
+  title: Amazon Rekognition Custom Labels API
   description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
   version: '2016-06-27'
   contact:
@@ -69,6 +69,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
     S3Object:
       type: object
       description: Provides the S3 bucket name and object name.
@@ -85,16 +107,6 @@ components:
           type: string
           description: S3 object version ID if versioning is enabled.
           example: v1
-    Image:
-      type: object
-      description: Provides the input image either as bytes or an S3 object.
-      properties:
-        Bytes:
-          type: string
-          format: byte
-          description: Blob of image bytes up to 5 MBs.
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
     DetectCustomLabelsRequest:
       type: object
       required:
@@ -111,18 +123,6 @@ components:
         MinConfidence:
           type: number
           format: float
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
     DetectCustomLabelsResponse:
       type: object
       properties:

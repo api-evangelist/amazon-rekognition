@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Rekognition Celebrity Recognition Face Liveness API
+  title: Amazon Rekognition Face Liveness API
   description: Amazon Rekognition is a cloud-based computer vision service providing image and video analysis including label detection, facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom labels, face liveness detection, and streaming video analysis.
   version: '2016-06-27'
   contact:
@@ -107,6 +107,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
     GetFaceLivenessSessionResultsResponse:
       type: object
       properties:
@@ -132,15 +144,6 @@ components:
           type: array
           items:
             type: object
-    GetFaceLivenessSessionResultsRequest:
-      type: object
-      required:
-      - SessionId
-      properties:
-        SessionId:
-          type: string
-          format: uuid
-          description: The sessionId for the Face Liveness session.
     CreateFaceLivenessSessionResponse:
       type: object
       properties:
@@ -149,18 +152,6 @@ components:
           description: A unique 128-bit UUID identifying a Face Liveness session.
           format: uuid
           example: 550e8400-e29b-41d4-a716-446655440000
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
     CreateFaceLivenessSessionRequest:
       type: object
       properties:
@@ -170,6 +161,15 @@ components:
           type: object
         ClientRequestToken:
           type: string
+    GetFaceLivenessSessionResultsRequest:
+      type: object
+      required:
+      - SessionId
+      properties:
+        SessionId:
+          type: string
+          format: uuid
+          description: The sessionId for the Face Liveness session.
   securitySchemes:
     aws_signature:
       type: apiKey

@@ -1,16 +1,7 @@
 {
   "provider": "amazon-rekognition",
   "sources": [
-    "amazon-rekognition-celebrity-recognition-api-openapi.yml",
-    "amazon-rekognition-content-moderation-api-openapi.yml",
-    "amazon-rekognition-custom-labels-api-openapi.yml",
-    "amazon-rekognition-face-collections-api-openapi.yml",
-    "amazon-rekognition-face-liveness-api-openapi.yml",
-    "amazon-rekognition-face-search-api-openapi.yml",
-    "amazon-rekognition-facial-analysis-api-openapi.yml",
-    "amazon-rekognition-image-analysis-api-openapi.yml",
-    "amazon-rekognition-stored-video-analysis-api-openapi.yml",
-    "amazon-rekognition-text-detection-api-openapi.yml"
+    "_ae-authored/amazon-rekognition-openapi.yml"
   ],
   "outputs": [
     "amazon-rekognition-celebrity-recognition-api-openapi.yml",
@@ -28,7 +19,20 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amazon-rekognition-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "amazon-rekognition-celebrity-recognition-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-content-moderation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-custom-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-face-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-face-liveness-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-face-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-facial-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-image-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-stored-video-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-rekognition-text-detection-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

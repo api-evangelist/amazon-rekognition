@@ -58,8 +58,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-content-moderation-api
   name: Amazon Rekognition Content Moderation API
   description: Detect inappropriate or explicit content.
@@ -82,8 +80,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-custom-labels-api
   name: Amazon Rekognition Custom Labels API
   description: Train and use custom image classifiers.
@@ -106,8 +102,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-face-collections-api
   name: Amazon Rekognition Face Collections API
   description: Create and manage searchable face collections.
@@ -130,8 +124,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-face-liveness-api
   name: Amazon Rekognition Face Liveness API
   description: Verify that a user is physically present during identity verification.
@@ -154,8 +146,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-face-search-api
   name: Amazon Rekognition Face Search API
   description: Search for matching faces within collections.
@@ -178,8 +168,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-facial-analysis-api
   name: Amazon Rekognition Facial Analysis API
   description: Detect and analyze faces with detailed attributes.
@@ -202,8 +190,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-image-analysis-api
   name: Amazon Rekognition Image Analysis API
   description: Detect labels, objects, scenes, and concepts in images.
@@ -226,8 +212,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-stored-video-analysis-api
   name: Amazon Rekognition Stored Video Analysis API
   description: Asynchronous analysis of videos stored in Amazon S3.
@@ -250,8 +234,6 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 - aid: amazon-rekognition:amazon-rekognition-text-detection-api
   name: Amazon Rekognition Text Detection API
   description: Detect and extract text from images and videos.
@@ -274,11 +256,9 @@ apis:
     url: https://aws.amazon.com/rekognition/pricing/
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
-  - type: GraphQL
-    url: graphql/amazon-rekognition-graphql.md
 common:
 - type: Website
-  url: https://amazon.com
+  url: https://aws.amazon.com/rekognition/
 - type: AgenticAccess
   url: agentic-access/amazon-rekognition-agentic-access.yml
 - type: TrustCenter
@@ -713,14 +693,14 @@ maintainer:
 tags:
 - AWS
 - Celebrity Recognition
-- Computer-Vision
+- Computer Vision
 - Content Moderation
 - Custom Labels
 - Deep Learning
 - Face Liveness
 - Facial Recognition
 - Image Analysis
-- Machine-Learning
+- Machine Learning
 - Object Detection
 - Text Detection
 - Video Analysis
@@ -738,6 +718,8 @@ tags_raw:
 - Object Detection
 - Text Detection
 - Video Analysis
+- Computer-Vision
+- Machine-Learning
 integrations:
 - name: Partner Programs
 - name: Resources
@@ -747,5 +729,5 @@ integrations:
 - name: AWS Partner Central
 - name: Partner Paths
 - name: co-sell with AWS
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product

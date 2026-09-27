@@ -67,18 +67,24 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    DetectModerationLabelsRequest:
       type: object
-      description: Standard error response from the Amazon Rekognition API.
+      required:
+      - Image
       properties:
-        __type:
+        Image:
+          $ref: '#/components/schemas/Image'
+        MinConfidence:
+          type: number
+          format: float
+          description: Minimum confidence level for labels to return.
+          example: 50.0
+        HumanLoopConfig:
+          type: object
+          description: Sets up the flow for A2I human review of moderation labels.
+        ProjectVersion:
           type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
+          description: Identifier for a custom label detection project version.
     Image:
       type: object
       description: Provides the input image either as bytes or an S3 object.
@@ -105,24 +111,6 @@ components:
           type: string
           description: S3 object version ID if versioning is enabled.
           example: v1
-    DetectModerationLabelsRequest:
-      type: object
-      required:
-      - Image
-      properties:
-        Image:
-          $ref: '#/components/schemas/Image'
-        MinConfidence:
-          type: number
-          format: float
-          description: Minimum confidence level for labels to return.
-          example: 50.0
-        HumanLoopConfig:
-          type: object
-          description: Sets up the flow for A2I human review of moderation labels.
-        ProjectVersion:
-          type: string
-          description: Identifier for a custom label detection project version.
     DetectModerationLabelsResponse:
       type: object
       properties:
@@ -146,6 +134,18 @@ components:
           type: object
         ProjectVersion:
           type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
   securitySchemes:
     aws_signature:
       type: apiKey

@@ -160,85 +160,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
-    ListCollectionsResponse:
-      type: object
-      properties:
-        CollectionIds:
-          type: array
-          items:
-            type: string
-        NextToken:
-          type: string
-        FaceModelVersions:
-          type: array
-          items:
-            type: string
-    IndexFacesResponse:
-      type: object
-      properties:
-        FaceRecords:
-          type: array
-          items:
-            type: object
-        OrientationCorrection:
-          type: string
-        FaceModelVersion:
-          type: string
-        UnindexedFaces:
-          type: array
-          items:
-            type: object
-    Image:
-      type: object
-      description: Provides the input image either as bytes or an S3 object.
-      properties:
-        Bytes:
-          type: string
-          format: byte
-          description: Blob of image bytes up to 5 MBs.
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
-    S3Object:
-      type: object
-      description: Provides the S3 bucket name and object name.
-      properties:
-        Bucket:
-          type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
-    CreateCollectionRequest:
-      type: object
-      required:
-      - CollectionId
-      properties:
-        CollectionId:
-          type: string
-          description: ID for the collection to create.
-          example: my-face-collection
-        Tags:
-          type: object
-          additionalProperties:
-            type: string
     IndexFacesRequest:
       type: object
       required:
@@ -272,14 +193,29 @@ components:
           - LOW
           - MEDIUM
           - HIGH
-    PaginationRequest:
+    CreateCollectionRequest:
       type: object
+      required:
+      - CollectionId
       properties:
-        NextToken:
+        CollectionId:
           type: string
-        MaxResults:
-          type: integer
-          example: 20
+          description: ID for the collection to create.
+          example: my-face-collection
+        Tags:
+          type: object
+          additionalProperties:
+            type: string
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
     CreateCollectionResponse:
       type: object
       properties:
@@ -292,6 +228,70 @@ components:
         FaceModelVersion:
           type: string
           example: '6.0'
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
+    IndexFacesResponse:
+      type: object
+      properties:
+        FaceRecords:
+          type: array
+          items:
+            type: object
+        OrientationCorrection:
+          type: string
+        FaceModelVersion:
+          type: string
+        UnindexedFaces:
+          type: array
+          items:
+            type: object
+    ListCollectionsResponse:
+      type: object
+      properties:
+        CollectionIds:
+          type: array
+          items:
+            type: string
+        NextToken:
+          type: string
+        FaceModelVersions:
+          type: array
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    PaginationRequest:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+          example: 20
   securitySchemes:
     aws_signature:
       type: apiKey

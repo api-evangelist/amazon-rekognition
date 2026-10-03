@@ -107,6 +107,35 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateFaceLivenessSessionResponse:
+      type: object
+      properties:
+        SessionId:
+          type: string
+          description: A unique 128-bit UUID identifying a Face Liveness session.
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    GetFaceLivenessSessionResultsRequest:
+      type: object
+      required:
+      - SessionId
+      properties:
+        SessionId:
+          type: string
+          format: uuid
+          description: The sessionId for the Face Liveness session.
     GetFaceLivenessSessionResultsResponse:
       type: object
       properties:
@@ -141,35 +170,6 @@ components:
           type: object
         ClientRequestToken:
           type: string
-    CreateFaceLivenessSessionResponse:
-      type: object
-      properties:
-        SessionId:
-          type: string
-          description: A unique 128-bit UUID identifying a Face Liveness session.
-          format: uuid
-          example: 550e8400-e29b-41d4-a716-446655440000
-    GetFaceLivenessSessionResultsRequest:
-      type: object
-      required:
-      - SessionId
-      properties:
-        SessionId:
-          type: string
-          format: uuid
-          description: The sessionId for the Face Liveness session.
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
   securitySchemes:
     aws_signature:
       type: apiKey

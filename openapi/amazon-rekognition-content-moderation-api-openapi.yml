@@ -95,22 +95,6 @@ components:
           description: Blob of image bytes up to 5 MBs.
         S3Object:
           $ref: '#/components/schemas/S3Object'
-    S3Object:
-      type: object
-      description: Provides the S3 bucket name and object name.
-      properties:
-        Bucket:
-          type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
     DetectModerationLabelsResponse:
       type: object
       properties:
@@ -146,6 +130,22 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Request has invalid parameters.
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
   securitySchemes:
     aws_signature:
       type: apiKey

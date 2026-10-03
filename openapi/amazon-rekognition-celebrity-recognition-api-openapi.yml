@@ -76,6 +76,26 @@ components:
           description: Blob of image bytes up to 5 MBs.
         S3Object:
           $ref: '#/components/schemas/S3Object'
+    ImageOnlyRequest:
+      type: object
+      required:
+      - Image
+      description: Request containing only an image.
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
     RecognizeCelebritiesResponse:
       type: object
       properties:
@@ -118,26 +138,6 @@ components:
           type: string
           description: S3 object version ID if versioning is enabled.
           example: v1
-    ImageOnlyRequest:
-      type: object
-      required:
-      - Image
-      description: Request containing only an image.
-      properties:
-        Image:
-          $ref: '#/components/schemas/Image'
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
   securitySchemes:
     aws_signature:
       type: apiKey

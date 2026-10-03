@@ -112,25 +112,77 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    StartVideoJobResponse:
+    GetVideoJobResultRequest:
       type: object
+      required:
+      - JobId
       properties:
         JobId:
           type: string
-          description: The identifier for the video analysis job.
+          description: Job identifier from the start job call.
           example: 1234567890abcdef
-    NotificationChannel:
+        MaxResults:
+          type: integer
+          example: 100
+        NextToken:
+          type: string
+        SortBy:
+          type: string
+          enum:
+          - NAME
+          - TIMESTAMP
+        AggregateBy:
+          type: string
+          enum:
+          - TIMESTAMPS
+          - SEGMENTS
+    StartLabelDetectionRequest:
       type: object
-      description: Amazon SNS topic for completion status notifications.
+      required:
+      - Video
       properties:
-        SNSTopicArn:
+        Video:
+          $ref: '#/components/schemas/Video'
+        ClientRequestToken:
           type: string
-          description: The Amazon SNS topic ARN to post completion status.
-          example: arn:aws:sns:us-east-1:123456789012:AmazonRekognitionTopic
-        RoleArn:
+        MinConfidence:
+          type: number
+          format: float
+          example: 75.0
+        NotificationChannel:
+          $ref: '#/components/schemas/NotificationChannel'
+        JobTag:
           type: string
-          description: The ARN of an IAM role that gives Rekognition publishing permissions.
-          example: arn:aws:iam::123456789012:role/RekognitionRole
+        Features:
+          type: array
+          items:
+            type: string
+        Settings:
+          type: object
+    BoundingBox:
+      type: object
+      description: Identifies the bounding box around the label, face, text or object.
+      properties:
+        Width:
+          type: number
+          format: float
+          description: Width of the bounding box as a ratio of the overall image width.
+          example: 0.35
+        Height:
+          type: number
+          format: float
+          description: Height of the bounding box as a ratio of the overall image height.
+          example: 0.45
+        Left:
+          type: number
+          format: float
+          description: Left coordinate of the bounding box as a ratio of overall image width.
+          example: 0.1
+        Top:
+          type: number
+          format: float
+          description: Top coordinate of the bounding box as a ratio of overall image height.
+          example: 0.05
     GetLabelDetectionResponse:
       type: object
       properties:
@@ -160,60 +212,30 @@ components:
           type: string
         JobId:
           type: string
-    GetVideoJobResultRequest:
+    ErrorResponse:
       type: object
-      required:
-      - JobId
+      description: Standard error response from the Amazon Rekognition API.
       properties:
-        JobId:
+        __type:
           type: string
-          description: Job identifier from the start job call.
-          example: 1234567890abcdef
-        MaxResults:
-          type: integer
-          example: 100
-        NextToken:
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
           type: string
-        SortBy:
-          type: string
-          enum:
-          - NAME
-          - TIMESTAMP
-        AggregateBy:
-          type: string
-          enum:
-          - TIMESTAMPS
-          - SEGMENTS
-    Video:
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    NotificationChannel:
       type: object
-      description: Video file stored in an Amazon S3 bucket.
+      description: Amazon SNS topic for completion status notifications.
       properties:
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
-    BoundingBox:
-      type: object
-      description: Identifies the bounding box around the label, face, text or object.
-      properties:
-        Width:
-          type: number
-          format: float
-          description: Width of the bounding box as a ratio of the overall image width.
-          example: 0.35
-        Height:
-          type: number
-          format: float
-          description: Height of the bounding box as a ratio of the overall image height.
-          example: 0.45
-        Left:
-          type: number
-          format: float
-          description: Left coordinate of the bounding box as a ratio of overall image width.
-          example: 0.1
-        Top:
-          type: number
-          format: float
-          description: Top coordinate of the bounding box as a ratio of overall image height.
-          example: 0.05
+        SNSTopicArn:
+          type: string
+          description: The Amazon SNS topic ARN to post completion status.
+          example: arn:aws:sns:us-east-1:123456789012:AmazonRekognitionTopic
+        RoleArn:
+          type: string
+          description: The ARN of an IAM role that gives Rekognition publishing permissions.
+          example: arn:aws:iam::123456789012:role/RekognitionRole
     S3Object:
       type: object
       description: Provides the S3 bucket name and object name.
@@ -262,41 +284,19 @@ components:
             properties:
               Name:
                 type: string
-    StartLabelDetectionRequest:
+    StartVideoJobResponse:
       type: object
-      required:
-      - Video
       properties:
-        Video:
-          $ref: '#/components/schemas/Video'
-        ClientRequestToken:
+        JobId:
           type: string
-        MinConfidence:
-          type: number
-          format: float
-          example: 75.0
-        NotificationChannel:
-          $ref: '#/components/schemas/NotificationChannel'
-        JobTag:
-          type: string
-        Features:
-          type: array
-          items:
-            type: string
-        Settings:
-          type: object
-    ErrorResponse:
+          description: The identifier for the video analysis job.
+          example: 1234567890abcdef
+    Video:
       type: object
-      description: Standard error response from the Amazon Rekognition API.
+      description: Video file stored in an Amazon S3 bucket.
       properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
   securitySchemes:
     aws_signature:
       type: apiKey

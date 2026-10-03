@@ -70,6 +70,38 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DetectTextResponse:
+      type: object
+      properties:
+        TextDetections:
+          type: array
+          description: An array of text detected in the input image.
+          items:
+            type: object
+            properties:
+              DetectedText:
+                type: string
+                example: Hello World
+              Type:
+                type: string
+                enum:
+                - LINE
+                - WORD
+              Id:
+                type: integer
+              ParentId:
+                type: integer
+              Confidence:
+                type: number
+                format: float
+              Geometry:
+                type: object
+                properties:
+                  BoundingBox:
+                    $ref: '#/components/schemas/BoundingBox'
+        TextModelVersion:
+          type: string
+          example: '3.1'
     Image:
       type: object
       description: Provides the input image either as bytes or an S3 object.
@@ -104,54 +136,6 @@ components:
           format: float
           description: Top coordinate of the bounding box as a ratio of overall image height.
           example: 0.05
-    DetectTextResponse:
-      type: object
-      properties:
-        TextDetections:
-          type: array
-          description: An array of text detected in the input image.
-          items:
-            type: object
-            properties:
-              DetectedText:
-                type: string
-                example: Hello World
-              Type:
-                type: string
-                enum:
-                - LINE
-                - WORD
-              Id:
-                type: integer
-              ParentId:
-                type: integer
-              Confidence:
-                type: number
-                format: float
-              Geometry:
-                type: object
-                properties:
-                  BoundingBox:
-                    $ref: '#/components/schemas/BoundingBox'
-        TextModelVersion:
-          type: string
-          example: '3.1'
-    S3Object:
-      type: object
-      description: Provides the S3 bucket name and object name.
-      properties:
-        Bucket:
-          type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
     ImageOnlyRequest:
       type: object
       required:
@@ -172,6 +156,22 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Request has invalid parameters.
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
   securitySchemes:
     aws_signature:
       type: apiKey

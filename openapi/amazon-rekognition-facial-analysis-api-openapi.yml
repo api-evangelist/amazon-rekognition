@@ -136,16 +136,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Image:
-      type: object
-      description: Provides the input image either as bytes or an S3 object.
-      properties:
-        Bytes:
-          type: string
-          format: byte
-          description: Blob of image bytes up to 5 MBs.
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
     CompareFacesRequest:
       type: object
       required:
@@ -169,6 +159,52 @@ components:
           - LOW
           - MEDIUM
           - HIGH
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+    BoundingBox:
+      type: object
+      description: Identifies the bounding box around the label, face, text or object.
+      properties:
+        Width:
+          type: number
+          format: float
+          description: Width of the bounding box as a ratio of the overall image width.
+          example: 0.35
+        Height:
+          type: number
+          format: float
+          description: Height of the bounding box as a ratio of the overall image height.
+          example: 0.45
+        Left:
+          type: number
+          format: float
+          description: Left coordinate of the bounding box as a ratio of overall image width.
+          example: 0.1
+        Top:
+          type: number
+          format: float
+          description: Top coordinate of the bounding box as a ratio of overall image height.
+          example: 0.05
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
     FaceDetail:
       type: object
       description: Structure containing attributes of the face that the algorithm detected.
@@ -229,6 +265,48 @@ components:
           format: float
           description: Confidence level that the bounding box contains a face.
           example: 99.7
+    DetectFacesRequest:
+      type: object
+      required:
+      - Image
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        Attributes:
+          type: array
+          description: An array of facial attributes to return. ALL returns all attributes.
+          items:
+            type: string
+            enum:
+            - DEFAULT
+            - ALL
+    DetectFacesResponse:
+      type: object
+      properties:
+        FaceDetails:
+          type: array
+          description: Details of each face found in the image.
+          items:
+            $ref: '#/components/schemas/FaceDetail'
+        OrientationCorrection:
+          type: string
+          description: Orientation correction value.
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
     CompareFacesResponse:
       type: object
       properties:
@@ -261,84 +339,6 @@ components:
           type: array
           items:
             type: object
-    DetectFacesRequest:
-      type: object
-      required:
-      - Image
-      properties:
-        Image:
-          $ref: '#/components/schemas/Image'
-        Attributes:
-          type: array
-          description: An array of facial attributes to return. ALL returns all attributes.
-          items:
-            type: string
-            enum:
-            - DEFAULT
-            - ALL
-    BoundingBox:
-      type: object
-      description: Identifies the bounding box around the label, face, text or object.
-      properties:
-        Width:
-          type: number
-          format: float
-          description: Width of the bounding box as a ratio of the overall image width.
-          example: 0.35
-        Height:
-          type: number
-          format: float
-          description: Height of the bounding box as a ratio of the overall image height.
-          example: 0.45
-        Left:
-          type: number
-          format: float
-          description: Left coordinate of the bounding box as a ratio of overall image width.
-          example: 0.1
-        Top:
-          type: number
-          format: float
-          description: Top coordinate of the bounding box as a ratio of overall image height.
-          example: 0.05
-    S3Object:
-      type: object
-      description: Provides the S3 bucket name and object name.
-      properties:
-        Bucket:
-          type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
-    DetectFacesResponse:
-      type: object
-      properties:
-        FaceDetails:
-          type: array
-          description: Details of each face found in the image.
-          items:
-            $ref: '#/components/schemas/FaceDetail'
-        OrientationCorrection:
-          type: string
-          description: Orientation correction value.
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
   securitySchemes:
     aws_signature:
       type: apiKey

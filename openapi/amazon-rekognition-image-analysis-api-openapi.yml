@@ -72,6 +72,66 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DetectLabelsRequest:
+      type: object
+      required:
+      - Image
+      description: Request for the DetectLabels operation.
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxLabels:
+          type: integer
+          description: Maximum number of labels to return.
+          example: 10
+        MinConfidence:
+          type: number
+          format: float
+          description: Minimum confidence level for labels to return.
+          example: 75.0
+        Features:
+          type: array
+          description: A list of the types of analysis to perform.
+          items:
+            type: string
+            enum:
+            - GENERAL_LABELS
+            - IMAGE_PROPERTIES
+        Settings:
+          type: object
+          description: Optional settings for label detection.
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    DetectLabelsResponse:
+      type: object
+      description: Response from the DetectLabels operation.
+      properties:
+        Labels:
+          type: array
+          description: An array of labels for the real-world objects detected.
+          items:
+            $ref: '#/components/schemas/Label'
+        OrientationCorrection:
+          type: string
+          description: The value of OrientationCorrection is always null.
+          example: ROTATE_0
+        LabelModelVersion:
+          type: string
+          description: Version number of the label detection model used.
+          example: '3.0'
+        ImageProperties:
+          type: object
+          description: Information about the quality and dominant colors of an input image.
     Image:
       type: object
       description: Provides the input image either as bytes or an S3 object.
@@ -106,82 +166,6 @@ components:
           format: float
           description: Top coordinate of the bounding box as a ratio of overall image height.
           example: 0.05
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
-    DetectLabelsResponse:
-      type: object
-      description: Response from the DetectLabels operation.
-      properties:
-        Labels:
-          type: array
-          description: An array of labels for the real-world objects detected.
-          items:
-            $ref: '#/components/schemas/Label'
-        OrientationCorrection:
-          type: string
-          description: The value of OrientationCorrection is always null.
-          example: ROTATE_0
-        LabelModelVersion:
-          type: string
-          description: Version number of the label detection model used.
-          example: '3.0'
-        ImageProperties:
-          type: object
-          description: Information about the quality and dominant colors of an input image.
-    DetectLabelsRequest:
-      type: object
-      required:
-      - Image
-      description: Request for the DetectLabels operation.
-      properties:
-        Image:
-          $ref: '#/components/schemas/Image'
-        MaxLabels:
-          type: integer
-          description: Maximum number of labels to return.
-          example: 10
-        MinConfidence:
-          type: number
-          format: float
-          description: Minimum confidence level for labels to return.
-          example: 75.0
-        Features:
-          type: array
-          description: A list of the types of analysis to perform.
-          items:
-            type: string
-            enum:
-            - GENERAL_LABELS
-            - IMAGE_PROPERTIES
-        Settings:
-          type: object
-          description: Optional settings for label detection.
-    S3Object:
-      type: object
-      description: Provides the S3 bucket name and object name.
-      properties:
-        Bucket:
-          type: string
-          description: Name of the S3 bucket.
-          example: my-images-bucket
-        Name:
-          type: string
-          description: S3 object key name.
-          example: images/photo.jpg
-        Version:
-          type: string
-          description: S3 object version ID if versioning is enabled.
-          example: v1
     Label:
       type: object
       description: Structure containing details about the detected label.
@@ -214,6 +198,22 @@ components:
             properties:
               Name:
                 type: string
+    S3Object:
+      type: object
+      description: Provides the S3 bucket name and object name.
+      properties:
+        Bucket:
+          type: string
+          description: Name of the S3 bucket.
+          example: my-images-bucket
+        Name:
+          type: string
+          description: S3 object key name.
+          example: images/photo.jpg
+        Version:
+          type: string
+          description: S3 object version ID if versioning is enabled.
+          example: v1
   securitySchemes:
     aws_signature:
       type: apiKey

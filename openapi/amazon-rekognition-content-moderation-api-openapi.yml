@@ -67,34 +67,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DetectModerationLabelsRequest:
-      type: object
-      required:
-      - Image
-      properties:
-        Image:
-          $ref: '#/components/schemas/Image'
-        MinConfidence:
-          type: number
-          format: float
-          description: Minimum confidence level for labels to return.
-          example: 50.0
-        HumanLoopConfig:
-          type: object
-          description: Sets up the flow for A2I human review of moderation labels.
-        ProjectVersion:
-          type: string
-          description: Identifier for a custom label detection project version.
-    Image:
-      type: object
-      description: Provides the input image either as bytes or an S3 object.
-      properties:
-        Bytes:
-          type: string
-          format: byte
-          description: Blob of image bytes up to 5 MBs.
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
     DetectModerationLabelsResponse:
       type: object
       properties:
@@ -118,6 +90,24 @@ components:
           type: object
         ProjectVersion:
           type: string
+    DetectModerationLabelsRequest:
+      type: object
+      required:
+      - Image
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        MinConfidence:
+          type: number
+          format: float
+          description: Minimum confidence level for labels to return.
+          example: 50.0
+        HumanLoopConfig:
+          type: object
+          description: Sets up the flow for A2I human review of moderation labels.
+        ProjectVersion:
+          type: string
+          description: Identifier for a custom label detection project version.
     ErrorResponse:
       type: object
       description: Standard error response from the Amazon Rekognition API.
@@ -130,6 +120,16 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Request has invalid parameters.
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
     S3Object:
       type: object
       description: Provides the S3 bucket name and object name.

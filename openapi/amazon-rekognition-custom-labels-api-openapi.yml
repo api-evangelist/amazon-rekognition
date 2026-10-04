@@ -69,6 +69,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DetectCustomLabelsRequest:
+      type: object
+      required:
+      - ProjectVersionArn
+      - Image
+      properties:
+        ProjectVersionArn:
+          type: string
+          description: The ARN of the model version to use.
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxResults:
+          type: integer
+        MinConfidence:
+          type: number
+          format: float
     DetectCustomLabelsResponse:
       type: object
       properties:
@@ -86,16 +102,6 @@ components:
                 example: 92.3
               Geometry:
                 type: object
-    Image:
-      type: object
-      description: Provides the input image either as bytes or an S3 object.
-      properties:
-        Bytes:
-          type: string
-          format: byte
-          description: Blob of image bytes up to 5 MBs.
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
     ErrorResponse:
       type: object
       description: Standard error response from the Amazon Rekognition API.
@@ -108,6 +114,16 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Request has invalid parameters.
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
     S3Object:
       type: object
       description: Provides the S3 bucket name and object name.
@@ -124,22 +140,6 @@ components:
           type: string
           description: S3 object version ID if versioning is enabled.
           example: v1
-    DetectCustomLabelsRequest:
-      type: object
-      required:
-      - ProjectVersionArn
-      - Image
-      properties:
-        ProjectVersionArn:
-          type: string
-          description: The ARN of the model version to use.
-        Image:
-          $ref: '#/components/schemas/Image'
-        MaxResults:
-          type: integer
-        MinConfidence:
-          type: number
-          format: float
   securitySchemes:
     aws_signature:
       type: apiKey

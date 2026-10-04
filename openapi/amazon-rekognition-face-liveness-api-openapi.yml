@@ -107,6 +107,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateFaceLivenessSessionRequest:
+      type: object
+      properties:
+        KmsKeyId:
+          type: string
+        Settings:
+          type: object
+        ClientRequestToken:
+          type: string
     CreateFaceLivenessSessionResponse:
       type: object
       properties:
@@ -115,18 +124,6 @@ components:
           description: A unique 128-bit UUID identifying a Face Liveness session.
           format: uuid
           example: 550e8400-e29b-41d4-a716-446655440000
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
     GetFaceLivenessSessionResultsRequest:
       type: object
       required:
@@ -161,15 +158,18 @@ components:
           type: array
           items:
             type: object
-    CreateFaceLivenessSessionRequest:
+    ErrorResponse:
       type: object
+      description: Standard error response from the Amazon Rekognition API.
       properties:
-        KmsKeyId:
+        __type:
           type: string
-        Settings:
-          type: object
-        ClientRequestToken:
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
           type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
   securitySchemes:
     aws_signature:
       type: apiKey

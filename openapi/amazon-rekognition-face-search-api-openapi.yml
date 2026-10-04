@@ -69,6 +69,58 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SearchFacesByImageRequest:
+      type: object
+      required:
+      - CollectionId
+      - Image
+      properties:
+        CollectionId:
+          type: string
+          example: my-face-collection
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxFaces:
+          type: integer
+          example: 5
+        FaceMatchThreshold:
+          type: number
+          format: float
+          example: 80.0
+        QualityFilter:
+          type: string
+          enum:
+          - NONE
+          - AUTO
+          - LOW
+          - MEDIUM
+          - HIGH
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Rekognition API.
+      properties:
+        __type:
+          type: string
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
+    SearchFacesByImageResponse:
+      type: object
+      properties:
+        SearchedFaceBoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        SearchedFaceConfidence:
+          type: number
+          format: float
+        FaceMatches:
+          type: array
+          items:
+            type: object
+        FaceModelVersion:
+          type: string
     Image:
       type: object
       description: Provides the input image either as bytes or an S3 object.
@@ -103,58 +155,6 @@ components:
           format: float
           description: Top coordinate of the bounding box as a ratio of overall image height.
           example: 0.05
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Rekognition API.
-      properties:
-        __type:
-          type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
-    SearchFacesByImageResponse:
-      type: object
-      properties:
-        SearchedFaceBoundingBox:
-          $ref: '#/components/schemas/BoundingBox'
-        SearchedFaceConfidence:
-          type: number
-          format: float
-        FaceMatches:
-          type: array
-          items:
-            type: object
-        FaceModelVersion:
-          type: string
-    SearchFacesByImageRequest:
-      type: object
-      required:
-      - CollectionId
-      - Image
-      properties:
-        CollectionId:
-          type: string
-          example: my-face-collection
-        Image:
-          $ref: '#/components/schemas/Image'
-        MaxFaces:
-          type: integer
-          example: 5
-        FaceMatchThreshold:
-          type: number
-          format: float
-          example: 80.0
-        QualityFilter:
-          type: string
-          enum:
-          - NONE
-          - AUTO
-          - LOW
-          - MEDIUM
-          - HIGH
     S3Object:
       type: object
       description: Provides the S3 bucket name and object name.

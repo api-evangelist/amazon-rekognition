@@ -66,16 +66,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Image:
-      type: object
-      description: Provides the input image either as bytes or an S3 object.
-      properties:
-        Bytes:
-          type: string
-          format: byte
-          description: Blob of image bytes up to 5 MBs.
-        S3Object:
-          $ref: '#/components/schemas/S3Object'
     ImageOnlyRequest:
       type: object
       required:
@@ -96,6 +86,16 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Request has invalid parameters.
+    Image:
+      type: object
+      description: Provides the input image either as bytes or an S3 object.
+      properties:
+        Bytes:
+          type: string
+          format: byte
+          description: Blob of image bytes up to 5 MBs.
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
     RecognizeCelebritiesResponse:
       type: object
       properties:

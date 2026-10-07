@@ -257,6 +257,8 @@ apis:
   - type: FAQ
     url: https://aws.amazon.com/rekognition/faqs/
 common:
+- type: Plans
+  url: plans/amazon-rekognition-plans-pricing.yml
 - type: Website
   url: https://aws.amazon.com/rekognition/
 - type: AgenticAccess

@@ -107,6 +107,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateFaceLivenessSessionResponse:
+      type: object
+      properties:
+        SessionId:
+          type: string
+          description: A unique 128-bit UUID identifying a Face Liveness session.
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
     CreateFaceLivenessSessionRequest:
       type: object
       properties:
@@ -116,23 +124,18 @@ components:
           type: object
         ClientRequestToken:
           type: string
-    CreateFaceLivenessSessionResponse:
+    ErrorResponse:
       type: object
+      description: Standard error response from the Amazon Rekognition API.
       properties:
-        SessionId:
+        __type:
           type: string
-          description: A unique 128-bit UUID identifying a Face Liveness session.
-          format: uuid
-          example: 550e8400-e29b-41d4-a716-446655440000
-    GetFaceLivenessSessionResultsRequest:
-      type: object
-      required:
-      - SessionId
-      properties:
-        SessionId:
+          description: The type of exception.
+          example: InvalidParameterException
+        message:
           type: string
-          format: uuid
-          description: The sessionId for the Face Liveness session.
+          description: Human-readable description of the error.
+          example: Request has invalid parameters.
     GetFaceLivenessSessionResultsResponse:
       type: object
       properties:
@@ -158,18 +161,15 @@ components:
           type: array
           items:
             type: object
-    ErrorResponse:
+    GetFaceLivenessSessionResultsRequest:
       type: object
-      description: Standard error response from the Amazon Rekognition API.
+      required:
+      - SessionId
       properties:
-        __type:
+        SessionId:
           type: string
-          description: The type of exception.
-          example: InvalidParameterException
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Request has invalid parameters.
+          format: uuid
+          description: The sessionId for the Face Liveness session.
   securitySchemes:
     aws_signature:
       type: apiKey

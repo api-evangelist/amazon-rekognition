@@ -119,7 +119,7 @@ rate_limit_statements:
 - Usage is billed on minute increments, with a minimum of 1 minute.
 - can analyze up to 120 seconds of video per event
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid

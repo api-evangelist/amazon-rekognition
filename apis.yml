@@ -1,8 +1,7 @@
 name: Amazon Rekognition
-description: Amazon Rekognition is a cloud-based computer vision service that makes it easy to add image
-  and video analysis to your applications, providing capabilities such as object and scene detection,
-  facial analysis, face comparison, celebrity recognition, text detection, content moderation, custom
-  labels, face liveness detection, and streaming video analysis using deep learning technology.
+description: Amazon Rekognition is a cloud-based computer vision service that makes it easy to add image and video analysis to your applications,
+  providing capabilities such as object and scene detection, facial analysis, face comparison, celebrity recognition, text detection, content
+  moderation, custom labels, face liveness detection, and streaming video analysis using deep learning technology.
 deliveryModel:
   model: saas
   open_source: false
@@ -25,12 +24,13 @@ accessModel:
   gated_source:
   - onboarding
   label: Freemium · Self-serve signup
-  confidence: medium
+  confidence: high
   source:
   - plans
   - authentication
+  - rate-limits
   - security
-  generated: '2026-11-06'
+  generated: '2026-11-13'
   method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml
@@ -38,329 +38,61 @@ created: '2024-01-15'
 modified: '2026-09-16'
 specificationVersion: '0.23'
 kind: company
-apis:
-- aid: amazon-rekognition:amazon-rekognition-celebrity-recognition-api
-  name: Amazon Rekognition Celebrity Recognition API
-  description: Identify celebrities in images and videos.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Celebrity Recognition
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-celebrity-recognition-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-content-moderation-api
-  name: Amazon Rekognition Content Moderation API
-  description: Detect inappropriate or explicit content.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Content Moderation
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-content-moderation-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-custom-labels-api
-  name: Amazon Rekognition Custom Labels API
-  description: Train and use custom image classifiers.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Custom Labels
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-custom-labels-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-face-collections-api
-  name: Amazon Rekognition Face Collections API
-  description: Create and manage searchable face collections.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Face Collections
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-face-collections-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-face-liveness-api
-  name: Amazon Rekognition Face Liveness API
-  description: Verify that a user is physically present during identity verification.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Face Liveness
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-face-liveness-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-face-search-api
-  name: Amazon Rekognition Face Search API
-  description: Search for matching faces within collections.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Face Search
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-face-search-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-facial-analysis-api
-  name: Amazon Rekognition Facial Analysis API
-  description: Detect and analyze faces with detailed attributes.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Facial Analysis
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-facial-analysis-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-image-analysis-api
-  name: Amazon Rekognition Image Analysis API
-  description: Detect labels, objects, scenes, and concepts in images.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Image Analysis
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-image-analysis-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-stored-video-analysis-api
-  name: Amazon Rekognition Stored Video Analysis API
-  description: Asynchronous analysis of videos stored in Amazon S3.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Stored Video Analysis
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-stored-video-analysis-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-text-detection-api
-  name: Amazon Rekognition Text Detection API
-  description: Detect and extract text from images and videos.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Text Detection
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-text-detection-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
-  - type: Authentication
-    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
-  - type: Pricing
-    url: https://aws.amazon.com/rekognition/pricing/
-  - type: FAQ
-    url: https://aws.amazon.com/rekognition/faqs/
-- aid: amazon-rekognition:amazon-rekognition-dataset-api
-  name: Amazon Rekognition Rekognition Dataset API
-  description: >-
-    The Rekognition Dataset API from Amazon Rekognition — 3 operation(s) for rekognition dataset.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Dataset
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-dataset-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-face-api
-  name: Amazon Rekognition Rekognition Face API
-  description: The Rekognition Face API from Amazon Rekognition — 6 operation(s) for rekognition face.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Face
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-face-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-media-analysis-job-api
-  name: Amazon Rekognition Rekognition Media Analysis Job API
-  description: >-
-    The Rekognition Media Analysis Job API from Amazon Rekognition — 3 operation(s) for rekognition media
-    analysis job.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Media Analysis Job
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-media-analysis-job-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-operations-api
-  name: Amazon Rekognition Rekognition Operations API
-  description: >-
-    The Rekognition Operations API from Amazon Rekognition — 21 operation(s) for rekognition operations.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Operations
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-operations-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-project-api
-  name: Amazon Rekognition Rekognition Project API
-  description: >-
-    The Rekognition Project API from Amazon Rekognition — 3 operation(s) for rekognition project.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Project
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-project-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-project-policy-api
-  name: Amazon Rekognition Rekognition Project Policy API
-  description: >-
-    The Rekognition Project Policy API from Amazon Rekognition — 3 operation(s) for rekognition project
-    policy.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Project Policy
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-project-policy-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-project-version-api
-  name: Amazon Rekognition Rekognition Project Version API
-  description: >-
-    The Rekognition Project Version API from Amazon Rekognition — 5 operation(s) for rekognition project
-    version.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Project Version
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-project-version-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-stream-processor-api
-  name: Amazon Rekognition Rekognition Stream Processor API
-  description: >-
-    The Rekognition Stream Processor API from Amazon Rekognition — 7 operation(s) for rekognition stream
-    processor.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition Stream Processor
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-stream-processor-api-openapi.yml
-- aid: amazon-rekognition:amazon-rekognition-user-api
-  name: Amazon Rekognition Rekognition User API
-  description: The Rekognition User API from Amazon Rekognition — 5 operation(s) for rekognition user.
-  humanURL: https://aws.amazon.com/rekognition/
-  baseURL: https://rekognition.amazonaws.com
-  tags:
-  - Rekognition User
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-rekognition-user-api-openapi.yml
+tags:
+- Amazon Web Services
+- Celebrity Recognition
+- Computer Vision
+- Content Moderation
+- Custom Labels
+- Deep Learning
+- Face Liveness
+- Facial Recognition
+- Image Analysis
+- Machine Learning
+- Object Detection
+- Text Detection
+- Video Analysis
+tags_raw:
+- AWS
+- Celebrity Recognition
+- Computer Vision
+- Content Moderation
+- Custom Labels
+- Deep Learning
+- Face Liveness
+- Facial Recognition
+- Image Analysis
+- Machine Learning
+- Object Detection
+- Text Detection
+- Video Analysis
 common:
+- type: Newsroom
+  url: https://aws.amazon.com/media/?nc2=h_sol_ind_med
+- type: GettingStarted
+  url: https://developer.amazon.com/frustration-free-setup
+- type: Spectral
+  url: rules/amazon-rekognition-spectral-rules.yml
+- type: Spectral
+  url: rules/amazon-rekognition-rules.yml
+- type: Spectral
+  url: rules/amazon-rekognition-jsonschema-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/amazon-rekognition-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Idempotency
+  url: conventions/amazon-rekognition-conventions.yml
+- type: Deprecation
+  url: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
+- type: Hosts
+  url: hosts/amazon-rekognition-hosts.yml
+- type: Vendors
+  url: vendors/amazon-rekognition-vendors.yml
+- type: SDKs
+  url: packages/amazon-rekognition-packages.yml
+- type: SignUp
+  url: https://signin.aws.amazon.com/signup?request_type=builderId
 - type: RateLimits
   url: rate-limits/amazon-rekognition-rate-limits.yml
 - type: FinOps
@@ -487,96 +219,71 @@ common:
 - type: Features
   data:
   - name: Object and Scene Detection
-    description: Detect thousands of objects, scenes, and concepts in images and videos with high confidence
-      scores using deep learning.
+    description: Detect thousands of objects, scenes, and concepts in images and videos with high confidence scores using deep learning.
   - name: Facial Analysis
-    description: Detect and analyze faces with attributes including age range, emotions, gender, and facial
-      landmarks.
+    description: Detect and analyze faces with attributes including age range, emotions, gender, and facial landmarks.
   - name: Face Comparison
-    description: Compare faces across images to determine if they are the same person with a similarity
-      score.
+    description: Compare faces across images to determine if they are the same person with a similarity score.
   - name: Face Collections
     description: Create searchable face collections to index and search millions of faces in near real-time.
   - name: Celebrity Recognition
-    description: Identify thousands of celebrities in images and videos across categories like sports,
-      entertainment, and politics.
+    description: Identify thousands of celebrities in images and videos across categories like sports, entertainment, and politics.
   - name: Text Detection
     description: Detect and extract printed and handwritten text from images and videos in multiple languages.
   - name: Content Moderation
-    description: Detect explicit, inappropriate, or violent content in images and videos for automated
-      content moderation.
+    description: Detect explicit, inappropriate, or violent content in images and videos for automated content moderation.
   - name: Custom Labels
-    description: Build and train custom image classifiers using your own labeled images for domain-specific
-      object detection.
+    description: Build and train custom image classifiers using your own labeled images for domain-specific object detection.
   - name: Protective Equipment Detection
-    description: Detect personal protective equipment such as face covers, hand covers, and head covers
-      on persons in images.
+    description: Detect personal protective equipment such as face covers, hand covers, and head covers on persons in images.
   - name: Face Liveness Detection
-    description: Verify that a user is physically present during identity verification to prevent spoofing
-      attacks.
+    description: Verify that a user is physically present during identity verification to prevent spoofing attacks.
   - name: People Pathing
     description: Track and follow identified people across frames in stored video footage.
   - name: Video Segmentation
-    description: Identify technical cues and segments such as black frames, end credits, and color bars
-      in video content.
+    description: Identify technical cues and segments such as black frames, end credits, and color bars in video content.
   - name: Streaming Video Analysis
     description: Analyze live streaming video in real-time using Amazon Kinesis Video Streams integration.
   - name: Image Properties Analysis
-    description: Evaluate image quality attributes including sharpness, brightness, contrast, and dominant
-      colors.
+    description: Evaluate image quality attributes including sharpness, brightness, contrast, and dominant colors.
 - type: UseCases
   data:
   - name: Identity Verification
-    description: Verify user identities by comparing selfies to ID documents or previously stored face
-      images for onboarding and authentication.
+    description: Verify user identities by comparing selfies to ID documents or previously stored face images for onboarding and authentication.
   - name: Content Moderation
-    description: Automatically moderate user-generated content on platforms to detect and filter explicit
-      or inappropriate imagery.
+    description: Automatically moderate user-generated content on platforms to detect and filter explicit or inappropriate imagery.
   - name: Searchable Media Libraries
-    description: Build searchable image and video archives by automatically tagging media with detected
-      labels, faces, and text.
+    description: Build searchable image and video archives by automatically tagging media with detected labels, faces, and text.
   - name: Workplace Safety Compliance
-    description: Monitor camera feeds to detect whether workers are wearing required personal protective
-      equipment in industrial settings.
+    description: Monitor camera feeds to detect whether workers are wearing required personal protective equipment in industrial settings.
   - name: Fraud Prevention
-    description: Prevent identity fraud during digital onboarding by using face liveness detection to
-      confirm real users.
+    description: Prevent identity fraud during digital onboarding by using face liveness detection to confirm real users.
   - name: Smart Retail Analytics
-    description: Analyze in-store camera feeds to track customer behavior, measure foot traffic, and optimize
-      product placement.
+    description: Analyze in-store camera feeds to track customer behavior, measure foot traffic, and optimize product placement.
   - name: Public Safety and Security
     description: Search video archives for persons of interest by comparing faces against a known collection.
   - name: Media and Entertainment
-    description: Automatically tag celebrities in photos and videos for media companies to improve content
-      discoverability.
+    description: Automatically tag celebrities in photos and videos for media companies to improve content discoverability.
   - name: Custom Object Detection
-    description: Train custom classifiers to detect proprietary products, logos, brand assets, or industry-specific
-      objects.
+    description: Train custom classifiers to detect proprietary products, logos, brand assets, or industry-specific objects.
 - type: Integrations
   data:
   - name: Amazon S3
     description: Process images and videos stored in Amazon S3 buckets directly without downloading content.
   - name: Amazon Kinesis Video Streams
-    description: Analyze live video streams in real-time by integrating with Kinesis Video Streams for
-      streaming analysis.
+    description: Analyze live video streams in real-time by integrating with Kinesis Video Streams for streaming analysis.
   - name: AWS Lambda
-    description: Trigger serverless analysis pipelines by invoking Rekognition from Lambda functions in
-      event-driven architectures.
+    description: Trigger serverless analysis pipelines by invoking Rekognition from Lambda functions in event-driven architectures.
   - name: Amazon SNS
-    description: Receive asynchronous notifications when stored video analysis jobs complete via Amazon
-      SNS.
+    description: Receive asynchronous notifications when stored video analysis jobs complete via Amazon SNS.
   - name: AWS IAM
-    description: Control access to Rekognition APIs using AWS Identity and Access Management policies
-      and roles.
+    description: Control access to Rekognition APIs using AWS Identity and Access Management policies and roles.
   - name: Amazon CloudWatch
-    description: Monitor Rekognition API usage, latency, and error metrics through CloudWatch dashboards
-      and alarms.
+    description: Monitor Rekognition API usage, latency, and error metrics through CloudWatch dashboards and alarms.
   - name: AWS Step Functions
-    description: Orchestrate multi-step computer vision workflows using Step Functions to chain Rekognition
-      operations.
+    description: Orchestrate multi-step computer vision workflows using Step Functions to chain Rekognition operations.
   - name: Amazon Augmented AI (A2I)
-    description: Route low-confidence Rekognition predictions to human reviewers using Amazon Augmented
-      AI for quality control.
+    description: Route low-confidence Rekognition predictions to human reviewers using Amazon Augmented AI for quality control.
 - type: JSONLD
   url: json-ld/amazon-rekognition-context.jsonld
 - type: JSONSchema
@@ -797,23 +504,502 @@ common:
   url: examples/amazon-rekognition-video-example.json
 - type: Integrations
   url: https://aws.amazon.com/partners/
+- type: UsageTerms
+  url: terms/amazon-rekognition-terms-of-service.yml
+- type: DataProcessing
+  url: privacy/amazon-rekognition-privacy-policy.yml
+- type: Attestations
+  url: compliance/amazon-rekognition-compliance.yml
+- type: Eligibility
+  url: eligibility/amazon-rekognition-eligibility.yml
+apis:
+- aid: amazon-rekognition:amazon-rekognition-celebrity-recognition-api
+  name: Amazon Rekognition Celebrity Recognition API
+  description: Identify celebrities in images and videos.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Celebrity Recognition
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-celebrity-recognition-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-celebrity-recognition-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-celebrity-recognition-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-celebrity-recognition-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-celebrity-recognition-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-content-moderation-api
+  name: Amazon Rekognition Content Moderation API
+  description: Detect inappropriate or explicit content.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Content Moderation
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-content-moderation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-content-moderation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-content-moderation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-content-moderation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-content-moderation-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-custom-labels-api
+  name: Amazon Rekognition Custom Labels API
+  description: Train and use custom image classifiers.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Custom Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-custom-labels-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-detect-custom-labels-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-detect-custom-labels-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-face-collections-api
+  name: Amazon Rekognition Face Collections API
+  description: Create and manage searchable face collections.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Face Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-face-collections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-index-faces-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-index-faces-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-collections-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-collection-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-collection-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-collections-request-schema.json
+- aid: amazon-rekognition:amazon-rekognition-face-liveness-api
+  name: Amazon Rekognition Face Liveness API
+  description: Verify that a user is physically present during identity verification.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Face Liveness
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-face-liveness-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-face-liveness-session-results-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-face-liveness-session-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-face-liveness-session-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-face-liveness-session-results-request-schema.json
+- aid: amazon-rekognition:amazon-rekognition-face-search-api
+  name: Amazon Rekognition Face Search API
+  description: Search for matching faces within collections.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Face Search
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-face-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-face-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-face-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-face-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-face-search-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-facial-analysis-api
+  name: Amazon Rekognition Facial Analysis API
+  description: Detect and analyze faces with detailed attributes.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Facial Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-facial-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-compare-faces-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-compare-faces-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-detect-faces-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-detect-faces-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-image-analysis-api
+  name: Amazon Rekognition Image Analysis API
+  description: Detect labels, objects, scenes, and concepts in images.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Image Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-image-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-detect-labels-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-detect-labels-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-stored-video-analysis-api
+  name: Amazon Rekognition Stored Video Analysis API
+  description: Asynchronous analysis of videos stored in Amazon S3.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Stored Video Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-stored-video-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-label-detection-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-label-detection-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-label-detection-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-label-detection-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-text-detection-api
+  name: Amazon Rekognition Text Detection API
+  description: Detect and extract text from images and videos.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Text Detection
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-text-detection-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/rekognition/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/getting-started.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/rekognition/latest/dg/security_iam_service-with-iam.html
+  - type: Pricing
+    url: https://aws.amazon.com/rekognition/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/rekognition/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-text-detection-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-text-detection-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-text-detection-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-text-detection-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-dataset-api
+  name: Amazon Rekognition Rekognition Dataset API
+  description: The Rekognition Dataset API from Amazon Rekognition — 3 operation(s) for rekognition dataset.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Dataset
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-dataset-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-dataset-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-delete-dataset-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-describe-dataset-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-dataset-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-describe-dataset-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-delete-dataset-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-face-api
+  name: Amazon Rekognition Rekognition Face API
+  description: The Rekognition Face API from Amazon Rekognition — 6 operation(s) for rekognition face.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Face
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-face-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-search-faces-by-image-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-disassociate-faces-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-associate-faces-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-associate-faces-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-faces-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-disassociate-faces-request-schema.json
+- aid: amazon-rekognition:amazon-rekognition-media-analysis-job-api
+  name: Amazon Rekognition Rekognition Media Analysis Job API
+  description: The Rekognition Media Analysis Job API from Amazon Rekognition — 3 operation(s) for rekognition media analysis job.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Media Analysis Job
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-media-analysis-job-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-media-analysis-job-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-media-analysis-job-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-media-analysis-jobs-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-media-analysis-jobs-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-media-analysis-job-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-media-analysis-job-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-operations-api
+  name: Amazon Rekognition Rekognition Operations API
+  description: The Rekognition Operations API from Amazon Rekognition — 21 operation(s) for rekognition operations.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-operations-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-index-faces-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-get-segment-detection-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-compare-faces-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-dataset-entries-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-index-faces-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-copy-project-version-request-schema.json
+- aid: amazon-rekognition:amazon-rekognition-project-api
+  name: Amazon Rekognition Rekognition Project API
+  description: The Rekognition Project API from Amazon Rekognition — 3 operation(s) for rekognition project.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Project
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-project-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-describe-projects-request-schema.json
+- aid: amazon-rekognition:amazon-rekognition-project-policy-api
+  name: Amazon Rekognition Rekognition Project Policy API
+  description: The Rekognition Project Policy API from Amazon Rekognition — 3 operation(s) for rekognition project policy.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Project Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-project-policy-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-put-project-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-project-policies-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-delete-project-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-project-policies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-put-project-policy-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-delete-project-policy-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-project-version-api
+  name: Amazon Rekognition Rekognition Project Version API
+  description: The Rekognition Project Version API from Amazon Rekognition — 5 operation(s) for rekognition project version.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Project Version
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-project-version-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-project-version-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-describe-project-versions-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-project-version-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-describe-project-versions-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-stop-project-version-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-project-version-response-schema.json
+- aid: amazon-rekognition:amazon-rekognition-stream-processor-api
+  name: Amazon Rekognition Rekognition Stream Processor API
+  description: The Rekognition Stream Processor API from Amazon Rekognition — 7 operation(s) for rekognition stream processor.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition Stream Processor
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-stream-processor-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-stream-processor-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-describe-stream-processor-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-update-stream-processor-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-stream-processors-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-list-stream-processors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-start-stream-processor-request-schema.json
+- aid: amazon-rekognition:amazon-rekognition-user-api
+  name: Amazon Rekognition Rekognition User API
+  description: The Rekognition User API from Amazon Rekognition — 5 operation(s) for rekognition user.
+  humanURL: https://aws.amazon.com/rekognition/
+  baseURL: https://rekognition.amazonaws.com
+  tags:
+  - Rekognition User
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-rekognition-user-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-search-users-by-image-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-search-users-by-image-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-search-users-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-create-user-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-delete-user-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-rekognition-search-users-response-schema.json
 maintainer:
   name: Kin Lane
   email: kin@apievangelist.com
-tags:
-- Amazon Web Services
-- Celebrity Recognition
-- Computer Vision
-- Content Moderation
-- Custom Labels
-- Deep Learning
-- Face Liveness
-- Facial Recognition
-- Image Analysis
-- Machine Learning
-- Object Detection
-- Text Detection
-- Video Analysis
 tags_raw:
 - AWS
 - Celebrity Recognition
@@ -841,3 +1027,8 @@ integrations:
 - name: co-sell with AWS
 x-parent: amazon-web-services
 x-relationship: product
+x-enrichment:
+  date: '2026-11-11'
+  status: enriched
+  artifacts_added: 8
+  pass: local-v6

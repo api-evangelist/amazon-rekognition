@@ -41,6 +41,9 @@ artifacts:
   authentication/amazon-rekognition-authentication.yml:
     method: searched
     evidence: declared in the artifact
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   changelog/amazon-rekognition-changelog.yml:
     method: searched
     evidence: declared in the artifact
@@ -113,6 +116,9 @@ artifacts:
   collections/amazon-rekognition.postman_collection.json:
     method: derived
     evidence: openapi/amazon-rekognition
+  compliance/amazon-rekognition-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
   components/amazon-rekognition-components.yml:
     method: searched
     evidence: declared in the artifact
@@ -124,6 +130,9 @@ artifacts:
     evidence: declared in the artifact
   data-model/amazon-rekognition-data-model.yml:
     method: derived
+    evidence: declared in the artifact
+  eligibility/amazon-rekognition-eligibility.yml:
+    method: harvested
     evidence: declared in the artifact
   errors/amazon-rekognition-problem-types.yml:
     method: searched
@@ -242,6 +251,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/amazon-rekognition-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -249,6 +261,12 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-ld/amazon-rekognition-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-associate-faces-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-associate-faces-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-bounding-box-schema.json:
@@ -260,16 +278,67 @@ artifacts:
   json-schema/amazon-rekognition-compare-faces-response-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-copy-project-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-create-collection-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-create-collection-response-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-create-dataset-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-create-dataset-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-create-face-liveness-session-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-create-face-liveness-session-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-create-project-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-create-stream-processor-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-create-user-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-delete-dataset-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-delete-dataset-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-delete-project-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-delete-project-policy-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-delete-user-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-describe-dataset-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-describe-dataset-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-describe-project-versions-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-describe-project-versions-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-describe-projects-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-describe-stream-processor-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-detect-custom-labels-request-schema.json:
@@ -302,7 +371,25 @@ artifacts:
   json-schema/amazon-rekognition-detectlabelsresponse-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-disassociate-faces-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-disassociate-faces-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-face-detail-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-celebrity-recognition-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-celebrity-recognition-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-content-moderation-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-content-moderation-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-get-face-liveness-session-results-request-schema.json:
@@ -311,7 +398,31 @@ artifacts:
   json-schema/amazon-rekognition-get-face-liveness-session-results-response-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-face-search-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-face-search-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-label-detection-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-get-label-detection-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-media-analysis-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-media-analysis-job-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-segment-detection-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-text-detection-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-get-text-detection-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-get-video-job-result-request-schema.json:
@@ -332,10 +443,43 @@ artifacts:
   json-schema/amazon-rekognition-label-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-collections-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-list-collections-response-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-dataset-entries-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-faces-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-media-analysis-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-media-analysis-jobs-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-project-policies-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-project-policies-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-stream-processors-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-list-stream-processors-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-notification-channel-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-put-project-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-put-project-policy-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-recognize-celebrities-response-schema.json:
@@ -350,10 +494,70 @@ artifacts:
   json-schema/amazon-rekognition-search-faces-by-image-response-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-search-users-by-image-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-search-users-by-image-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-search-users-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-search-users-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-celebrity-recognition-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-celebrity-recognition-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-content-moderation-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-content-moderation-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-face-search-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-face-search-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-start-label-detection-request-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-label-detection-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-media-analysis-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-media-analysis-job-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-project-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-project-version-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-stream-processor-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-text-detection-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-start-text-detection-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-rekognition-start-video-job-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-stop-project-version-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-rekognition-update-stream-processor-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-rekognition-video-schema.json:
@@ -470,7 +674,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -539,9 +743,15 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/amazon-rekognition-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
+  llms/amazon-rekognition-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/amazon-rekognition-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
@@ -611,6 +821,9 @@ artifacts:
   packages/amazon-rekognition-packages.yml:
     method: searched
     evidence: declared in the artifact
+  patterns/amazon-rekognition-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/amazon-rekognition-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -620,10 +833,19 @@ artifacts:
   postman/amazon-rekognition.postman_collection.json:
     method: derived
     evidence: openapi/amazon-rekognition
+  privacy/amazon-rekognition-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/amazon-rekognition-rate-limits.yml:
-    method: generated
+    method: searched
+    evidence: declared in the artifact
+  regulatory/amazon-rekognition-regulatory-posture.yml:
+    method: searched
     evidence: declared in the artifact
   rules/amazon-rekognition-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/amazon-rekognition-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/amazon-rekognition-spectral-rules.yml:
@@ -638,15 +860,43 @@ artifacts:
   security/amazon-rekognition-vulnerability-disclosure.yml:
     method: searched
     evidence: declared in the artifact
+  skills/_index.yml:
+    method: generated
+    evidence: declared in the artifact
+  skills/amazon-rekognition-compare-faces.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/amazon-rekognition-enroll-and-search-face.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/amazon-rekognition-face-liveness-session.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/amazon-rekognition-label-and-moderate-image.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/amazon-rekognition-video-label-detection.md:
+    method: generated
+    evidence: declared in the artifact
   sla/amazon-rekognition-sla.yml:
     method: generated
     evidence: declared in the artifact
   smithy/rekognition-2016-06-27.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/rekognition/service/2016-06-27/rekognition-2016-06-27.json
+      (sha256 ed01faba21bb, fetched 2026-11-11T21:14:32+00:00)
+  terms/amazon-rekognition-terms-of-service.yml:
+    method: harvested
+    evidence: declared in the artifact
+  vendors/amazon-rekognition-vendors.yml:
     method: unknown
     evidence: no authorship recorded
   vocabulary/amazon-rekognition-vocabulary.yaml:
     method: unknown
     evidence: no authorship recorded
+  vocabulary/amazon-rekognition-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
   well-known/amazon-rekognition-security.txt:
     method: unknown
     evidence: no authorship recorded

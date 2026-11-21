@@ -1,3 +1,4 @@
+aid: amazon-rekognition
 name: Amazon Rekognition
 description: Amazon Rekognition is a cloud-based computer vision service that makes it easy to add image and video analysis to your applications,
   providing capabilities such as object and scene detection, facial analysis, face comparison, celebrity recognition, text detection, content
@@ -30,7 +31,7 @@ accessModel:
   - authentication
   - rate-limits
   - security
-  generated: '2026-11-13'
+  generated: '2026-11-20'
   method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://raw.githubusercontent.com/api-evangelist/amazon-rekognition/refs/heads/main/apis.yml
